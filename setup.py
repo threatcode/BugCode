@@ -65,11 +65,17 @@ setup(
     # https://packaging.python.org/en/latest/single_source_version.html
     version=version,  # Required
 
+    packages=find_packages(),
+    install_requires=[
+        "bugcode_plugins='bugcode_plugins'"
+
+    ],
+
     # This is a one-line description or tagline of what your project does. This
     # corresponds to the "Summary" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#summary
     description='Open Source Collaborative Penetration Test and Vulnerability Management '
-                'Platform https://www.threatcode.github.io/bugcode',  # Optional
+                'Platform https://www.bugcode.com',  # Optional
 
     # This is an optional longer description of your project that represents
     # the body of text which users will see when they visit PyPI.
@@ -105,7 +111,7 @@ setup(
 
     # This should be a valid email address corresponding to the author listed
     # above.
-    author_email='devel@threatcode.github.io/bugcode',  # Optional
+    author_email='devel@bugcode.com',  # Optional
 
     # Classifiers help users find your project by categorizing it.
     #
