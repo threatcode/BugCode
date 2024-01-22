@@ -1,6 +1,6 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -10,7 +10,7 @@ from posixpath import join
 
 import pytest
 from sqlalchemy.orm.util import was_deleted
-from bogcode.server.models import db
+from bugcode.server.models import db
 from tests.test_api_pagination import PaginationTestsMixin as \
     OriginalPaginationTestsMixin
 

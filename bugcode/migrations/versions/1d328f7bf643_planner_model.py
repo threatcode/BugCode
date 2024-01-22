@@ -25,8 +25,8 @@ def upgrade():
     sa.Column('name', sa.Text(), nullable=False),
     sa.Column('creator_id', sa.Integer(), nullable=True),
     sa.Column('update_user_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['creator_id'], ['bogcode_user.id'], ondelete='SET NULL'),
-    sa.ForeignKeyConstraint(['update_user_id'], ['bogcode_user.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['creator_id'], ['bugcode_user.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['update_user_id'], ['bugcode_user.id'], ondelete='SET NULL'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('project_task',
@@ -42,9 +42,9 @@ def upgrade():
     sa.Column('project_id', sa.Integer(), nullable=False),
     sa.Column('creator_id', sa.Integer(), nullable=True),
     sa.Column('update_user_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['creator_id'], ['bogcode_user.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['creator_id'], ['bugcode_user.id'], ondelete='SET NULL'),
     sa.ForeignKeyConstraint(['project_id'], ['planner_project.id'], ),
-    sa.ForeignKeyConstraint(['update_user_id'], ['bogcode_user.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['update_user_id'], ['bugcode_user.id'], ondelete='SET NULL'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_project_task_project_id'), 'project_task', ['project_id'], unique=False)
@@ -52,7 +52,7 @@ def upgrade():
     sa.Column('task_id', sa.Integer(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['task_id'], ['project_task.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['bogcode_user.id'], ondelete='CASCADE')
+    sa.ForeignKeyConstraint(['user_id'], ['bugcode_user.id'], ondelete='CASCADE')
     )
     op.create_table('task_dependencies_association',
     sa.Column('task_id', sa.Integer(), nullable=True),

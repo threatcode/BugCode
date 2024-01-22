@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 # Standard library imports
@@ -27,9 +27,9 @@ from sqlalchemy.exc import OperationalError, ProgrammingError, IntegrityError
 from sqlalchemy.sql import text
 
 # Local application imports
-import bogcode.server.config
-from bogcode.server.config import CONST_BUGCODE_HOME_PATH, LOCAL_CONFIG_FILE, BUGCODE_BASE
-from bogcode.server.utils.database import is_unique_constraint_violation
+import bugcode.server.config
+from bugcode.server.config import CONST_BUGCODE_HOME_PATH, LOCAL_CONFIG_FILE, BUGCODE_BASE
+from bugcode.server.utils.database import is_unique_constraint_violation
 
 init()
 
@@ -56,7 +56,7 @@ class InitDB:
 
         return True
 
-    def run(self, choose_password, bogcode_user_password):
+    def run(self, choose_password, bugcode_user_password):
         """
              Main entry point that executes these steps:
                  * creates role in database.
@@ -69,22 +69,22 @@ class InitDB:
             config.read(LOCAL_CONFIG_FILE)
             if not self._check_current_config(config):
                 return
-            bogcode_path_conf = CONST_BUGCODE_HOME_PATH
-            # we use psql_log_filename for historical saving. we will ask bogcode users this file.
+            bugcode_path_conf = CONST_BUGCODE_HOME_PATH
+            # we use psql_log_filename for historical saving. we will ask bugcode users this file.
             # current_psql_output is for checking psql command already known errors for each execution.
-            psql_log_filename = bogcode_path_conf / 'logs' / 'psql_log.log'
+            psql_log_filename = bugcode_path_conf / 'logs' / 'psql_log.log'
             current_psql_output = TemporaryFile()
             with open(psql_log_filename, 'ab+') as psql_log_file:
                 hostname = 'localhost'
                 username, password, process_status = self._configure_new_postgres_user(current_psql_output)
                 current_psql_output.seek(0)
                 psql_output = current_psql_output.read()
-                # persist log in the bogcode log psql_log.log
+                # persist log in the bugcode log psql_log.log
                 psql_log_file.write(psql_output)
                 self._check_psql_output(current_psql_output, process_status)
 
                 if hostname.lower() in ['localhost', '127.0.0.1']:
-                    database_name = os.environ.get("BUGCODE_DATABASE_NAME", "bogcode")
+                    database_name = os.environ.get("BUGCODE_DATABASE_NAME", "bugcode")
                     current_psql_output = TemporaryFile()
                     database_name, process_status = self._create_database(database_name, username, current_psql_output)
                     current_psql_output.seek(0)
@@ -93,7 +93,7 @@ class InitDB:
             current_psql_output.close()
             conn_string = self._save_config(config, username, password, database_name, hostname)
             self._create_tables(conn_string)
-            self._create_admin_user(conn_string, choose_password, bogcode_user_password)
+            self._create_admin_user(conn_string, choose_password, bugcode_user_password)
         except KeyboardInterrupt:
             current_psql_output.close()
             print('User cancelled.')
@@ -105,7 +105,7 @@ class InitDB:
         try:
             statement = text(
                 "INSERT "
-                "INTO bogcode_role(name, weight) "
+                "INTO bugcode_role(name, weight) "
                 "VALUES ('admin', 10),('asset_owner', 20),('pentester', 30),('client', 40);"
             )
             connection = engine.connect()
@@ -113,7 +113,7 @@ class InitDB:
         except IntegrityError as ex:
             if is_unique_constraint_violation(ex):
                 # when re using database user could be created previously
-                print(f"{Fore.YELLOW}WARNING{Fore.WHITE}: Bogcode administrator user already exists.")
+                print(f"{Fore.YELLOW}WARNING{Fore.WHITE}: Bugcode administrator user already exists.")
             else:
                 print(f"{Fore.YELLOW}WARNING{Fore.WHITE}: Can't create administrator user.")
                 raise
@@ -121,7 +121,7 @@ class InitDB:
     @staticmethod
     def _create_initial_notifications_config():
         # pylint:disable=import-outside-toplevel
-        from bogcode.server.models import (
+        from bugcode.server.models import (
             db,
             Role,
             NotificationSubscription,
@@ -238,19 +238,19 @@ class InitDB:
                 db.session.add(ns)
                 db.session.commit()
 
-    def _create_admin_user(self, conn_string, choose_password, bogcode_user_password):
+    def _create_admin_user(self, conn_string, choose_password, bugcode_user_password):
         engine = create_engine(conn_string)
         # TODO change the random_password variable name, it is not always
         # random anymore
         if choose_password:
             user_password = click.prompt(
-                'Enter the desired password for the "bogcode" user',
+                'Enter the desired password for the "bugcode" user',
                 confirmation_prompt=True,
                 hide_input=True
             )
         else:
-            if bogcode_user_password:
-                user_password = bogcode_user_password
+            if bugcode_user_password:
+                user_password = bugcode_user_password
             else:
                 user_password = self.generate_random_pw(12)
         already_created = False
@@ -258,12 +258,12 @@ class InitDB:
         try:
 
             statement = text("""
-                INSERT INTO bogcode_user (
+                INSERT INTO bugcode_user (
                             username, name, password,
                             user_type, active, last_login_ip,
                             current_login_ip, state_otp, fs_uniquifier
                         ) VALUES (
-                            'bogcode', 'Administrator', :password,
+                            'bugcode', 'Administrator', :password,
                             'local', true, '127.0.0.1',
                             '127.0.0.1', 'disabled', :fs_uniquifier
                         )
@@ -274,9 +274,9 @@ class InitDB:
             }
             connection = engine.connect()
             connection.execute(statement, **params)
-            result = connection.execute(text("""SELECT id, username FROM bogcode_user"""))
-            user_id = list(user_tuple[0] for user_tuple in result if user_tuple[1] == "bogcode")[0]
-            result = connection.execute(text("""SELECT id, name FROM bogcode_role"""))
+            result = connection.execute(text("""SELECT id, username FROM bugcode_user"""))
+            user_id = list(user_tuple[0] for user_tuple in result if user_tuple[1] == "bugcode")[0]
+            result = connection.execute(text("""SELECT id, name FROM bugcode_role"""))
             role_id = list(role_tuple[0] for role_tuple in result if role_tuple[1] == "admin")[0]
             params = {
                 "user_id": user_id,
@@ -287,12 +287,12 @@ class InitDB:
             if is_unique_constraint_violation(ex):
                 # when re using database user could be created previously
                 already_created = True
-                print(f"{Fore.YELLOW}WARNING{Fore.WHITE}: Bogcode administrator user already exists.")
+                print(f"{Fore.YELLOW}WARNING{Fore.WHITE}: Bugcode administrator user already exists.")
             else:
                 print(f"{Fore.YELLOW}WARNING{Fore.WHITE}: Can't create administrator user.")
                 raise
         if not already_created:
-            print(f"Admin user created with \n\n{Fore.RED}username: {Fore.WHITE}bogcode \n"
+            print(f"Admin user created with \n\n{Fore.RED}username: {Fore.WHITE}bugcode \n"
                   f"{Fore.RED}password:{Fore.WHITE} {user_password} \n")
 
     @staticmethod
@@ -330,8 +330,8 @@ class InitDB:
             we return username and password and those values will be saved in the config file.
         """
         print(f'This script will {Fore.BLUE} create a new postgres user {Fore.WHITE} and {Fore.BLUE} '
-              f'save bogcode-server settings {Fore.WHITE}(server.ini).')
-        username = os.environ.get("BUGCODE_DATABASE_USER", 'bogcode_postgresql')
+              f'save bugcode-server settings {Fore.WHITE}(server.ini).')
+        username = os.environ.get("BUGCODE_DATABASE_USER", 'bugcode_postgresql')
         postgres_command = ['sudo', '-u', 'postgres', 'psql']
         if sys.platform == 'darwin':
             print(f'{Fore.BLUE}MAC OS detected{Fore.WHITE}')
@@ -350,18 +350,18 @@ class InitDB:
             print(f"{Fore.YELLOW}WARNING{Fore.WHITE}: Role {username} already exists, skipping creation ")
 
             try:
-                if not getattr(bogcode.server.config, 'database', None):
-                    print('Manual configuration? \n bogcode_postgresql was found in PostgreSQL, '
+                if not getattr(bugcode.server.config, 'database', None):
+                    print('Manual configuration? \n bugcode_postgresql was found in PostgreSQL, '
                           'but no connection string was found in server.ini.')
                     print('Please configure [database] section with correct postgresql string. Ex. '
-                          'postgresql+psycopg2://bogcode_postgresql:PASSWORD@localhost/bogcode')
+                          'postgresql+psycopg2://bugcode_postgresql:PASSWORD@localhost/bugcode')
                     sys.exit(1)
                 try:
-                    password = bogcode.server.config.database.connection_string.split(':')[2].split('@')[0]
+                    password = bugcode.server.config.database.connection_string.split(':')[2].split('@')[0]
                 except AttributeError:
                     print('Could not find connection string.')
                     print('Please configure [database] section with correct postgresql string. Ex. '
-                          'postgresql+psycopg2://bogcode_postgresql:PASSWORD@localhost/bogcode')
+                          'postgresql+psycopg2://bugcode_postgresql:PASSWORD@localhost/bugcode')
                     sys.exit(1)
                 connection = psycopg2.connect(dbname='postgres',
                                               user=username,
@@ -417,7 +417,7 @@ class InitDB:
 
     def _create_tables(self, conn_string):
         print('Creating tables')
-        from bogcode.server.models import db  # pylint:disable=import-outside-toplevel
+        from bugcode.server.models import db  # pylint:disable=import-outside-toplevel
         current_app.config['SQLALCHEMY_DATABASE_URI'] = conn_string
 
         # Check if the alembic_version exists
@@ -426,9 +426,9 @@ class InitDB:
         exists = result[0] is not None
 
         if exists:
-            print("Bogcode tables already exist in the database. No tables will "
+            print("Bugcode tables already exist in the database. No tables will "
                   "be created. If you want to upgrade the schema to the latest "
-                  "version, you should run \"bogcode-manage migrate\".")
+                  "version, you should run \"bugcode-manage migrate\".")
             return
 
         try:

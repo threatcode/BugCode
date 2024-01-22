@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2016  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2016  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 # Standard library imports
@@ -263,7 +263,7 @@ def get_conflict_object(session, obj, data, workspace=None):
 
         if get_object_type_for(obj) == 'vulnerability':
             # This is a special key due to model inheritance
-            from bogcode.server.models import VulnerabilityGeneric  # pylint:disable=import-outside-toplevel
+            from bugcode.server.models import VulnerabilityGeneric  # pylint:disable=import-outside-toplevel
             klass = VulnerabilityGeneric
         else:
             klass = obj.__class__
@@ -309,7 +309,7 @@ UNIQUE_VIOLATION = '23505'
 
 
 def is_unique_constraint_violation(exception):
-    from bogcode.server.models import db  # pylint:disable=import-outside-toplevel
+    from bugcode.server.models import db  # pylint:disable=import-outside-toplevel
     if db.engine.dialect.name != 'postgresql':
         # Not implemented for RDMS other than postgres, we can live without
         # this since it is just an extra check
@@ -322,7 +322,7 @@ NOT_NULL_VIOLATION = '23502'
 
 
 def not_null_constraint_violation(exception):
-    from bogcode.server.models import db  # pylint:disable=import-outside-toplevel
+    from bugcode.server.models import db  # pylint:disable=import-outside-toplevel
     if db.engine.dialect.name != 'postgresql':
         # Not implemented for RDMS other than postgres, we can live without
         # this since it is just an extra check

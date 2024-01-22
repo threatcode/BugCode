@@ -1,13 +1,13 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
 
 import pytest
 from tests.factories import HostFactory, ServiceFactory
-from bogcode.server.models import Host, Workspace
+from bugcode.server.models import Host, Workspace
 
 
 def test_child_parent_verification_event_fails(session, workspace,

@@ -27,7 +27,7 @@ def downgrade():
     op.create_table('knowledge_base',
     sa.Column('id', sa.INTEGER(), autoincrement=True, nullable=False),
     sa.Column('vulnerability_template_id', sa.INTEGER(), autoincrement=False, nullable=True),
-    sa.Column('bogcode_kb_id', sa.TEXT(), autoincrement=False, nullable=False),
+    sa.Column('bugcode_kb_id', sa.TEXT(), autoincrement=False, nullable=False),
     sa.Column('reference_id', sa.INTEGER(), autoincrement=False, nullable=False),
     sa.Column('script_name', sa.TEXT(), autoincrement=False, nullable=False),
     sa.Column('external_identifier', sa.TEXT(), autoincrement=False, nullable=False),

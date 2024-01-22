@@ -1,6 +1,6 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -23,7 +23,7 @@ from factory.fuzzy import (
     FuzzyText,
     FuzzyDateTime,
 )
-from bogcode.server.models import (
+from bugcode.server.models import (
     db,
     Command,
     Credential,
@@ -81,7 +81,7 @@ all_unicode = ''.join(chr(i) for i in range(65536))
 UNICODE_LETTERS = ''.join(c for c in all_unicode if unicodedata.category(c) == 'Lu' or unicodedata.category(c) == 'Ll')
 
 
-class BogcodeFactory(factory.alchemy.SQLAlchemyModelFactory):
+class BugcodeFactory(factory.alchemy.SQLAlchemyModelFactory):
 
     @classmethod
     def build_dict(cls, **kwargs):
@@ -94,7 +94,7 @@ class BogcodeFactory(factory.alchemy.SQLAlchemyModelFactory):
         return ret
 
 
-class UserFactory(BogcodeFactory):
+class UserFactory(BugcodeFactory):
 
     username = FuzzyText()
     fs_uniquifier = factory.LazyAttribute(
@@ -130,7 +130,7 @@ class UserFactory(BogcodeFactory):
         sqlalchemy_session = db.session
 
 
-class WorkspaceFactory(BogcodeFactory):
+class WorkspaceFactory(BugcodeFactory):
 
     name = FuzzyText(chars=string.ascii_lowercase + string.digits)
     description = FuzzyText()
@@ -141,7 +141,7 @@ class WorkspaceFactory(BogcodeFactory):
         sqlalchemy_session = db.session
 
 
-class WorkspaceObjectFactory(BogcodeFactory):
+class WorkspaceObjectFactory(BugcodeFactory):
     workspace = factory.SubFactory(WorkspaceFactory)
     creator = factory.SubFactory(UserFactory)
 
@@ -201,7 +201,7 @@ class ReferenceFactory(WorkspaceObjectFactory):
         sqlalchemy_session = db.session
 
 
-class VulnerabilityReferenceFactory(BogcodeFactory):
+class VulnerabilityReferenceFactory(BugcodeFactory):
     name = FuzzyText()
 
     class Meta:
@@ -209,7 +209,7 @@ class VulnerabilityReferenceFactory(BogcodeFactory):
         sqlalchemy_session = db.session
 
 
-class ReferenceTemplateFactory(BogcodeFactory):
+class ReferenceTemplateFactory(BugcodeFactory):
     name = FuzzyText()
 
     class Meta:
@@ -248,7 +248,7 @@ class SourceCodeFactory(WorkspaceObjectFactory):
         sqlalchemy_session = db.session
 
 
-class CustomFieldsSchemaFactory(BogcodeFactory):
+class CustomFieldsSchemaFactory(BugcodeFactory):
 
     field_name = FuzzyText()
     field_type = FuzzyText()
@@ -389,7 +389,7 @@ class VulnerabilityCodeFactory(VulnerabilityGenericFactory):
         sqlalchemy_session = db.session
 
 
-class VulnerabilityTemplateFactory(BogcodeFactory):
+class VulnerabilityTemplateFactory(BugcodeFactory):
     # name = FuzzyText(chars=UNICODE_LETTERS)
     # description = FuzzyText(chars=UNICODE_LETTERS)
     name = FuzzyText()
@@ -423,7 +423,7 @@ class CredentialFactory(HasParentHostOrService, WorkspaceObjectFactory):
         sqlalchemy_session = db.session
 
 
-class CommandObjectFactory(BogcodeFactory):
+class CommandObjectFactory(BugcodeFactory):
     workspace = factory.SubFactory(WorkspaceFactory)
     created_persistent = False
 
@@ -522,7 +522,7 @@ class CommentFactory(WorkspaceObjectFactory):
         sqlalchemy_session = db.session
 
 
-class LicenseFactory(BogcodeFactory):
+class LicenseFactory(BugcodeFactory):
     product = FuzzyText()
     start_date = FuzzyStartTime()
     end_date = FuzzyEndTime()
@@ -543,7 +543,7 @@ class LicenseFactory(BogcodeFactory):
         return ret
 
 
-class TagFactory(BogcodeFactory):
+class TagFactory(BugcodeFactory):
     name = FuzzyText()
     slug = FuzzyText()
 
@@ -552,13 +552,13 @@ class TagFactory(BogcodeFactory):
         sqlalchemy_session = db.session
 
 
-class NoteFactory(BogcodeFactory):
+class NoteFactory(BugcodeFactory):
 
     class Meta:
         model = Comment
 
 
-class AgentFactory(BogcodeFactory):
+class AgentFactory(BugcodeFactory):
     name = FuzzyText()
     active = True
     id = FuzzyIncrementalInteger(1, 10000)
@@ -573,7 +573,7 @@ class AgentFactory(BogcodeFactory):
         sqlalchemy_session = db.session
 
 
-class ExecutorFactory(BogcodeFactory):
+class ExecutorFactory(BugcodeFactory):
     name = FuzzyText()
     agent = factory.SubFactory(AgentFactory)
     parameters_metadata = factory.LazyAttribute(
@@ -603,7 +603,7 @@ class AgentExecutionFactory(WorkspaceObjectFactory):
         sqlalchemy_session = db.session
 
 
-class SearchFilterFactory(BogcodeFactory):
+class SearchFilterFactory(BugcodeFactory):
 
     name = FuzzyText()
     user_query = FuzzyText()
@@ -616,7 +616,7 @@ class SearchFilterFactory(BogcodeFactory):
         sqlalchemy_session = db.session
 
 
-class ActionFactory(BogcodeFactory):
+class ActionFactory(BugcodeFactory):
     name = FuzzyText()
     description = FuzzyText()
     command = 'UPDATE'  # FuzzyChoice(['UPDATE', 'DELETE', 'ALERT'])
@@ -628,7 +628,7 @@ class ActionFactory(BogcodeFactory):
         sqlalchemy_session = db.session
 
 
-class PipelineFactory(BogcodeFactory):
+class PipelineFactory(BugcodeFactory):
     name = FuzzyText()
     jobs = []
     enabled = True
@@ -652,7 +652,7 @@ class PipelineFactory(BogcodeFactory):
         sqlalchemy_session = db.session
 
 
-class WorkflowFactory(BogcodeFactory):
+class WorkflowFactory(BugcodeFactory):
     model = 'vulnerability'
     name = FuzzyText()
     description = FuzzyText()
@@ -738,7 +738,7 @@ class WorkflowFactory(BogcodeFactory):
         sqlalchemy_session = db.session
 
 
-class ConditionFactory(BogcodeFactory):
+class ConditionFactory(BugcodeFactory):
     field = 'description'
     type = 'leaf'
     data = FuzzyText()

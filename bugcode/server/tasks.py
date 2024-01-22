@@ -5,8 +5,8 @@ from typing import Optional
 from celery import group, chord
 from celery.utils.log import get_task_logger
 
-from bogcode.server.extensions import celery
-from bogcode.server.models import db, Workspace, Command
+from bugcode.server.extensions import celery
+from bugcode.server.models import db, Workspace, Command
 
 logger = get_task_logger(__name__)
 
@@ -49,7 +49,7 @@ def process_report_task(workspace_id: int, command: dict, hosts):
 
 @celery.task(ignore_result=False, acks_late=True)
 def create_host_task(workspace_id, command: dict, host):
-    from bogcode.server.api.modules.bulk_create import _create_host  # pylint: disable=import-outside-toplevel
+    from bugcode.server.api.modules.bulk_create import _create_host  # pylint: disable=import-outside-toplevel
     created_objects = []
     db.engine.dispose()
     start_time = time.time()
@@ -76,9 +76,9 @@ def pre_process_report_task(workspace_name: str, command_id: int, file_path: str
                             plugin_id: Optional[int], user_id: Optional[int], ignore_info: bool,
                             dns_resolution: bool, vuln_tag: Optional[list] = None,
                             host_tag: Optional[list] = None, service_tag: Optional[list] = None):
-    from bogcode.server.utils.reports_processor import process_report  # pylint: disable=import-outside-toplevel
-    from bogcode_plugins.plugins.manager import PluginsManager, ReportAnalyzer  # pylint: disable=import-outside-toplevel
-    from bogcode.settings.reports import ReportsSettings  # pylint: disable=import-outside-toplevel
+    from bugcode.server.utils.reports_processor import process_report  # pylint: disable=import-outside-toplevel
+    from bugcode_plugins.plugins.manager import PluginsManager, ReportAnalyzer  # pylint: disable=import-outside-toplevel
+    from bugcode.settings.reports import ReportsSettings  # pylint: disable=import-outside-toplevel
 
     if not plugin_id:
         start_time = time.time()
@@ -87,7 +87,7 @@ def pre_process_report_task(workspace_name: str, command_id: int, file_path: str
         plugin = report_analyzer.get_plugin(file_path)
 
         if not plugin:
-            from bogcode.server.utils.reports_processor import command_status_error  # pylint: disable=import-outside-toplevel
+            from bugcode.server.utils.reports_processor import command_status_error  # pylint: disable=import-outside-toplevel
             logger.info("Could not get plugin for file")
             logger.info("Plugin analyzer took %s", time.time() - start_time)
             command_status_error(command_id)

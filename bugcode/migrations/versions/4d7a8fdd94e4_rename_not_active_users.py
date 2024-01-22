@@ -17,13 +17,13 @@ depends_on = None
 
 
 def upgrade():
-    t_users = sa.table('bogcode_user',
+    t_users = sa.table('bugcode_user',
                        sa.column('username', sa.String),
                        sa.column('email', sa.String)
                        )
 
     conn = op.get_bind()
-    res = conn.execute('SELECT username FROM bogcode_user WHERE active = FALSE').fetchall()
+    res = conn.execute('SELECT username FROM bugcode_user WHERE active = FALSE').fetchall()
 
     for user in res:
         op.execute(

@@ -1,4 +1,4 @@
-from bogcode.server.commands.app_urls import openapi_format
+from bugcode.server.commands.app_urls import openapi_format
 
 
 def test_openapi_format(session):

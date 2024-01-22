@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2018  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2018  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 
@@ -26,14 +26,14 @@ from werkzeug.utils import secure_filename
 from wtforms import ValidationError
 
 # Local application imports
-from bogcode.server.api.base import GenericWorkspacedView
-from bogcode.server.config import CONST_BUGCODE_HOME_PATH, bogcode_server
-from bogcode.server.models import Workspace, Command, db
-from bogcode.server.utils.reports_processor import REPORTS_QUEUE
-from bogcode.server.utils.web import gzipped
-from bogcode.settings.reports import ReportsSettings
-from bogcode_plugins.plugins.manager import PluginsManager, ReportAnalyzer
-from bogcode.server.tasks import pre_process_report_task
+from bugcode.server.api.base import GenericWorkspacedView
+from bugcode.server.config import CONST_BUGCODE_HOME_PATH, bugcode_server
+from bugcode.server.models import Workspace, Command, db
+from bugcode.server.utils.reports_processor import REPORTS_QUEUE
+from bugcode.server.utils.web import gzipped
+from bugcode.settings.reports import ReportsSettings
+from bugcode_plugins.plugins.manager import PluginsManager, ReportAnalyzer
+from bugcode.server.tasks import pre_process_report_task
 
 upload_api = Blueprint('upload_reports', __name__)
 logger = logging.getLogger(__name__)
@@ -102,9 +102,9 @@ class UploadReportView(GenericWorkspacedView):
                     output.write(report_file.read())
             except AttributeError:
                 logger.warning(
-                    "Upload reports in WEB-UI not configured, run Bogcode client and try again...")
+                    "Upload reports in WEB-UI not configured, run Bugcode client and try again...")
                 abort(make_response(
-                    jsonify(message="Upload reports not configured: Run bogcode client and start Bogcode server again"),
+                    jsonify(message="Upload reports not configured: Run bugcode client and start Bugcode server again"),
                     500))
             else:
                 workspace_instance = Workspace.query.filter_by(
@@ -120,7 +120,7 @@ class UploadReportView(GenericWorkspacedView):
                 db.session.add(command)
                 db.session.commit()
 
-                if bogcode_server.celery_enabled:
+                if bugcode_server.celery_enabled:
                     try:
                         pre_process_report_task.delay(
                             workspace_instance.name,

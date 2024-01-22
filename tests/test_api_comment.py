@@ -1,12 +1,12 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
 
-from bogcode.server.api.modules.comments import CommentView
-from bogcode.server.models import Comment
+from bugcode.server.api.modules.comments import CommentView
+from bugcode.server.models import Comment
 from tests.factories import ServiceFactory
 from tests.test_api_workspaced_base import ReadWriteAPITests, BulkDeleteTestsMixin
 from tests import factories

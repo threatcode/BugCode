@@ -1,8 +1,8 @@
-from bogcode.server.models import (
+from bugcode.server.models import (
     Command,
     CommandObject
 )
-from bogcode.server.api.base import InvalidUsage
+from bugcode.server.api.base import InvalidUsage
 
 
 def set_command_id(session, obj, created, command_id):

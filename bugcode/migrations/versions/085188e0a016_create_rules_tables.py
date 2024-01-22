@@ -34,13 +34,13 @@ def upgrade():
     op.create_foreign_key(
         'rule_creator_id_fkey',
         'rule',
-        'bogcode_user', ['creator_id'], ['id']
+        'bugcode_user', ['creator_id'], ['id']
     )
 
     op.create_foreign_key(
         'rule_update_user_id_fkey',
         'rule',
-        'bogcode_user', ['update_user_id'], ['id']
+        'bugcode_user', ['update_user_id'], ['id']
     )
 
     op.create_foreign_key(
@@ -65,13 +65,13 @@ def upgrade():
     op.create_foreign_key(
         'action_creator_id_fkey',
         'action',
-        'bogcode_user', ['creator_id'], ['id']
+        'bugcode_user', ['creator_id'], ['id']
     )
 
     op.create_foreign_key(
         'action_update_user_id_fkey',
         'action',
-        'bogcode_user', ['update_user_id'], ['id']
+        'bugcode_user', ['update_user_id'], ['id']
     )
 
     op.create_table(
@@ -88,13 +88,13 @@ def upgrade():
     op.create_foreign_key(
         'rule_action_creator_id_fkey',
         'rule_action',
-        'bogcode_user', ['creator_id'], ['id']
+        'bugcode_user', ['creator_id'], ['id']
     )
 
     op.create_foreign_key(
         'rule_action_update_user_id_fkey',
         'rule_action',
-        'bogcode_user', ['update_user_id'], ['id']
+        'bugcode_user', ['update_user_id'], ['id']
     )
 
     op.create_foreign_key(
@@ -127,13 +127,13 @@ def upgrade():
     op.create_foreign_key(
         'condition_creator_id_fkey',
         'condition',
-        'bogcode_user', ['creator_id'], ['id']
+        'bugcode_user', ['creator_id'], ['id']
     )
 
     op.create_foreign_key(
         'condition_update_user_id_fkey',
         'condition',
-        'bogcode_user', ['update_user_id'], ['id']
+        'bugcode_user', ['update_user_id'], ['id']
     )
 
     op.create_foreign_key(
@@ -156,13 +156,13 @@ def upgrade():
     op.create_foreign_key(
         'rule_execution_creator_id_fkey',
         'rule_execution',
-        'bogcode_user', ['creator_id'], ['id']
+        'bugcode_user', ['creator_id'], ['id']
     )
 
     op.create_foreign_key(
         'rule_execution_update_user_id_fkey',
         'rule_execution',
-        'bogcode_user', ['update_user_id'], ['id']
+        'bugcode_user', ['update_user_id'], ['id']
     )
 
     op.create_foreign_key(

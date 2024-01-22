@@ -9,7 +9,7 @@ from alembic import op
 import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
-from bogcode.server.models import NotificationSubscription, NotificationSubscriptionWebSocketConfig, User
+from bugcode.server.models import NotificationSubscription, NotificationSubscriptionWebSocketConfig, User
 
 revision = '89115e133f0a'
 down_revision = '5d7a930c439e'
@@ -44,7 +44,7 @@ def upgrade():
     res = bind.execute('SELECT name, id FROM event_type').fetchall()  # nosec
     event_type_ids = dict(res)
 
-    res = bind.execute('SELECT name, id FROM bogcode_role').fetchall()  # nosec
+    res = bind.execute('SELECT name, id FROM bugcode_role').fetchall()  # nosec
     role_ids = dict(res)
 
     for config in notifications_config:

@@ -1,8 +1,8 @@
 import re
 import logging
 
-from bogcode.server.models import db, CWE
-from bogcode.server.utils.database import get_or_create
+from bugcode.server.models import db, CWE
+from bugcode.server.utils.database import get_or_create
 
 CWE_FORMAT = r'^CWE-\d{1,}$'
 

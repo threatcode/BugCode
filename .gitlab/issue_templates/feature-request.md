@@ -5,7 +5,7 @@ about: Suggest an idea for this
 ---
 
 **What's the problem this feature will solve?**
-<!-- What are you trying to do, that you are unable to achieve with bogcode as it currently stands? -->
+<!-- What are you trying to do, that you are unable to achieve with bugcode as it currently stands? -->
 
 **Describe the solution you'd like**
 <!-- Clear and concise description of what you want to happen. -->

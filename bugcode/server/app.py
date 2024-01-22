@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2016  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2016  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 # Standard library imports
@@ -48,27 +48,27 @@ from simplekv.fs import FilesystemStore
 from sqlalchemy.pool import QueuePool
 
 # Local application imports
-import bogcode.server.config
-import bogcode.server.events
-from bogcode.server.config import (
+import bugcode.server.config
+import bugcode.server.events
+from bugcode.server.config import (
     CONST_BUGCODE_HOME_PATH,
     LOCAL_CONFIG_FILE,
     copy_default_config_to_local,
 )
-from bogcode.server.extensions import socketio
-from bogcode.server.models import (
+from bugcode.server.extensions import socketio
+from bugcode.server.models import (
     User,
     Role,
 )
-from bogcode.server.utils.ping import ping_home_background_task
+from bugcode.server.utils.ping import ping_home_background_task
 
-from bogcode.server.utils.reports_processor import reports_manager_background_task
-from bogcode.server.api.modules.swagger import swagger_api
-from bogcode.server.utils.invalid_chars import remove_null_characters
-from bogcode.server.utils.logger import LOGGING_HANDLERS
-from bogcode.server.websockets.dispatcher import remove_sid
-from bogcode.settings import load_settings
-from bogcode.server.extensions import celery
+from bugcode.server.utils.reports_processor import reports_manager_background_task
+from bugcode.server.api.modules.swagger import swagger_api
+from bugcode.server.utils.invalid_chars import remove_null_characters
+from bugcode.server.utils.logger import LOGGING_HANDLERS
+from bugcode.server.websockets.dispatcher import remove_sid
+from bugcode.settings import load_settings
+from bugcode.server.extensions import celery
 
 
 # Don't move this import from here
@@ -86,52 +86,52 @@ def setup_storage_path():
         logger.info(f'Creating directory {default_path}')
         default_path.mkdir()
     config = ConfigParser()
-    config.read(bogcode.server.config.LOCAL_CONFIG_FILE)
+    config.read(bugcode.server.config.LOCAL_CONFIG_FILE)
     try:
         config.add_section('storage')
         config.set('storage', 'path', str(default_path))
     except DuplicateSectionError:
         logger.info('Duplicate section storage. skipping.')
-    with bogcode.server.config.LOCAL_CONFIG_FILE.open('w') as configfile:
+    with bugcode.server.config.LOCAL_CONFIG_FILE.open('w') as configfile:
         config.write(configfile)
 
     return default_path
 
 
 def register_blueprints(app):
-    from bogcode.server.ui import ui  # pylint: disable=import-outside-toplevel
-    from bogcode.server.api.modules.info import info_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.commandsrun import commandsrun_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.global_commands import globalcommands_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.activity_feed import activityfeed_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.credentials import credentials_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.hosts import host_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.licenses import license_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.services import services_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.session import session_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.vulns import vulns_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.vulnerability_template import \
+    from bugcode.server.ui import ui  # pylint: disable=import-outside-toplevel
+    from bugcode.server.api.modules.info import info_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.commandsrun import commandsrun_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.global_commands import globalcommands_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.activity_feed import activityfeed_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.credentials import credentials_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.hosts import host_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.licenses import license_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.services import services_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.session import session_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.vulns import vulns_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.vulnerability_template import \
         vulnerability_template_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.workspaces import workspace_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.handlers import handlers_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.comments import comment_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.upload_reports import upload_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.websocket_auth import websocket_auth_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.get_exploits import exploits_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.custom_fields import \
+    from bugcode.server.api.modules.workspaces import workspace_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.handlers import handlers_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.comments import comment_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.upload_reports import upload_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.websocket_auth import websocket_auth_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.get_exploits import exploits_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.custom_fields import \
         custom_fields_schema_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.agent_auth_token import \
+    from bugcode.server.api.modules.agent_auth_token import \
         agent_auth_token_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.agent import agent_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.bulk_create import bulk_create_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.token import token_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.search_filter import searchfilter_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.preferences import preferences_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.export_data import export_data_api  # pylint:disable=import-outside-toplevel
-    # from bogcode.server.websockets import websockets  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.settings_reports import \
+    from bugcode.server.api.modules.agent import agent_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.bulk_create import bulk_create_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.token import token_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.search_filter import searchfilter_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.preferences import preferences_api  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.export_data import export_data_api  # pylint:disable=import-outside-toplevel
+    # from bugcode.server.websockets import websockets  # pylint:disable=import-outside-toplevel
+    from bugcode.server.api.modules.settings_reports import \
         reports_settings_api  # pylint:disable=import-outside-toplevel
-    from bogcode.server.api.modules.settings_dashboard import \
+    from bugcode.server.api.modules.settings_dashboard import \
         dashboard_settings_api  # pylint:disable=import-outside-toplevel
 
     app.register_blueprint(ui)
@@ -171,7 +171,7 @@ def check_testing_configuration(testing, app):
     if testing:
         app.config['SQLALCHEMY_ECHO'] = False
         app.config['TESTING'] = testing
-        app.config['NPLUSONE_LOGGER'] = logging.getLogger('bogcode.nplusone')
+        app.config['NPLUSONE_LOGGER'] = logging.getLogger('bugcode.nplusone')
         app.config['NPLUSONE_LOG_LEVEL'] = logging.ERROR
         app.config['NPLUSONE_RAISE'] = True
         NPlusOne(app)
@@ -269,10 +269,10 @@ def save_new_secret_key(app):
     secret_key = "".join([rng.choice(string.ascii_letters + string.digits) for _ in range(25)])
     app.config['SECRET_KEY'] = secret_key
     try:
-        config.set('bogcode_server', 'secret_key', secret_key)
+        config.set('bugcode_server', 'secret_key', secret_key)
     except NoSectionError:
-        config.add_section('bogcode_server')
-        config.set('bogcode_server', 'secret_key', secret_key)
+        config.add_section('bugcode_server')
+        config.set('bugcode_server', 'secret_key', secret_key)
     with open(LOCAL_CONFIG_FILE, 'w', encoding='utf-8') as configfile:
         config.write(configfile)
 
@@ -282,10 +282,10 @@ def save_new_agent_creation_token_secret():
     config = ConfigParser()
     config.read(LOCAL_CONFIG_FILE)
     registration_secret = pyotp.random_base32()
-    config.set('bogcode_server', 'agent_registration_secret', registration_secret)
+    config.set('bugcode_server', 'agent_registration_secret', registration_secret)
     with open(LOCAL_CONFIG_FILE, 'w', encoding='utf-8') as configfile:
         config.write(configfile)
-    bogcode.server.config.bogcode_server.agent_registration_secret = registration_secret
+    bugcode.server.config.bugcode_server.agent_registration_secret = registration_secret
 
 
 def request_user_ip():
@@ -307,13 +307,13 @@ def expire_session(app, user):
 
 def user_logged_in_successful(app, user):
     user_agent = request.headers.get('User-Agent')
-    if user_agent.startswith('bogcode-client/'):
-        HOME_URL = "https://portal.bugcode.com/api/v1/license_check"
-        params = {'version': bogcode.__version__, 'key': 'white', 'client': user_agent}
+    if user_agent.startswith('bugcode-client/'):
+        HOME_URL = "https://portal.threatcode.github.io/bugcode/api/v1/license_check"
+        params = {'version': bugcode.__version__, 'key': 'white', 'client': user_agent}
         try:
-            logger.debug('Send Bogcode-Client license_check')
+            logger.debug('Send Bugcode-Client license_check')
             res = requests.get(HOME_URL, params=params, timeout=1, verify=True)
-            logger.debug("Bogcode-Client license_check response: %s", res.text)
+            logger.debug("Bugcode-Client license_check response: %s", res.text)
         except Exception as e:
             logger.warning("Error sending client license_check [%s]", e)
     # cleanup old sessions
@@ -374,7 +374,7 @@ def create_app(db_connection_string=None, testing=None, register_extensions_flag
     app.config['APPLICATION_PREFIX'] = '/_api' if not testing else ''
 
     try:
-        secret_key = bogcode.server.config.bogcode_server.secret_key
+        secret_key = bugcode.server.config.bugcode_server.secret_key
     except Exception:
         # Now when the config file does not exist it doesn't enter in this
         # condition, but it could happen in the future. TODO check
@@ -387,7 +387,7 @@ def create_app(db_connection_string=None, testing=None, register_extensions_flag
         else:
             app.config['SECRET_KEY'] = secret_key
 
-    if bogcode.server.config.bogcode_server.agent_registration_secret is None:
+    if bugcode.server.config.bugcode_server.agent_registration_secret is None:
         save_new_agent_creation_token_secret()
 
     login_failed_message = ("Invalid username or password", 'error')
@@ -418,7 +418,7 @@ def create_app(db_connection_string=None, testing=None, register_extensions_flag
         'SECURITY_MSG_INVALID_PASSWORD': login_failed_message,
 
         'SESSION_TYPE': 'filesystem',
-        'SESSION_FILE_DIR': bogcode.server.config.BUGCODE_SERVER_SESSIONS_DIR,
+        'SESSION_FILE_DIR': bugcode.server.config.BUGCODE_SERVER_SESSIONS_DIR,
 
         'SQLALCHEMY_TRACK_MODIFICATIONS': False,
         'SQLALCHEMY_RECORD_QUERIES': True,
@@ -432,12 +432,12 @@ def create_app(db_connection_string=None, testing=None, register_extensions_flag
             # 'sha512_crypt',
         ],
         'PERMANENT_SESSION_LIFETIME': datetime.timedelta(
-            hours=int(bogcode.server.config.bogcode_server.session_timeout or 12)),
-        'SESSION_COOKIE_NAME': 'bogcode_session_2',
+            hours=int(bugcode.server.config.bugcode_server.session_timeout or 12)),
+        'SESSION_COOKIE_NAME': 'bugcode_session_2',
         'SESSION_COOKIE_SAMESITE': 'Lax',
-        'IMPORTS': ('bogcode.server.tasks', ),
-        'CELERY_BROKER_URL': f'redis://{bogcode.server.config.bogcode_server.celery_broker_url}:6379',
-        'CELERY_RESULT_BACKEND': f'redis://{bogcode.server.config.bogcode_server.celery_backend_url}:6379',
+        'IMPORTS': ('bugcode.server.tasks', ),
+        'CELERY_BROKER_URL': f'redis://{bugcode.server.config.bugcode_server.celery_broker_url}:6379',
+        'CELERY_RESULT_BACKEND': f'redis://{bugcode.server.config.bugcode_server.celery_backend_url}:6379',
     })
 
     store = FilesystemStore(app.config['SESSION_FILE_DIR'])
@@ -446,10 +446,10 @@ def create_app(db_connection_string=None, testing=None, register_extensions_flag
     user_logged_in.connect(user_logged_in_successful, app)
     user_logged_out.connect(expire_session, app)
 
-    storage_path = bogcode.server.config.storage.path
+    storage_path = bugcode.server.config.storage.path
     if not storage_path:
-        logger.warning('No storage section or path in the .bogcode/config/server.ini. '
-                       'Setting the default value to .bogcode/storage')
+        logger.warning('No storage section or path in the .bugcode/config/server.ini. '
+                       'Setting the default value to .bugcode/storage')
         storage_path = setup_storage_path()
 
     if not DepotManager.get('default'):
@@ -473,7 +473,7 @@ def create_app(db_connection_string=None, testing=None, register_extensions_flag
 
     try:
         app.config[
-            'SQLALCHEMY_DATABASE_URI'] = db_connection_string or bogcode.server.config.database.connection_string.strip(
+            'SQLALCHEMY_DATABASE_URI'] = db_connection_string or bugcode.server.config.database.connection_string.strip(
             "'")
     except AttributeError:
         logger.info(
@@ -482,7 +482,7 @@ def create_app(db_connection_string=None, testing=None, register_extensions_flag
         logger.info('Missing connection_string on [database] section on server.ini. '
                     'Please configure the database before running the server.')
 
-    from bogcode.server.models import db  # pylint:disable=import-outside-toplevel
+    from bugcode.server.models import db  # pylint:disable=import-outside-toplevel
     db.init_app(app)
     # Session(app)
 
@@ -492,7 +492,7 @@ def create_app(db_connection_string=None, testing=None, register_extensions_flag
         user_model=User,
         role_model=Role)
 
-    from bogcode.server.api.modules.agent import agent_creation_api  # pylint: disable=import-outside-toplevel
+    from bugcode.server.api.modules.agent import agent_creation_api  # pylint: disable=import-outside-toplevel
 
     app.limiter = Limiter(
         app,
@@ -500,7 +500,7 @@ def create_app(db_connection_string=None, testing=None, register_extensions_flag
         default_limits=[]
     )
     if not testing:
-        app.limiter.limit(bogcode.server.config.limiter_config.login_limit)(agent_creation_api)
+        app.limiter.limit(bugcode.server.config.limiter_config.login_limit)(agent_creation_api)
 
     app.register_blueprint(agent_creation_api)
 
@@ -510,7 +510,7 @@ def create_app(db_connection_string=None, testing=None, register_extensions_flag
 
     app.view_functions['security.login'].is_public = True
     app.view_functions['security.logout'].is_public = True
-    app.debug = bogcode.server.config.is_debug_mode()
+    app.debug = bugcode.server.config.is_debug_mode()
     minify_json_output(app)
 
     for handler in LOGGING_HANDLERS:
@@ -543,17 +543,17 @@ def get_app(db_connection_string=None, testing=None, register_extensions_flag=Tr
 
 
 def register_extensions(app):
-    from bogcode.server.websockets.dispatcher import DispatcherNamespace  # pylint: disable=import-outside-toplevel
+    from bugcode.server.websockets.dispatcher import DispatcherNamespace  # pylint: disable=import-outside-toplevel
     socketio.init_app(app)
     socketio.on_namespace(DispatcherNamespace("/dispatcher"))
 
-    if bogcode.server.config.bogcode_server.celery_enabled:
+    if bugcode.server.config.bugcode_server.celery_enabled:
         logger.info("Celery is enabled ...")
         logger.info("Checking celery configuration ...")
-        if not bogcode.server.config.bogcode_server.celery_broker_url:
+        if not bugcode.server.config.bugcode_server.celery_broker_url:
             logger.error("No broker configuration found. Please add `celery_broker_url` to your server.ini...")
             sys.exit()
-        if not bogcode.server.config.bogcode_server.celery_backend_url:
+        if not bugcode.server.config.bugcode_server.celery_backend_url:
             logger.error("No backend configuration found. Please add `celery_backend_url` to your server.ini...")
             sys.exit()
         celery.init_app(app)

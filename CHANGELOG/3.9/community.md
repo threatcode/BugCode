@@ -9,14 +9,14 @@
  * Allow filtering hosts by its service's ports in the Web UI
  * Performance improvements in vulnerabilities and vulnerability templates API (they
    were doing a lot of SQL queries because of a programming bug)
- * Require being in the bogcode-manage group when running bogcode from a .deb or .rpm package
+ * Require being in the bugcode-manage group when running bugcode from a .deb or .rpm package
  * Change the first page shown after the user logs in. Now it displays a workspace
    selection dialog
  * Add API endpoint to import Vuln Templates from a CSV file
  * Create the exported CSV of the status report in the backend instead of in the
 problem, which was much slower
  * Add API endpoint to import hosts from a CSV file
- * Add `bogcode-manage rename-user` command to change a user's username
+ * Add `bugcode-manage rename-user` command to change a user's username
  * Allow resizing columns in Vulnerability Templates view
  * Avoid copying technical details when a vuln template is generated from the status report
  * Use exact matches when searching vulns by target
@@ -32,7 +32,7 @@ problem, which was much slower
  * Add active filter in workspaces view. Only show active workspaces
    in other parts of the Web UI
  * Enforce end date to be greater than start date in workspaces API
- * Fix bug in `bogcode-manage create-tables` that incorrectly marked schema
+ * Fix bug in `bugcode-manage create-tables` that incorrectly marked schema
    migrations as applied
  * Fix bug in many plugins that loaded hostnames incorrectly (one hostname per chararcter)
  * Improve references parsing in OpenVAS plugin
@@ -41,4 +41,4 @@ problem, which was much slower
  * Fix showing of services with large names in the Web UI
  * Fix broken select all hosts checkbox
  * Fix bug viewing an attachment/evidence when its filename contained whitespaces
- * Fix "Are you sure you want to quit Bogcode?" dialog showing twice in GTK
+ * Fix "Are you sure you want to quit Bugcode?" dialog showing twice in GTK

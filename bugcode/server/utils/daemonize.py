@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2016  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2016  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 
 Copyright (C) 2005 Chad J. Schroeder
@@ -19,7 +19,7 @@ from functools import partial
 from pathlib import Path
 
 # Local application imports
-from bogcode.server.config import (
+from bugcode.server.config import (
     CONST_BUGCODE_HOME_PATH,
     BUGCODE_SERVER_PID_FILE,
     BUGCODE_BASE
@@ -151,19 +151,19 @@ def start_server():
 
 
 def stop_server(port):
-    """Stops Bogcode Server if it isn't running"""
+    """Stops Bugcode Server if it isn't running"""
     pid = is_server_running(port)
     if pid is None:
-        logger.error('Bogcode Server is not running')
+        logger.error('Bugcode Server is not running')
         return False
 
     try:
         logger.info(f'Sending SIGTERM to pid {pid}, in port {port}')
         os.kill(pid, signal.SIGTERM)
-        logger.info("Bogcode Server stopped successfully")
+        logger.info("Bugcode Server stopped successfully")
     except OSError as err:
         if err.errno == errno.EPERM:
-            logger.error("Couldn't stop Bogcode Server. User doesn't"
+            logger.error("Couldn't stop Bugcode Server. User doesn't"
                          "have enough permissions")
             return False
         else:
@@ -207,7 +207,7 @@ def get_server_pid(port):
         except ValueError:
             logger.warning('PID file was found but is corrupted. '
                            'Assuming server is not running. Please check manually'
-                           'if Bogcode Server is effectively running')
+                           'if Bugcode Server is effectively running')
             remove_pid_file(port)
             return None
 
@@ -229,7 +229,7 @@ def get_ports_running():
     home_dir = CONST_BUGCODE_HOME_PATH
 
     for path in home_dir.iterdir():
-        match = re.match(r"bogcode\-server\-port\-(?P<last_name>[0-9]+)\.pid",
+        match = re.match(r"bugcode\-server\-port\-(?P<last_name>[0-9]+)\.pid",
                          path.name)
         if match:
             ports.append(int(match.group(1)))

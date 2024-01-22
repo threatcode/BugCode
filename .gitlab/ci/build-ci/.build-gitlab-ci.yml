@@ -2,8 +2,8 @@ generate_deb_dev:
     image: registry.gitlab.com/bugcode/devops
     stage: build
     before_script:
-        - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/bugcode/bogcode-linux-installers-builder.git
-        - cd bogcode-linux-installers-builder
+        - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/khulnasoft/bugcode-linux-installers-builder.git
+        - cd bugcode-linux-installers-builder
         - "if ! [ -z $INSTALLER_BRANCH ]; then git checkout $INSTALLER_BRANCH; fi"
         - cd ..
         - mv py3.tar /
@@ -11,13 +11,13 @@ generate_deb_dev:
 
     script:
         - mkdir build_installer
-        - cp -a bogcode.tar.gz build_installer/.
+        - cp -a bugcode.tar.gz build_installer/.
         - cd build_installer
-        - /bin/tar zxf bogcode.tar.gz
-        - cd bogcode_copy
+        - /bin/tar zxf bugcode.tar.gz
+        - cd bugcode_copy
         - cp -r /nix .
-        - mv ../../bogcode-linux-installers-builder .
-        - cd bogcode-linux-installers-builder
+        - mv ../../bugcode-linux-installers-builder .
+        - cd bugcode-linux-installers-builder
         - git rev-parse HEAD
         - git clone https://github.com/jordansissel/fpm.git
         - cd fpm
@@ -29,17 +29,17 @@ generate_deb_dev:
         - gem install --no-document fpm-1.11.0.gem
         - cd ../../
         - POSTFIX=$(echo "$CI_COMMIT_BRANCH" | awk '{split($1,a,"_");split($1,b,"/"); if (a[3]!="y2k") if (b[2]=="dev"||b[2]=="master") print ""; else print "~"a[3]; else exit 1;}')
-        - sh bogcode-linux-installers-builder/build.sh $(eval $IMAGE_TAG)~$((`date '+%s%N'`/1000))$POSTFIX server deb white
-        - mv bogcode-server_amd64.deb ../../bogcode-server_amd64.deb
+        - sh bugcode-linux-installers-builder/build.sh $(eval $IMAGE_TAG)~$((`date '+%s%N'`/1000))$POSTFIX server deb white
+        - mv bugcode-server_amd64.deb ../../bugcode-server_amd64.deb
     needs:
       - job: generate_build_file_dev
         artifacts: true
       - job: build_nix_python3_dev
         artifacts: true
     artifacts:
-        name: 'bogcode_$CI_COMMIT_REF_NAME.deb'
+        name: 'bugcode_$CI_COMMIT_REF_NAME.deb'
         paths:
-            - "bogcode-server_amd64.deb"
+            - "bugcode-server_amd64.deb"
         expire_in: 15 days
     rules:
         - !reference [.be-uploaded, rules]
@@ -52,8 +52,8 @@ generate_deb_staging:
     image: registry.gitlab.com/bugcode/devops
     stage: build
     before_script:
-        - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/bugcode/bogcode-linux-installers-builder.git
-        - cd bogcode-linux-installers-builder
+        - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/khulnasoft/bugcode-linux-installers-builder.git
+        - cd bugcode-linux-installers-builder
         - "if ! [ -z $INSTALLER_BRANCH ]; then git checkout $INSTALLER_BRANCH; fi"
         - cd ..
         - mv py3.tar /
@@ -61,13 +61,13 @@ generate_deb_staging:
 
     script:
         - mkdir build_installer
-        - cp -a bogcode.tar.gz build_installer/.
+        - cp -a bugcode.tar.gz build_installer/.
         - cd build_installer
-        - /bin/tar zxf bogcode.tar.gz
-        - cd bogcode_copy
+        - /bin/tar zxf bugcode.tar.gz
+        - cd bugcode_copy
         - cp -r /nix .
-        - mv ../../bogcode-linux-installers-builder .
-        - cd bogcode-linux-installers-builder
+        - mv ../../bugcode-linux-installers-builder .
+        - cd bugcode-linux-installers-builder
         - git rev-parse HEAD
         - git clone https://github.com/jordansissel/fpm.git
         - cd fpm
@@ -79,17 +79,17 @@ generate_deb_staging:
         - gem install --no-document fpm-1.11.0.gem
         - cd ../../
         - POSTFIX=$(echo "$CI_COMMIT_BRANCH" | awk '{split($1,a,"_");split($1,b,"/"); if (a[3]!="y2k") if (b[2]=="dev"||b[2]=="master") print ""; else print "~"a[3]; else exit 1;}')
-        - sh bogcode-linux-installers-builder/build.sh $(eval $IMAGE_TAG)~$((`date '+%s%N'`/1000))$POSTFIX server deb white
-        - mv bogcode-server_amd64.deb ../../bogcode-server_amd64.deb
+        - sh bugcode-linux-installers-builder/build.sh $(eval $IMAGE_TAG)~$((`date '+%s%N'`/1000))$POSTFIX server deb white
+        - mv bugcode-server_amd64.deb ../../bugcode-server_amd64.deb
     needs:
       - job: generate_build_file_staging
         artifacts: true
       - job: build_nix_python3_staging
         artifacts: true
     artifacts:
-        name: 'bogcode_$CI_COMMIT_REF_NAME.deb'
+        name: 'bugcode_$CI_COMMIT_REF_NAME.deb'
         paths:
-            - "bogcode-server_amd64.deb"
+            - "bugcode-server_amd64.deb"
         expire_in: 15 days
     rules:
         - !reference [.on-staging, rules]
@@ -99,8 +99,8 @@ generate_deb_master:
     image: registry.gitlab.com/bugcode/devops
     stage: build
     before_script:
-        - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/bugcode/bogcode-linux-installers-builder.git
-        - cd bogcode-linux-installers-builder
+        - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/khulnasoft/bugcode-linux-installers-builder.git
+        - cd bugcode-linux-installers-builder
         - "if ! [ -z $INSTALLER_BRANCH ]; then git checkout $INSTALLER_BRANCH; fi"
         - cd ..
         - mv py3.tar /
@@ -108,13 +108,13 @@ generate_deb_master:
 
     script:
         - mkdir build_installer
-        - cp -a bogcode.tar.gz build_installer/.
+        - cp -a bugcode.tar.gz build_installer/.
         - cd build_installer
-        - /bin/tar zxf bogcode.tar.gz
-        - cd bogcode_copy
+        - /bin/tar zxf bugcode.tar.gz
+        - cd bugcode_copy
         - cp -r /nix .
-        - mv ../../bogcode-linux-installers-builder .
-        - cd bogcode-linux-installers-builder
+        - mv ../../bugcode-linux-installers-builder .
+        - cd bugcode-linux-installers-builder
         - git rev-parse HEAD
         - git clone https://github.com/jordansissel/fpm.git
         - cd fpm
@@ -126,17 +126,17 @@ generate_deb_master:
         - gem install --no-document fpm-1.11.0.gem
         - cd ../../
         - POSTFIX=$(echo "$CI_COMMIT_BRANCH" | awk '{split($1,a,"_");split($1,b,"/"); if (a[3]!="y2k") if (b[2]=="dev"||b[2]=="master") print ""; else print "~"a[3]; else exit 1;}')
-        - sh bogcode-linux-installers-builder/build.sh $(eval $IMAGE_TAG)~$((`date '+%s%N'`/1000))$POSTFIX server deb white
-        - mv bogcode-server_amd64.deb ../../bogcode-server_amd64.deb
+        - sh bugcode-linux-installers-builder/build.sh $(eval $IMAGE_TAG)~$((`date '+%s%N'`/1000))$POSTFIX server deb white
+        - mv bugcode-server_amd64.deb ../../bugcode-server_amd64.deb
     needs:
       - job: generate_build_file_master
         artifacts: true
       - job: build_nix_python3_master
         artifacts: true
     artifacts:
-        name: 'bogcode_$CI_COMMIT_REF_NAME.deb'
+        name: 'bugcode_$CI_COMMIT_REF_NAME.deb'
         paths:
-            - "bogcode-server_amd64.deb"
+            - "bugcode-server_amd64.deb"
         expire_in: 15 days
     rules:
         - !reference [.on-master, rules]
@@ -149,8 +149,8 @@ generate_rpm_dev:
     before_script:
       - yum -y upgrade
       - yum -y install which git epel-release centos-release-scl
-      - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/bugcode/bogcode-linux-installers-builder.git
-      - cd bogcode-linux-installers-builder
+      - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/khulnasoft/bugcode-linux-installers-builder.git
+      - cd bugcode-linux-installers-builder
       - "if ! [ -z $INSTALLER_BRANCH ]; then git checkout $INSTALLER_BRANCH; fi"
       - cd ..
       - mv py3.tar /
@@ -165,13 +165,13 @@ generate_rpm_dev:
       - pip install virtualenv-tools3
     script:
         - mkdir build_installer
-        - cp -a bogcode.tar.gz build_installer/.
+        - cp -a bugcode.tar.gz build_installer/.
         - cd build_installer
-        - /bin/tar zxf bogcode.tar.gz
-        - cd bogcode_copy
+        - /bin/tar zxf bugcode.tar.gz
+        - cd bugcode_copy
         - cp -r /nix .
-        - mv ../../bogcode-linux-installers-builder .
-        - cd bogcode-linux-installers-builder
+        - mv ../../bugcode-linux-installers-builder .
+        - cd bugcode-linux-installers-builder
         - git rev-parse HEAD
         - git clone https://github.com/jordansissel/fpm.git
         - cd fpm
@@ -182,17 +182,17 @@ generate_rpm_dev:
         - gem install --no-document public_suffix -v 4.0.7
         - gem install --no-document fpm-1.11.0.gem
         - cd ../../
-        - sh bogcode-linux-installers-builder/build.sh $(eval $IMAGE_TAG) server rpm white
-        - mv bogcode-server_amd64.rpm ../../bogcode-server_amd64.rpm
+        - sh bugcode-linux-installers-builder/build.sh $(eval $IMAGE_TAG) server rpm white
+        - mv bugcode-server_amd64.rpm ../../bugcode-server_amd64.rpm
     needs:
       - job: generate_build_file_dev
         artifacts: true
       - job: build_nix_python3_dev
         artifacts: true
     artifacts:
-        name: 'bogcode_$CI_COMMIT_REF_NAME.rpm'
+        name: 'bugcode_$CI_COMMIT_REF_NAME.rpm'
         paths:
-            - "bogcode-server_amd64.rpm"
+            - "bugcode-server_amd64.rpm"
         expire_in: 15 days
     rules:
         - !reference [.be-uploaded, rules]
@@ -207,8 +207,8 @@ generate_rpm_staging:
     before_script:
       - yum -y upgrade
       - yum -y install which git epel-release centos-release-scl
-      - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/bugcode/bogcode-linux-installers-builder.git
-      - cd bogcode-linux-installers-builder
+      - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/khulnasoft/bugcode-linux-installers-builder.git
+      - cd bugcode-linux-installers-builder
       - "if ! [ -z $INSTALLER_BRANCH ]; then git checkout $INSTALLER_BRANCH; fi"
       - cd ..
       - mv py3.tar /
@@ -223,13 +223,13 @@ generate_rpm_staging:
       - pip install virtualenv-tools3
     script:
         - mkdir build_installer
-        - cp -a bogcode.tar.gz build_installer/.
+        - cp -a bugcode.tar.gz build_installer/.
         - cd build_installer
-        - /bin/tar zxf bogcode.tar.gz
-        - cd bogcode_copy
+        - /bin/tar zxf bugcode.tar.gz
+        - cd bugcode_copy
         - cp -r /nix .
-        - mv ../../bogcode-linux-installers-builder .
-        - cd bogcode-linux-installers-builder
+        - mv ../../bugcode-linux-installers-builder .
+        - cd bugcode-linux-installers-builder
         - git rev-parse HEAD
         - git clone https://github.com/jordansissel/fpm.git
         - cd fpm
@@ -240,17 +240,17 @@ generate_rpm_staging:
         - gem install --no-document public_suffix -v 4.0.7
         - gem install --no-document fpm-1.11.0.gem
         - cd ../../
-        - sh bogcode-linux-installers-builder/build.sh $(eval $IMAGE_TAG) server rpm white
-        - mv bogcode-server_amd64.rpm ../../bogcode-server_amd64.rpm
+        - sh bugcode-linux-installers-builder/build.sh $(eval $IMAGE_TAG) server rpm white
+        - mv bugcode-server_amd64.rpm ../../bugcode-server_amd64.rpm
     needs:
       - job: generate_build_file_staging
         artifacts: true
       - job: build_nix_python3_staging
         artifacts: true
     artifacts:
-        name: 'bogcode_$CI_COMMIT_REF_NAME.rpm'
+        name: 'bugcode_$CI_COMMIT_REF_NAME.rpm'
         paths:
-            - "bogcode-server_amd64.rpm"
+            - "bugcode-server_amd64.rpm"
         expire_in: 15 days
     rules:
         - !reference [.on-staging, rules]
@@ -262,8 +262,8 @@ generate_rpm_master:
     before_script:
       - yum -y upgrade
       - yum -y install which git epel-release centos-release-scl
-      - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/bugcode/bogcode-linux-installers-builder.git
-      - cd bogcode-linux-installers-builder
+      - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/khulnasoft/bugcode-linux-installers-builder.git
+      - cd bugcode-linux-installers-builder
       - "if ! [ -z $INSTALLER_BRANCH ]; then git checkout $INSTALLER_BRANCH; fi"
       - cd ..
       - mv py3.tar /
@@ -278,13 +278,13 @@ generate_rpm_master:
       - pip install virtualenv-tools3
     script:
         - mkdir build_installer
-        - cp -a bogcode.tar.gz build_installer/.
+        - cp -a bugcode.tar.gz build_installer/.
         - cd build_installer
-        - /bin/tar zxf bogcode.tar.gz
-        - cd bogcode_copy
+        - /bin/tar zxf bugcode.tar.gz
+        - cd bugcode_copy
         - cp -r /nix .
-        - mv ../../bogcode-linux-installers-builder .
-        - cd bogcode-linux-installers-builder
+        - mv ../../bugcode-linux-installers-builder .
+        - cd bugcode-linux-installers-builder
         - git rev-parse HEAD
         - git clone https://github.com/jordansissel/fpm.git
         - cd fpm
@@ -295,17 +295,17 @@ generate_rpm_master:
         - gem install --no-document public_suffix -v 4.0.7
         - gem install --no-document fpm-1.11.0.gem
         - cd ../../
-        - sh bogcode-linux-installers-builder/build.sh $(eval $IMAGE_TAG) server rpm white
-        - mv bogcode-server_amd64.rpm ../../bogcode-server_amd64.rpm
+        - sh bugcode-linux-installers-builder/build.sh $(eval $IMAGE_TAG) server rpm white
+        - mv bugcode-server_amd64.rpm ../../bugcode-server_amd64.rpm
     needs:
       - job: generate_build_file_master
         artifacts: true
       - job: build_nix_python3_master
         artifacts: true
     artifacts:
-        name: 'bogcode_$CI_COMMIT_REF_NAME.rpm'
+        name: 'bugcode_$CI_COMMIT_REF_NAME.rpm'
         paths:
-            - "bogcode-server_amd64.rpm"
+            - "bugcode-server_amd64.rpm"
         expire_in: 15 days
     rules:
         - !reference [.on-master, rules]
@@ -319,12 +319,12 @@ generate_docker_tar_gz_dev:
     script:
         - !reference [ .get_from_tar_and_replace_www, script ]
         - !reference [ .get_secrets, script ]
-        - docker build . -t bogcode-community
-        - docker save bogcode-community:latest | gzip > bogcode-server-docker.tar.gz
-        - docker rmi -f bogcode-community
+        - docker build . -t threatcode.github.io/bugcodemunity
+        - docker save threatcode.github.io/bugcodemunity:latest | gzip > bugcode-server-docker.tar.gz
+        - docker rmi -f threatcode.github.io/bugcodemunity
     artifacts:
       paths:
-        - bogcode-server-docker.tar.gz
+        - bugcode-server-docker.tar.gz
     rules:
         - !reference [.be-uploaded, rules]
         # What is not '/staging' is '/dev', '/master' or a development branch , and all are manual
@@ -332,7 +332,7 @@ generate_docker_tar_gz_dev:
         - !reference [.ignore-on-master, rules]
         - when: never
     needs:
-        - project: bugcode/bogcode-react
+        - project: khulnasoft/bugcode-react
           job: npm_build
           ref: community/dev
           artifacts: true
@@ -344,17 +344,17 @@ generate_docker_tar_gz_staging:
     script:
         - !reference [ .get_from_tar_and_replace_www, script ]
         - !reference [ .get_secrets, script ]
-        - docker build . -t bogcode-community
-        - docker save bogcode-community:latest | gzip > bogcode-server-docker.tar.gz
-        - docker rmi -f bogcode-community
+        - docker build . -t threatcode.github.io/bugcodemunity
+        - docker save threatcode.github.io/bugcodemunity:latest | gzip > bugcode-server-docker.tar.gz
+        - docker rmi -f threatcode.github.io/bugcodemunity
     artifacts:
       paths:
-        - bogcode-server-docker.tar.gz
+        - bugcode-server-docker.tar.gz
     rules:
         - !reference [.on-staging, rules]
         - when: never
     needs:
-        - project: bugcode/bogcode-react
+        - project: khulnasoft/bugcode-react
           job: npm_build
           ref: community/staging
           artifacts: true
@@ -367,18 +367,18 @@ generate_docker_tar_gz_master:
         - !reference [ .get_from_tar_and_replace_www, script ]
         - !reference [ .get_secrets, script ]
         - docker build . -t $CI_REGISTRY_IMAGE
-        - docker save $CI_REGISTRY_IMAGE:latest | gzip > bogcode-server-docker.tar.gz
+        - docker save $CI_REGISTRY_IMAGE:latest | gzip > bugcode-server-docker.tar.gz
         - docker rmi -f $CI_REGISTRY_IMAGE
     artifacts:
       paths:
-        - bogcode-server-docker.tar.gz
+        - bugcode-server-docker.tar.gz
     rules:
       - !reference [.on-master, rules]
       - !reference [ .on-community-tag, rules ]
       - !reference [ .update_docker, rules ]
       - when: never
     needs:
-      - project: bugcode/bogcode-react
+      - project: khulnasoft/bugcode-react
         job: npm_build
         ref: community/master
         artifacts: true

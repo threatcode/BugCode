@@ -7,8 +7,8 @@ from apispec.ext.marshmallow import MarshmallowPlugin
 from apispec_webframeworks.flask import FlaskPlugin
 from flask import current_app
 
-from bogcode.utils.bogcode_openapi_plugin import BogcodeAPIPlugin
-from bogcode.server.commands.app_urls import openapi_format
+from bugcode.utils.bugcode_openapi_plugin import BugcodeAPIPlugin
+from bugcode.server.commands.app_urls import openapi_format
 
 extra_specs = {
     'info': {'description': 'TEST'},
@@ -17,10 +17,10 @@ extra_specs = {
 }
 
 spec = APISpec(
-    title="Bogcode API",
+    title="Bugcode API",
     version="2",
     openapi_version="3.0.2",
-    plugins=[BogcodeAPIPlugin(), FlaskPlugin(), MarshmallowPlugin()],
+    plugins=[BugcodeAPIPlugin(), FlaskPlugin(), MarshmallowPlugin()],
     **extra_specs
 )
 

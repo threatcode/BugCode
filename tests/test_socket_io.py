@@ -1,6 +1,6 @@
-from bogcode.server.models import Executor, Agent
-from bogcode.server.extensions import socketio
-from bogcode.server.websockets.dispatcher import update_executors
+from bugcode.server.models import Executor, Agent
+from bugcode.server.extensions import socketio
+from bugcode.server.websockets.dispatcher import update_executors
 from tests.factories import AgentFactory, ExecutorFactory
 
 

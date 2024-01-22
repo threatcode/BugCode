@@ -3,8 +3,8 @@ import pytest
 from tests.factories import CustomFieldsSchemaFactory
 from tests.test_api_non_workspaced_base import ReadWriteAPITests, BulkDeleteTestsMixin
 
-from bogcode.server.api.modules.custom_fields import CustomFieldsSchemaView
-from bogcode.server.models import (
+from bugcode.server.api.modules.custom_fields import CustomFieldsSchemaView
+from bugcode.server.models import (
     CustomFieldsSchema
 )
 

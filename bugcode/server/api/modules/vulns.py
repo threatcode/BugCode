@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2016  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2016  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 
@@ -29,10 +29,10 @@ from werkzeug.datastructures import ImmutableMultiDict
 from depot.manager import DepotManager
 
 # Local application imports
-from bogcode.server.utils.cwe import create_cwe
-from bogcode.server.utils.reference import create_reference
-from bogcode.server.utils.search import search
-from bogcode.server.api.base import (
+from bugcode.server.utils.cwe import create_cwe
+from bugcode.server.utils.reference import create_reference
+from bugcode.server.utils.search import search
+from bugcode.server.api.base import (
     AutoSchema,
     FilterAlchemyMixin,
     FilterSetMeta,
@@ -45,9 +45,9 @@ from bogcode.server.api.base import (
     get_filtered_data,
     get_workspace,
 )
-from bogcode.server.api.modules.services import ServiceSchema
-from bogcode.server.fields import BogcodeUploadedFile
-from bogcode.server.models import (
+from bugcode.server.api.modules.services import ServiceSchema
+from bugcode.server.fields import BugcodeUploadedFile
+from bugcode.server.models import (
     db,
     File,
     Host,
@@ -60,21 +60,21 @@ from bogcode.server.models import (
     VulnerabilityGeneric,
     User
 )
-from bogcode.server.utils.database import (
+from bugcode.server.utils.database import (
     get_or_create,
 )
-from bogcode.server.utils.export import export_vulns_to_csv
-from bogcode.server.utils.filters import FlaskRestlessSchema
-from bogcode.server.utils.command import set_command_id
-from bogcode.server.schemas import (
+from bugcode.server.utils.export import export_vulns_to_csv
+from bugcode.server.utils.filters import FlaskRestlessSchema
+from bugcode.server.utils.command import set_command_id
+from bugcode.server.schemas import (
     MutableField,
     SeverityField,
     MetadataSchema,
     SelfNestedField,
-    BogcodeCustomField,
+    BugcodeCustomField,
     PrimaryKeyRelatedField,
 )
-from bogcode.server.utils.vulns import parse_cve_references_and_policyviolations
+from bugcode.server.utils.vulns import parse_cve_references_and_policyviolations
 
 vulns_api = Blueprint('vulns_api', __name__)
 logger = logging.getLogger(__name__)
@@ -267,7 +267,7 @@ class VulnerabilitySchema(AutoSchema):
     metadata = SelfNestedField(CustomMetadataSchema())
     date = fields.DateTime(attribute='create_date',
                            dump_only=True)  # This is only used for sorting
-    custom_fields = BogcodeCustomField(table_name='vulnerability', attribute='custom_fields')
+    custom_fields = BugcodeCustomField(table_name='vulnerability', attribute='custom_fields')
     external_id = fields.String(allow_none=True)
     command_id = fields.Int(required=False, load_only=True)
     risk = SelfNestedField(RiskSchema(), dump_only=True)
@@ -694,7 +694,7 @@ class VulnerabilityView(PaginatedMixin,
                 if image_format and image_format.lower() == "webp":
                     logger.info("Evidence can not be webp format")
                     flask.abort(400, "Evidence can not be webp format")
-            bogcode_file = BogcodeUploadedFile(b64decode(attachment['data']))
+            bugcode_file = BugcodeUploadedFile(b64decode(attachment['data']))
             filename = filename.replace(" ", "_")
             get_or_create(
                 db.session,
@@ -703,7 +703,7 @@ class VulnerabilityView(PaginatedMixin,
                 object_type='vulnerability',
                 name=Path(filename).stem,
                 filename=Path(filename).name,
-                content=bogcode_file,
+                content=bugcode_file,
             )
 
     def _update_object(self, obj, data, **kwargs):
@@ -920,7 +920,7 @@ class VulnerabilityView(PaginatedMixin,
                 if image_format and image_format.lower() == "webp":
                     logger.info("Evidence can't be webp")
                     flask.abort(400, "Evidence can't be webp")
-                bogcode_file = BogcodeUploadedFile(partial + request.files['file'].read())
+                bugcode_file = BugcodeUploadedFile(partial + request.files['file'].read())
                 instance, created = get_or_create(
                     db.session,
                     File,
@@ -928,7 +928,7 @@ class VulnerabilityView(PaginatedMixin,
                     object_type='vulnerability',
                     name=filename,
                     filename=filename,
-                    content=bogcode_file
+                    content=bugcode_file
                 )
                 db.session.commit()
                 message = 'Evidence upload was successful'
@@ -979,7 +979,7 @@ class VulnerabilityView(PaginatedMixin,
                 custom_fields_columns.append(custom_field.field_name)
             memory_file = export_vulns_to_csv(filtered_vulns, custom_fields_columns)
             return send_file(memory_file,
-                             attachment_filename=f"Bogcode-SR-{workspace_name}.csv",
+                             attachment_filename=f"Bugcode-SR-{workspace_name}.csv",
                              as_attachment=True,
                              cache_timeout=-1)
         else:
@@ -1282,7 +1282,7 @@ class VulnerabilityView(PaginatedMixin,
         memory_file = export_vulns_to_csv(vulns_query, custom_fields_columns)
         logger.info(f"csv file with vulns from workspace {workspace_name} exported")
         return send_file(memory_file,
-                         attachment_filename=f"Bogcode-SR-{workspace_name}.csv",
+                         attachment_filename=f"Bugcode-SR-{workspace_name}.csv",
                          as_attachment=True,
                          cache_timeout=-1)
 

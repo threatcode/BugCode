@@ -81,8 +81,8 @@
       <name>Vulnerability Web test</name>
       <description>Desc for testing web vuln</description>
       <risk>5</risk>
-      <legacy-category>Bogcode</legacy-category>
-      <path>bogcode.com</path>
+      <legacy-category>Bugcode</legacy-category>
+      <path>threatcode.github.io/bugcode</path>
       <method>GET</method>
       <params></params>
       <pname>qwerty</pname>

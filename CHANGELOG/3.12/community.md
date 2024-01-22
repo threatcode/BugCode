@@ -2,16 +2,16 @@
  * Add agent and executor data to Activity Feed
  * Add session timeout configuration to server.ini configuration file
  * Add hostnames to already existing hosts when importing a report
- * Add new bogcode background image
+ * Add new bugcode background image
  * Display an error when uploading an invalid report
  * Use minimized JS libraries to improve page load time
  * Fix aspect ratio distortion in evidence tab of vulnerability preview
  * Fix broken Knowledge Base upload modal
  * Fix closing of websocket connections when communicating with Agents
  * Change Custom Fields names in exported CSV to make columns compatible with
-   `bogcode_csv` plugin
+   `bugcode_csv` plugin
  * Fix import CSV for vuln template: some values were overwritten with default values.
- * Catch errors in bogcode-manage commands when the connection string is not
+ * Catch errors in bugcode-manage commands when the connection string is not
    specified in the server.ini file
  * Fix bug that generated a session when using Token authentication
  * Fix bug that requested to the API when an invalid filter is used

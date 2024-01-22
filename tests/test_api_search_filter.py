@@ -1,6 +1,6 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -16,9 +16,9 @@ from tests.test_api_non_workspaced_base import (
 )
 from tests.test_api_agent import logout
 from tests.conftest import login_as
-from bogcode.server.models import SearchFilter
+from bugcode.server.models import SearchFilter
 
-from bogcode.server.api.modules.search_filter import SearchFilterView
+from bugcode.server.api.modules.search_filter import SearchFilterView
 
 
 @pytest.mark.usefixtures('logged_user')

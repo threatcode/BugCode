@@ -1,6 +1,6 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -25,8 +25,8 @@ from tests.test_api_workspaced_base import (
     BulkUpdateTestsMixin,
     BulkDeleteTestsMixin
 )
-from bogcode.server.models import db, Host, Hostname
-from bogcode.server.api.modules.hosts import HostsView
+from bugcode.server.models import db, Host, Hostname
+from bugcode.server.api.modules.hosts import HostsView
 from tests.factories import (
     HostFactory,
     EmptyCommandFactory,
@@ -1090,7 +1090,7 @@ class TestHostAPIGeneric(ReadWriteAPITests, PaginationTestsMixin, BulkUpdateTest
             "name": "127.0.0.1",
             "mac": "",
             "hostnames": ["dasdas"],
-            "owner": "bogcode",
+            "owner": "bugcode",
             "os": "Unknown",
         }
 

@@ -8,11 +8,11 @@ if [ -e $PGSQL_PASSWD ];then
 fi
 
 if [ -z "$PGSQL_USER" ]; then
-	PGSQL_USER="bogcode_postgresql"
+	PGSQL_USER="bugcode_postgresql"
 fi
 
 if [ -z "$PGSQL_PASSWD" ]; then
-	#cat is for cases when bogcode runs as a docker service
+	#cat is for cases when bugcode runs as a docker service
 	PGSQL_PASSWD=`cat $PGSQL_PASSWD`
 fi
 
@@ -21,7 +21,7 @@ if [ -z "$PGSQL_HOST" ]; then
 fi
 
 if [ -z "$PGSQL_PGSQL_DBNAME" ]; then
-	PGSQL_DBNAME="bogcode"
+	PGSQL_DBNAME="bugcode"
 fi
 
 if [ -z "$LISTEN_ADDR" ]; then
@@ -29,16 +29,16 @@ if [ -z "$LISTEN_ADDR" ]; then
 fi
 
 echo "Restoring config file"
-if [ ! -f "/home/bogcode/.bogcode/config/server.ini" ]; then
-    mv /server.ini /home/bogcode/.bogcode/config/.
+if [ ! -f "/home/bugcode/.bugcode/config/server.ini" ]; then
+    mv /server.ini /home/bugcode/.bugcode/config/.
     CONNECTION_STRING="connection_string = postgresql+psycopg2:\/\/$PGSQL_USER:$PGSQL_PASSWD@$PGSQL_HOST\/$PGSQL_DBNAME"
-    sed -i "s/connection_string = .*/$CONNECTION_STRING/"  /home/bogcode/.bogcode/config/server.ini
+    sed -i "s/connection_string = .*/$CONNECTION_STRING/"  /home/bugcode/.bugcode/config/server.ini
 fi
 
-export BUGCODE_HOME=/home/bogcode
+export BUGCODE_HOME=/home/bugcode
 echo "Trying to connect to database ..."
-bogcode-manage create-tables
-bogcode-manage migrate
+bugcode-manage create-tables
+bugcode-manage migrate
 
-export BUGCODE_HOME=/home/bogcode
-/opt/bogcode/bin/bogcode-server
+export BUGCODE_HOME=/home/bugcode
+/opt/bugcode/bin/bugcode-server

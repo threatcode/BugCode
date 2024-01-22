@@ -1,19 +1,19 @@
 .get_from_tar_and_replace_www:
     script:
-      - rm bogcode/server/www
+      - rm bugcode/server/www
       - ls
-      - tar xfvz bogcode-frontend.tar.gz
-      - rm bogcode-frontend.tar.gz
-      - mv build/ bogcode/server/www/
+      - tar xfvz bugcode-frontend.tar.gz
+      - rm bugcode-frontend.tar.gz
+      - mv build/ bugcode/server/www/
 
 generate_build_file_dev:
     image: registry.gitlab.com/bugcode/devops
     stage: pre_build
     script:
-        - "/bin/mkdir bogcode_copy"
+        - "/bin/mkdir bugcode_copy"
         - !reference [.get_from_tar_and_replace_www, script]
-        - "/usr/bin/rsync -aq --exclude 'bogcode_copy' --exclude '.cache' . bogcode_copy"
-        - "/bin/tar -zcf bogcode.tar.gz bogcode_copy"
+        - "/usr/bin/rsync -aq --exclude 'bugcode_copy' --exclude '.cache' . bugcode_copy"
+        - "/bin/tar -zcf bugcode.tar.gz bugcode_copy"
     rules:
         - !reference [.be-uploaded, rules]
         # What is not '/staging' is '/dev', '/master' or a development branch , and all are manual
@@ -21,12 +21,12 @@ generate_build_file_dev:
         - !reference [.ignore-on-master, rules]
         - when: never
     artifacts:
-        name: 'bogcode'
+        name: 'bugcode'
         paths:
-            - "bogcode.tar.gz"
+            - "bugcode.tar.gz"
         expire_in: 15 days
     needs:
-        - project: bugcode/bogcode-react
+        - project: khulnasoft/bugcode-react
           job: npm_build
           ref: community/dev
           artifacts: true
@@ -35,20 +35,20 @@ generate_build_file_staging:
     image: registry.gitlab.com/bugcode/devops
     stage: pre_build
     script:
-        - "/bin/mkdir bogcode_copy"
+        - "/bin/mkdir bugcode_copy"
         - !reference [.get_from_tar_and_replace_www, script]
-        - "/usr/bin/rsync -aq --exclude 'bogcode_copy' --exclude '.cache' . bogcode_copy"
-        - "/bin/tar -zcf bogcode.tar.gz bogcode_copy"
+        - "/usr/bin/rsync -aq --exclude 'bugcode_copy' --exclude '.cache' . bugcode_copy"
+        - "/bin/tar -zcf bugcode.tar.gz bugcode_copy"
     rules:
         - !reference [.on-staging, rules]
         - when: never
     artifacts:
-        name: 'bogcode'
+        name: 'bugcode'
         paths:
-            - "bogcode.tar.gz"
+            - "bugcode.tar.gz"
         expire_in: 15 days
     needs:
-        - project: bugcode/bogcode-react
+        - project: khulnasoft/bugcode-react
           job: npm_build
           ref: community/staging
           artifacts: true
@@ -57,21 +57,21 @@ generate_build_file_master:
     image: registry.gitlab.com/bugcode/devops
     stage: pre_build
     script:
-        - "/bin/mkdir bogcode_copy"
+        - "/bin/mkdir bugcode_copy"
         - !reference [.get_from_tar_and_replace_www, script]
-        - "/usr/bin/rsync -aq --exclude 'bogcode_copy' --exclude '.cache' . bogcode_copy"
-        - "/bin/tar -zcf bogcode.tar.gz bogcode_copy"
+        - "/usr/bin/rsync -aq --exclude 'bugcode_copy' --exclude '.cache' . bugcode_copy"
+        - "/bin/tar -zcf bugcode.tar.gz bugcode_copy"
     rules:
         - !reference [.on-master, rules]
         - !reference [ .on-community-tag, rules ]
         - when: never
     artifacts:
-        name: 'bogcode'
+        name: 'bugcode'
         paths:
-            - "bogcode.tar.gz"
+            - "bugcode.tar.gz"
         expire_in: 15 days
     needs:
-        - project: bugcode/bogcode-react
+        - project: khulnasoft/bugcode-react
           job: npm_build
           ref: community/master
           artifacts: true
@@ -92,9 +92,9 @@ build_nix_python3_dev:
     - cachix use bugcode
     - nix-build
     - tar cf /py3.tar $(nix-store --query --requisites $(readlink result))
-    - mkdir -p /opt/bogcode
-    - cp -r $(readlink result)/* /opt/bogcode
-    - tar rvf /py3.tar /opt/bogcode
+    - mkdir -p /opt/bugcode
+    - cp -r $(readlink result)/* /opt/bugcode
+    - tar rvf /py3.tar /opt/bugcode
     - mv /py3.tar $CI_PROJECT_DIR
   artifacts:
     name: python3
@@ -108,7 +108,7 @@ build_nix_python3_dev:
     - !reference [.ignore-on-master, rules]
     - when: never
   needs:
-    - project: bugcode/bogcode-react
+    - project: khulnasoft/bugcode-react
       job: npm_build
       ref: community/dev
       artifacts: true
@@ -129,9 +129,9 @@ build_nix_python3_staging:
     - cachix use bugcode
     - nix-build
     - tar cf /py3.tar $(nix-store --query --requisites $(readlink result))
-    - mkdir -p /opt/bogcode
-    - cp -r $(readlink result)/* /opt/bogcode
-    - tar rvf /py3.tar /opt/bogcode
+    - mkdir -p /opt/bugcode
+    - cp -r $(readlink result)/* /opt/bugcode
+    - tar rvf /py3.tar /opt/bugcode
     - mv /py3.tar $CI_PROJECT_DIR
   artifacts:
     name: python3
@@ -142,7 +142,7 @@ build_nix_python3_staging:
     - !reference [.on-staging, rules]
     - when: never
   needs:
-    - project: bugcode/bogcode-react
+    - project: khulnasoft/bugcode-react
       job: npm_build
       ref: community/staging
       artifacts: true
@@ -163,9 +163,9 @@ build_nix_python3_master:
     - cachix use bugcode
     - nix-build
     - tar cf /py3.tar $(nix-store --query --requisites $(readlink result))
-    - mkdir -p /opt/bogcode
-    - cp -r $(readlink result)/* /opt/bogcode
-    - tar rvf /py3.tar /opt/bogcode
+    - mkdir -p /opt/bugcode
+    - cp -r $(readlink result)/* /opt/bugcode
+    - tar rvf /py3.tar /opt/bugcode
     - mv /py3.tar $CI_PROJECT_DIR
   artifacts:
     name: python3
@@ -177,7 +177,7 @@ build_nix_python3_master:
     - !reference [ .on-community-tag, rules ]
     - when: never
   needs:
-    - project: bugcode/bogcode-react
+    - project: khulnasoft/bugcode-react
       job: npm_build
       ref: community/master
       artifacts: true

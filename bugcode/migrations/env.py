@@ -3,9 +3,9 @@ from logging.config import fileConfig
 
 from alembic import context
 
-from bogcode.server.app import get_app
-import bogcode.server.config
-from bogcode.server.models import db
+from bugcode.server.app import get_app
+import bugcode.server.config
+from bugcode.server.models import db
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -19,7 +19,7 @@ fileConfig(config.config_file_name)
 # from myapp import mymodel
 target_metadata = db.metadata
 alembic_logger = logging.getLogger('alembic.runtime.migration')
-LOG_FILE = bogcode.server.config.CONST_BUGCODE_HOME_PATH / 'logs' \
+LOG_FILE = bugcode.server.config.CONST_BUGCODE_HOME_PATH / 'logs' \
            / 'alembic.log'
 fh = logging.FileHandler(LOG_FILE)
 fh.setLevel(logging.INFO)
@@ -55,7 +55,7 @@ def run_migrations_offline():
     script output.
 
     """
-    url = bogcode.server.config.database.connection_string
+    url = bugcode.server.config.database.connection_string
     context.configure(
         url=url, target_metadata=target_metadata, literal_binds=True, include_object=include_object)
 

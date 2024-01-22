@@ -1,6 +1,6 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -13,10 +13,10 @@ except ImportError:
 import pytest
 import json
 
-from bogcode.server.api.modules.services import ServiceView
+from bugcode.server.api.modules.services import ServiceView
 from tests import factories
 from tests.test_api_workspaced_base import ReadWriteAPITests, BulkDeleteTestsMixin, BulkUpdateTestsMixin
-from bogcode.server.models import (
+from bugcode.server.models import (
     Service, Credential, Vulnerability
 )
 from tests.factories import HostFactory, EmptyCommandFactory, CredentialFactory, VulnerabilityFactory

@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2016  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2016  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 # Standard library imports
@@ -13,10 +13,10 @@ import os
 from syslog_rfc5424_formatter import RFC5424Formatter
 
 # Local application imports
-import bogcode.server.config
-from bogcode.server.config import CONST_BUGCODE_HOME_PATH
+import bugcode.server.config
+from bugcode.server.config import CONST_BUGCODE_HOME_PATH
 
-LOG_FILE = CONST_BUGCODE_HOME_PATH / 'logs' / 'bogcode-server.log'
+LOG_FILE = CONST_BUGCODE_HOME_PATH / 'logs' / 'bugcode-server.log'
 AUDIT_LOG_FILE = CONST_BUGCODE_HOME_PATH / 'logs' / 'audit.log'
 
 MAX_LOG_FILE_SIZE = 5 * 1024 * 1024     # 5 MB
@@ -34,7 +34,7 @@ def setup_logging():
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
 
-    if bogcode.server.config.logger_config.use_rfc5424_formatter:
+    if bugcode.server.config.logger_config.use_rfc5424_formatter:
         formatter = RFC5424Formatter()
     else:
         formatter = logging.Formatter(LOG_FORMAT, LOG_DATE_FORMAT)
@@ -48,7 +48,7 @@ def setup_logging():
 def setup_console_logging(formatter):
     console_handler = logging.StreamHandler()
     console_handler.setFormatter(formatter)
-    console_handler.setLevel(bogcode.server.config.LOGGING_LEVEL)
+    console_handler.setLevel(bugcode.server.config.LOGGING_LEVEL)
     add_handler(console_handler)
     LVL_SETTABLE_HANDLERS.append(console_handler)
 
@@ -58,7 +58,7 @@ def setup_file_logging(formatter, log_file, log_name=None):
     file_handler = logging.handlers.RotatingFileHandler(
         log_file, maxBytes=MAX_LOG_FILE_SIZE, backupCount=MAX_LOG_FILE_BACKUP_COUNT)
     file_handler.setFormatter(formatter)
-    file_handler.setLevel(bogcode.server.config.LOGGING_LEVEL)
+    file_handler.setLevel(bugcode.server.config.LOGGING_LEVEL)
     add_handler(file_handler, log_name)
     LVL_SETTABLE_HANDLERS.append(file_handler)
 
@@ -71,7 +71,7 @@ def add_handler(handler, log_name=None):
 
 
 def set_logging_level(level):
-    bogcode.server.config.LOGGING_LEVEL = level
+    bugcode.server.config.LOGGING_LEVEL = level
     for handler in LVL_SETTABLE_HANDLERS:
         handler.setLevel(level)
 

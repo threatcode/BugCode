@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 
@@ -30,7 +30,7 @@ from webargs.flaskparser import FlaskParser
 from webargs.core import ValidationError
 
 # Local application imports
-from bogcode.server.models import (
+from bugcode.server.models import (
     Workspace,
     Command,
     CommandObject,
@@ -38,15 +38,15 @@ from bogcode.server.models import (
     count_vulnerability_severities,
     _make_vuln_count_property,
 )
-from bogcode.server.schemas import NullToBlankString
-from bogcode.server.utils.database import (
+from bugcode.server.schemas import NullToBlankString
+from bugcode.server.utils.database import (
     get_conflict_object,
     is_unique_constraint_violation,
     not_null_constraint_violation,
 )
-from bogcode.server.utils.filters import FlaskRestlessSchema
-from bogcode.server.utils.search import search
-from bogcode.server.config import bogcode_server
+from bugcode.server.utils.filters import FlaskRestlessSchema
+from bugcode.server.utils.search import search
+from bugcode.server.config import bugcode_server
 
 logger = logging.getLogger(__name__)
 
@@ -414,13 +414,13 @@ class GenericView(FlaskView):
 
         """# @app.errorhandler(404)
         def handle_not_found(err):  # pylint: disable=unused-variable
-            response = {'success': False, 'message': err.description if bogcode_server.debug else err.name}
+            response = {'success': False, 'message': err.description if bugcode_server.debug else err.name}
             return flask.jsonify(response), 404"""
 
         @app.errorhandler(500)
         def handle_server_error(err):  # pylint: disable=unused-variable
             response = {'success': False,
-                        'message': f"Exception: {err.original_exception}" if bogcode_server.debug else
+                        'message': f"Exception: {err.original_exception}" if bugcode_server.debug else
                         'Internal Server Error'}
             return flask.jsonify(response), 500
 
@@ -1790,7 +1790,7 @@ class CountWorkspacedMixin:
     show the count of elements and its value.
 
     This view is often used by some parts of the web UI. It was designed
-    to keep backwards compatibility with the count endpoint of Bogcode
+    to keep backwards compatibility with the count endpoint of Bugcode
     v2.
     """
 
@@ -1860,7 +1860,7 @@ class CountMultiWorkspacedMixin:
     show the count of elements and its value.
 
     This view is often used by some parts of the web UI. It was designed
-    to keep backwards compatibility with the count endpoint of Bogcode
+    to keep backwards compatibility with the count endpoint of Bugcode
     v2.
     """
 

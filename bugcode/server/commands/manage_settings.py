@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2021  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2021  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 # Standard library imports
@@ -12,10 +12,10 @@ import click
 from flask import current_app
 
 # Local application imports
-from bogcode.server.models import Configuration, db
-from bogcode.server.utils.database import get_or_create
-from bogcode.settings import get_settings, get_all_settings, load_settings
-from bogcode.settings.exceptions import InvalidConfigurationError
+from bugcode.server.models import Configuration, db
+from bugcode.server.utils.database import get_or_create
+from bugcode.settings import get_settings, get_all_settings, load_settings
+from bugcode.settings.exceptions import InvalidConfigurationError
 
 
 def settings_format_validation(ctx, param, value):

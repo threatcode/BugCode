@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2021  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2021  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 # Standard library imports
@@ -14,11 +14,11 @@ from typing import Dict, Optional
 from flask import current_app
 
 # Local application imports
-from bogcode.server.models import (
+from bugcode.server.models import (
     db,
     Configuration
 )
-from bogcode.server.utils.database import get_or_create
+from bugcode.server.utils.database import get_or_create
 
 logger = logging.getLogger(__name__)
 
@@ -54,7 +54,7 @@ class Settings:
         return settings_config
 
     def delete_configuration(self):
-        from bogcode.server.app import get_app   # pylint: disable=import-outside-toplevel
+        from bugcode.server.app import get_app   # pylint: disable=import-outside-toplevel
         with get_app().app_context():
             db.session.query(Configuration).filter(Configuration.key == self.settings_key).delete()
             db.session.commit()

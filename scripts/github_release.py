@@ -27,7 +27,7 @@ def main(deb_file, rpm_file):
         'Authorization': 'token ' + TOKEN,
     }
     res = requests.post(
-        "https://api.github.com/repos/threatcode/bogcode/releases",
+        "https://api.github.com/repos/threatcode/bugcode/releases",
         json=release_data,
         headers=headers
     )
@@ -39,7 +39,7 @@ def main(deb_file, rpm_file):
         headers["Content-Type"] = mimetype
         params = (('name', asset_file.name),)
         data = open(asset_file, mode="rb").read()
-        url = f"https://uploads.github.com/repos/threatcode/bogcode/releases/{release_id}/assets"
+        url = f"https://uploads.github.com/repos/threatcode/bugcode/releases/{release_id}/assets"
         res = requests.post(url, headers=headers, params=params, data=data)
         res.raise_for_status()
         print(res.json())

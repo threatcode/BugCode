@@ -7,7 +7,7 @@
  * Add pagination in  'Command history', 'Last Vulnerabilities', 'Activity logs' into dashboard
  * Add status_code field to web vulnerability
  * Preserve selection after bulk edition of vulnerabilities in the Web UI
- * Bogcode's database will be created using UTF-8 encoding
+ * Bugcode's database will be created using UTF-8 encoding
  * Fix bug of "select a different workspace" from an empty list loop.
  * Fix bug when creating duplicate custom fields
  * Fix bug when loading in server.ini with extra configs

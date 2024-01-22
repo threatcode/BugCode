@@ -6,7 +6,7 @@ Create Date: 2020-04-02 20:41:41.083048+00:00
 
 """
 
-from bogcode.server.config import LOCAL_CONFIG_FILE
+from bugcode.server.config import LOCAL_CONFIG_FILE
 from configparser import ConfigParser, NoSectionError
 
 

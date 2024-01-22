@@ -1,7 +1,7 @@
  * ADD RESTless filter to multiples views, improving the searchs
- * ADD "extras" modal in options menu, linking to other Bogcode resources
- * ADD `import vulnerability templates` command to bogcode-manage
- * ADD `generate nginx config` command to bogcode-manage
+ * ADD "extras" modal in options menu, linking to other Bugcode resources
+ * ADD `import vulnerability templates` command to bugcode-manage
+ * ADD `generate nginx config` command to bugcode-manage
  * ADD vulnerabilities severities count to host
  * ADD Active Agent columns to workspace
  * ADD critical vulns count to workspace
@@ -17,7 +17,7 @@
  * FIX Vulnerability Filter endpoint Performance improvement using joinedload. Removed several nplusone uses
  * MOD Updating the template.ini for new installations
  * MOD Improve SMTP configuration
- * MOD The agent now indicates how much time it had run (bogcode-agent-dispatcher v1.4.0)
+ * MOD The agent now indicates how much time it had run (bugcode-agent-dispatcher v1.4.0)
  * MOD Type "Vulnerability Web" cannot have "Host" type as a parent when creating data in bulk
  * MOD Expiration default time from 1 month to 12 hour
  * MOD Improve data reference when uploading a new report

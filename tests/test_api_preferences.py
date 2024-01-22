@@ -1,7 +1,7 @@
 from tests.test_api_non_workspaced_base import GenericAPITest
 from tests.factories import UserFactory
-from bogcode.server.models import User
-from bogcode.server.api.modules.preferences import PreferencesView
+from bugcode.server.models import User
+from bugcode.server.api.modules.preferences import PreferencesView
 
 
 # pytest.fixture('logged_user')

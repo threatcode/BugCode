@@ -12,8 +12,8 @@ from flask import Blueprint, request, abort, send_file
 from marshmallow import Schema
 
 # Local application imports
-from bogcode.server.api.base import GenericWorkspacedView
-from bogcode.server.models import Workspace
+from bugcode.server.api.base import GenericWorkspacedView
+from bugcode.server.models import Workspace
 
 export_data_api = Blueprint('export_data_api', __name__)
 logger = logging.getLogger(__name__)
@@ -53,7 +53,7 @@ class ExportDataView(GenericWorkspacedView):
             logger.info("Workspace´s data exported")
             return send_file(
                 memory_file,
-                attachment_filename=f"Bogcode-{workspace_name}-data.xml",
+                attachment_filename=f"Bugcode-{workspace_name}-data.xml",
                 as_attachment=True,
                 cache_timeout=-1
             )
@@ -198,7 +198,7 @@ def _build_vuln_web_element(vuln, vuln_tag):
     risk = SubElement(vuln_tag, 'risk')
     risk.text = map_severity(vuln.severity)
     legacy_category = SubElement(vuln_tag, 'legacy-category')
-    legacy_category.text = "Bogcode"
+    legacy_category.text = "Bugcode"
 
     path = SubElement(vuln_tag, 'path')
     path.text = vuln.path or "/"

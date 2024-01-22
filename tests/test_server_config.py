@@ -1,6 +1,6 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -11,9 +11,9 @@ import tempfile
 from pathlib import Path
 from unittest import mock
 
-from bogcode import __version__
+from bugcode import __version__
 
-from bogcode.server.config import (
+from bugcode.server.config import (
     copy_default_config_to_local,
 )
 
@@ -26,7 +26,7 @@ def test_copy_default_config_to_local_does_not_exist(copyfile):
     )
     filename = Path(tempfile.gettempdir()) / random_name
 
-    with mock.patch('bogcode.server.config.LOCAL_CONFIG_FILE', filename):
+    with mock.patch('bugcode.server.config.LOCAL_CONFIG_FILE', filename):
         assert copy_default_config_to_local() is None
         assert copyfile.called
 

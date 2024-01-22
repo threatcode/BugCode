@@ -4,7 +4,7 @@ about: Create a report an issue
 
 ---
 
-Please search the [Wiki](https://github.com/threatcode/bogcode/wiki) for a solution before posting a ticket. Use the <strong>“New Support Request”</strong> button to the right of the screen to submit a ticket for technical support.
+Please search the [Wiki](https://github.com/threatcode/bugcode/wiki) for a solution before posting a ticket. Use the <strong>“New Support Request”</strong> button to the right of the screen to submit a ticket for technical support.
 
 ## Issue Type
  - Bug Re port
@@ -12,9 +12,9 @@ Please search the [Wiki](https://github.com/threatcode/bogcode/wiki) for a solut
  - Documentation Report
 
 
-## Bogcode version
+## Bugcode version
 
-Paste the output of the *./bogcode.py --version* command
+Paste the output of the *./bugcode.py --version* command
 
 ## Component Name
 
@@ -32,9 +32,9 @@ What did you expect to happen when following the steps above?
 ### Debugging tracebacks (current results)
 
 Try to reproduce the bug with the server and/or gtk client in debug mode and check the logs for the ERROR string.
-Add here any errors you find while running in debug mode or, if possible, Bogcode’s log files (located at *$HOME/.bogcode/logs/*).
+Add here any errors you find while running in debug mode or, if possible, Bugcode’s log files (located at *$HOME/.bugcode/logs/*).
 
-If you need help on how to execute in debug mode [click here for more information](https://github.com/threatcode/bogcode/wiki/troubleshooting).
+If you need help on how to execute in debug mode [click here for more information](https://github.com/threatcode/bugcode/wiki/troubleshooting).
 
 Please attach the result of:
 

@@ -6,7 +6,7 @@ from marshmallow import ValidationError
 from sqlalchemy import true, null, false
 import jwt
 
-from bogcode.server.models import (
+from bugcode.server.models import (
     db,
     Command,
     CommandObject,
@@ -18,10 +18,10 @@ from bogcode.server.models import (
     VulnerabilityWeb,
     Workspace)
 
-from bogcode.server.api.modules import bulk_create as bc
+from bugcode.server.api.modules import bulk_create as bc
 from tests.factories import CustomFieldsSchemaFactory
-from bogcode.server.app import get_app
-from bogcode.server.utils.reports_processor import REPORTS_QUEUE
+from bugcode.server.app import get_app
+from bugcode.server.utils.reports_processor import REPORTS_QUEUE
 
 host_data = {
     "ip": "127.0.0.1",
@@ -55,7 +55,7 @@ vuln_data = {
 vuln_web_data = {
     'type': 'VulnerabilityWeb',
     'method': 'POST',
-    'website': 'https://bugcode.com',
+    'website': 'https://threatcode.github.io/bugcode',
     'path': '/search',
     'parameter_name': 'q',
     'status_code': 200,
@@ -500,7 +500,7 @@ def test_create_service_with_vulnweb(session, host):
     assert vuln.name == 'sql injection'
     assert vuln.service == service
     assert vuln.method == 'POST'
-    assert vuln.website == 'https://bugcode.com'
+    assert vuln.website == 'https://threatcode.github.io/bugcode'
     assert vuln.status_code == 200
 
 

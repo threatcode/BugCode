@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2019  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2019  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 import json
@@ -12,18 +12,18 @@ from queue import Queue, Empty
 
 from gevent.event import Event
 
-from bogcode_plugins.plugins.manager import PluginsManager
-from bogcode.server.api.modules.bulk_create import bulk_create, BulkCreateSchema
-from bogcode.server.config import bogcode_server
-from bogcode.server.extensions import socketio
-from bogcode.server.models import (
+from bugcode_plugins.plugins.manager import PluginsManager
+from bugcode.server.api.modules.bulk_create import bulk_create, BulkCreateSchema
+from bugcode.server.config import bugcode_server
+from bugcode.server.extensions import socketio
+from bugcode.server.models import (
     Workspace,
     Command,
     User,
     db,
 )
-from bogcode.server.utils.bulk_create import add_creator
-from bogcode.settings.reports import ReportsSettings
+from bugcode.server.utils.bulk_create import add_creator
+from bugcode.settings.reports import ReportsSettings
 
 logger = logging.getLogger(__name__)
 
@@ -84,7 +84,7 @@ def send_report_data(workspace_name: str, command_id: int, report_json: dict,
 def process_report(workspace_name: str, command_id: int, file_path: Path,
                    plugin_id: Optional[int], user_id: Optional[int], ignore_info: bool, dns_resolution: bool,
                    vuln_tag: Optional[list] = None, host_tag: Optional[list] = None, service_tag: Optional[list] = None):
-    from bogcode.server.app import get_app  # pylint: disable=import-outside-toplevel
+    from bugcode.server.app import get_app  # pylint: disable=import-outside-toplevel
     with get_app().app_context():
         if plugin_id is not None:
             plugins_manager = PluginsManager(ReportsSettings.settings.custom_plugins_folder,
@@ -130,7 +130,7 @@ def process_report(workspace_name: str, command_id: int, file_path: Path,
             logger.debug("Removing file: %s", file_path)
             os.remove(file_path)
         else:
-            if bogcode_server.delete_report_after_process:
+            if bugcode_server.delete_report_after_process:
                 os.remove(file_path)
         set_end_date = True
         try:

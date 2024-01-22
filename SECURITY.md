@@ -1,17 +1,17 @@
-The Bogcode development team is aware that the information stored in the platform is of the highest criticality.
-With this in mind, we have developed this guide to perform Bogcode Hardening.
+The Bugcode development team is aware that the information stored in the platform is of the highest criticality.
+With this in mind, we have developed this guide to perform Bugcode Hardening.
 
 ## SSL
 
 Use SSL for cipher information between client and server, using a Nginx server.
 
-More information [HERE](https://github.com/threatcode/bogcode/wiki/NGINX-Setup)
+More information [HERE](https://github.com/threatcode/bugcode/wiki/NGINX-Setup)
 
-## Report a security vulnerability in Bogcode.
+## Report a security vulnerability in Bugcode.
 
 Send us a email with all relevant information about your discovery at:
 
-![](https://raw.github.com/wiki/threatcode/bogcode/images/extras/security-email.png)
+![](https://raw.github.com/wiki/threatcode/bugcode/images/extras/security-email.png)
 
 To encrypt your communications, or to verify signed messages you receive from us you can use the PGP key below.
 

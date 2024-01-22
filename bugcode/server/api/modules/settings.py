@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2019  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2019  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 
@@ -13,9 +13,9 @@ from flask import abort, make_response
 from marshmallow import Schema, ValidationError
 
 # Local application imports
-from bogcode.settings import get_settings
-from bogcode.settings.exceptions import InvalidConfigurationError
-from bogcode.server.api.base import GenericView
+from bugcode.settings import get_settings
+from bugcode.settings.exceptions import InvalidConfigurationError
+from bugcode.server.api.base import GenericView
 
 logger = logging.getLogger(__name__)
 

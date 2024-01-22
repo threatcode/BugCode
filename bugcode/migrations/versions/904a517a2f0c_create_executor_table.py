@@ -38,13 +38,13 @@ def upgrade():
     op.create_foreign_key(
         'executor_creator_id_fkey',
         'executor',
-        'bogcode_user', ['creator_id'], ['id']
+        'bugcode_user', ['creator_id'], ['id']
     )
 
     op.create_foreign_key(
         'executor_update_user_id_fkey',
         'executor',
-        'bogcode_user', ['update_user_id'], ['id']
+        'bugcode_user', ['update_user_id'], ['id']
     )
 
     op.drop_column('agent_schedule', 'agent_id')
@@ -87,13 +87,13 @@ def upgrade():
     op.create_foreign_key(
         'agent_execution_creator_id_fkey',
         'agent_execution',
-        'bogcode_user', ['creator_id'], ['id']
+        'bugcode_user', ['creator_id'], ['id']
     )
 
     op.create_foreign_key(
         'agent_execution_update_user_id_fkey',
         'agent_execution',
-        'bogcode_user', ['update_user_id'], ['id']
+        'bugcode_user', ['update_user_id'], ['id']
     )
 
     op.create_unique_constraint(

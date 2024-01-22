@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2018  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2018  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 
@@ -13,13 +13,13 @@ from flask import Blueprint
 from marshmallow import fields
 
 # Local application imports
-from bogcode.server.api.base import (
+from bugcode.server.api.base import (
     AutoSchema,
     ReadWriteWorkspacedView,
     PaginatedMixin,
 )
-from bogcode.server.models import Command
-from bogcode.server.schemas import PrimaryKeyRelatedField
+from bugcode.server.models import Command
+from bugcode.server.schemas import PrimaryKeyRelatedField
 
 activityfeed_api = Blueprint('activityfeed_api', __name__)
 

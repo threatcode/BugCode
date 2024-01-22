@@ -32,7 +32,7 @@ The **RELEASE.md** generation process is as follows:
     1. Git add CHANGELOG/
     1. Commit & push
 
-As for bogcode 3.15.0, the changelog file changed to .json format with this structure:
+As for bugcode 3.15.0, the changelog file changed to .json format with this structure:
 ```json
 {
   "level": "community|prof|corp",

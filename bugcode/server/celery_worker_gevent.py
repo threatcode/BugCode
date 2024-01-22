@@ -4,15 +4,15 @@ import os
 
 import gevent.monkey
 
-import bogcode
-from bogcode.server.config import CELERY_LOG_FILE
+import bugcode
+from bugcode.server.config import CELERY_LOG_FILE
 
 gevent.monkey.patch_all() # noqa
 
 import psycogreen.gevent
 psycogreen.gevent.patch_psycopg() # noqa
 
-from bogcode.server.app import celery, create_app  # noqa
+from bugcode.server.app import celery, create_app  # noqa
 
 application = create_app()
 
@@ -37,7 +37,7 @@ def main(options=None):
         concurrency = args.concurrency
 
     loglevel = 'WARNING'
-    if bogcode.server.config.bogcode_server.debug:
+    if bugcode.server.config.bugcode_server.debug:
         loglevel = 'DEBUG'
     else:
         if args.loglevel:

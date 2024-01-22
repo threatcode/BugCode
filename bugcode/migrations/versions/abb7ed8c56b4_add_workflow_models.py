@@ -40,8 +40,8 @@ def upgrade():
                     sa.Column('creator_id', sa.Integer(), nullable=True),
                     sa.Column('update_user_id', sa.Integer(), nullable=True),
                     sa.Column('workspace_id', sa.Integer(), nullable=True),
-                    sa.ForeignKeyConstraint(['creator_id'], ['bogcode_user.id'], ondelete='SET NULL'),
-                    sa.ForeignKeyConstraint(['update_user_id'], ['bogcode_user.id'], ondelete='SET NULL'),
+                    sa.ForeignKeyConstraint(['creator_id'], ['bugcode_user.id'], ondelete='SET NULL'),
+                    sa.ForeignKeyConstraint(['update_user_id'], ['bugcode_user.id'], ondelete='SET NULL'),
                     sa.ForeignKeyConstraint(['workspace_id'], ['workspace.id'], ),
                     sa.PrimaryKeyConstraint('id'),
                     sa.UniqueConstraint('name')
@@ -58,8 +58,8 @@ def upgrade():
                     sa.Column('enabled', sa.Boolean(), nullable=False),
                     sa.Column('creator_id', sa.Integer(), nullable=True),
                     sa.Column('update_user_id', sa.Integer(), nullable=True),
-                    sa.ForeignKeyConstraint(['creator_id'], ['bogcode_user.id'], ondelete='SET NULL'),
-                    sa.ForeignKeyConstraint(['update_user_id'], ['bogcode_user.id'], ondelete='SET NULL'),
+                    sa.ForeignKeyConstraint(['creator_id'], ['bugcode_user.id'], ondelete='SET NULL'),
+                    sa.ForeignKeyConstraint(['update_user_id'], ['bugcode_user.id'], ondelete='SET NULL'),
                     sa.PrimaryKeyConstraint('id'),
                     sa.UniqueConstraint('name')
                     )
@@ -82,8 +82,8 @@ def upgrade():
                     sa.Column('creator_id', sa.Integer(), nullable=True),
                     sa.Column('update_user_id', sa.Integer(), nullable=True),
                     sa.Column('workflow_id', sa.Integer(), nullable=True),
-                    sa.ForeignKeyConstraint(['creator_id'], ['bogcode_user.id'], ondelete='SET NULL'),
-                    sa.ForeignKeyConstraint(['update_user_id'], ['bogcode_user.id'], ondelete='SET NULL'),
+                    sa.ForeignKeyConstraint(['creator_id'], ['bugcode_user.id'], ondelete='SET NULL'),
+                    sa.ForeignKeyConstraint(['update_user_id'], ['bugcode_user.id'], ondelete='SET NULL'),
                     sa.ForeignKeyConstraint(['workflow_id'], ['workflow.id'], ),
                     sa.PrimaryKeyConstraint('id')
                     )
@@ -101,9 +101,9 @@ def upgrade():
                     sa.Column('workflow_id', sa.Integer(), nullable=False),
                     sa.Column('creator_id', sa.Integer(), nullable=True),
                     sa.Column('update_user_id', sa.Integer(), nullable=True),
-                    sa.ForeignKeyConstraint(['creator_id'], ['bogcode_user.id'], ondelete='SET NULL'),
+                    sa.ForeignKeyConstraint(['creator_id'], ['bugcode_user.id'], ondelete='SET NULL'),
                     sa.ForeignKeyConstraint(['parent_id'], ['condition.id'], ),
-                    sa.ForeignKeyConstraint(['update_user_id'], ['bogcode_user.id'], ondelete='SET NULL'),
+                    sa.ForeignKeyConstraint(['update_user_id'], ['bugcode_user.id'], ondelete='SET NULL'),
                     sa.ForeignKeyConstraint(['workflow_id'], ['workflow.id'], ),
                     sa.PrimaryKeyConstraint('id')
                     )
@@ -118,8 +118,8 @@ def upgrade():
                     sa.Column('object_and_id', sa.String(), nullable=False),
                     sa.Column('creator_id', sa.Integer(), nullable=True),
                     sa.Column('update_user_id', sa.Integer(), nullable=True),
-                    sa.ForeignKeyConstraint(['creator_id'], ['bogcode_user.id'], ondelete='SET NULL'),
-                    sa.ForeignKeyConstraint(['update_user_id'], ['bogcode_user.id'], ondelete='SET NULL'),
+                    sa.ForeignKeyConstraint(['creator_id'], ['bugcode_user.id'], ondelete='SET NULL'),
+                    sa.ForeignKeyConstraint(['update_user_id'], ['bugcode_user.id'], ondelete='SET NULL'),
                     sa.ForeignKeyConstraint(['workflow_id'], ['workflow.id'], ),
                     sa.PrimaryKeyConstraint('id')
                     )

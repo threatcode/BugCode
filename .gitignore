@@ -45,8 +45,8 @@ node_modules
 # Couch
 .couchadmin
 
-# Ignore bogcode server pid
-server/.bogcode-server.pid
+# Ignore bugcode server pid
+server/.bugcode-server.pid
 
 #Ignore images executive report
 reports/executive/images/ease-of-resolution-piechart.png
@@ -78,8 +78,7 @@ reports/executive/outputs/scope.docx
 
 # Editable install hoook
 _install
-bogcode_plugins/
-bogcode/frontend/
+bugcode/frontend/
 .cache
 
 ## OSX files

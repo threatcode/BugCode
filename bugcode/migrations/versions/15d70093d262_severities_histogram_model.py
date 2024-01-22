@@ -12,7 +12,7 @@ import sqlalchemy as sa
 # revision identifiers, used by Alembic.
 # from sqlalchemy import func, case
 
-# from bogcode.server.models import VulnerabilityGeneric, SeveritiesHistogram, Workspace
+# from bugcode.server.models import VulnerabilityGeneric, SeveritiesHistogram, Workspace
 
 revision = '15d70093d262'
 down_revision = 'd8f0b32a5c0e'

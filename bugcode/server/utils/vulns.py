@@ -3,15 +3,15 @@ import logging
 
 from sqlalchemy.exc import IntegrityError
 
-from bogcode.server.models import (
+from bugcode.server.models import (
     CVE,
     db,
     Reference,
     PolicyViolation,
     OWASP
 )
-from bogcode.server.utils.database import is_unique_constraint_violation
-from bogcode.server.utils.reference import create_reference
+from bugcode.server.utils.database import is_unique_constraint_violation
+from bugcode.server.utils.reference import create_reference
 
 logger = logging.getLogger(__name__)
 

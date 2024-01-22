@@ -1,16 +1,16 @@
  * Refactor the project to use absolute imports to make the installation easier
 (with a setup.py file). This also was a first step to make our codebase
 compatible with python 3.
- * Change the commands used to run bogcode. `./bogcode-server.py`,
-   `./manage.py`, `./bogcode.py` and `bin/flugin` are replaced for `bogcode-server`, `bogcode-manage`,
-   `bogcode-client` and `fplugin` respectively
+ * Change the commands used to run bugcode. `./bugcode-server.py`,
+   `./manage.py`, `./bugcode.py` and `bin/flugin` are replaced for `bugcode-server`, `bugcode-manage`,
+   `bugcode-client` and `fplugin` respectively
  * Changed suggested installation method. Now we provide binary executables with all python dependencies
    embedded into them
  * Add admin panel to the Web UI to manage custom fields
  * Fix slow host list when creating vulns in a workspace with many hosts
  * Usability improvements in status report: change the way vulns are selected and confirmed
  * Improve workspace workspace creation from the Web UI
- * Fix attachment api when file was not found in .bogcode/storage
+ * Fix attachment api when file was not found in .bugcode/storage
  * Fix visualization of the fields Policy Violations and References.
  * Add a setting in server.ini to display the Vulnerability Cost widget of the Dashboard
  * Fix status report resize when the browser console closes.
@@ -28,7 +28,7 @@ compatible with python 3.
  * Fix hostnames bug in Nikto and Core Impact plugins
  * Change Openvas plugin: Low and Debug threats are not taken as vulnerabilities.
  * Add fplugin command to close vulns created after a certain time
- * Add list-plugins command to bogcode-manage to see all available plugins
+ * Add list-plugins command to bugcode-manage to see all available plugins
  * Fix a logging error in PluginBase class
  * Fix an error when using NexposePlugin from command line.
  * Add CSV parser to Dnsmap Plugin

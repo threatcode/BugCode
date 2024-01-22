@@ -1,13 +1,13 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2021  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2021  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 # Standard library imports
 from typing import List
 
 # Local application imports
-from bogcode.settings.base import LOADED_SETTINGS
+from bugcode.settings.base import LOADED_SETTINGS
 
 
 def get_settings(name: str):
@@ -20,9 +20,9 @@ def get_all_settings() -> List:
 
 
 def load_settings():
-    from bogcode.settings.smtp import init_setting as smtp_init  # pylint: disable=import-outside-toplevel
+    from bugcode.settings.smtp import init_setting as smtp_init  # pylint: disable=import-outside-toplevel
     smtp_init()
-    from bogcode.settings.dashboard import init_setting as dashboard_init  # pylint: disable=import-outside-toplevel
+    from bugcode.settings.dashboard import init_setting as dashboard_init  # pylint: disable=import-outside-toplevel
     dashboard_init()
-    from bogcode.settings.reports import init_setting as reports_init  # pylint: disable=import-outside-toplevel
+    from bugcode.settings.reports import init_setting as reports_init  # pylint: disable=import-outside-toplevel
     reports_init()

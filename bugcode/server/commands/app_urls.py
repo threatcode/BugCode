@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 """
@@ -12,19 +12,19 @@ import yaml
 from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
 from apispec_webframeworks.flask import FlaskPlugin
-from bogcode import __version__ as f_version
+from bugcode import __version__ as f_version
 import json
 from urllib.parse import urljoin
-from bogcode.server.config import LOCAL_OPENAPI_FILE
+from bugcode.server.config import LOCAL_OPENAPI_FILE
 
-from bogcode.utils.bogcode_openapi_plugin import BogcodeAPIPlugin
+from bugcode.utils.bugcode_openapi_plugin import BugcodeAPIPlugin
 
 
 def openapi_format(server, modify_default=False, return_tags=False):
     extra_specs = {'info': {
-        'description': 'The Bogcode REST API enables you to interact with '
-                       '[our server](https://github.com/threatcode/bogcode).\n'
-                       'Use this API to interact or integrate with Bogcode'
+        'description': 'The Bugcode REST API enables you to interact with '
+                       '[our server](https://github.com/threatcode/bugcode).\n'
+                       'Use this API to interact or integrate with Bugcode'
                        ' server. This page documents the REST API, with HTTP'
                        ' response codes and example requests and responses.'},
         'security': {"basicAuth": []}
@@ -38,10 +38,10 @@ def openapi_format(server, modify_default=False, return_tags=False):
     extra_specs['servers'] = [{'url': server}]
 
     spec = APISpec(
-        title=f"Bogcode {f_version} API",
+        title=f"Bugcode {f_version} API",
         version="v3",
         openapi_version="3.0.2",
-        plugins=[BogcodeAPIPlugin(), FlaskPlugin(), MarshmallowPlugin()],
+        plugins=[BugcodeAPIPlugin(), FlaskPlugin(), MarshmallowPlugin()],
         **extra_specs
     )
     auth_scheme = {
@@ -79,7 +79,7 @@ def openapi_format(server, modify_default=False, return_tags=False):
             return sorted(tags)
 
         if modify_default:
-            file_path = Path(__file__).parent.parent.parent / 'openapi' / 'bogcode_swagger.json'
+            file_path = Path(__file__).parent.parent.parent / 'openapi' / 'bugcode_swagger.json'
         else:
             file_path = LOCAL_OPENAPI_FILE
             if not LOCAL_OPENAPI_FILE.parent.exists():

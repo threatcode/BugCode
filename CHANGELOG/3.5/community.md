@@ -1,12 +1,12 @@
  * Redesgin of new/edit vulnerability forms
  * Add new custom fields feature to vulnerabilities
  * Add ./manage.py migrate to perform alembic migrations
- * Bogcode will use webargs==4.4.1 because webargs==5.0.0 fails with Python2
+ * Bugcode will use webargs==4.4.1 because webargs==5.0.0 fails with Python2
  * New system for online plugins using Threads, a few fixes for metasploit plugin online also.
  * Fix Command "python manage.py process-reports" now stops once all reports have been processed
  * Fix bug in query when it checks if a vulnerability or a workspace exists
- * Fix Once a workspace is created through the web UI, a folder with its name is created inside ~/.bogcode/report/
- * The manage.py now has a new support funtionality that creates a .zip file with all the information bogcode's support team will need to throubleshoot your issue
+ * Fix Once a workspace is created through the web UI, a folder with its name is created inside ~/.bugcode/report/
+ * The manage.py now has a new support funtionality that creates a .zip file with all the information bugcode's support team will need to throubleshoot your issue
  * Status-check checks PostgreSQL encoding
  * Fix a bug when fail importation of reports, command duration say "In Progress" forever.
  * Fix confirmed bug in vulns API

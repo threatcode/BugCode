@@ -14,7 +14,7 @@ from setuptools import setup, find_packages
 from re import search
 
 
-with open('bogcode/__init__.py', encoding='utf8') as f:
+with open('bugcode/__init__.py', encoding='utf8') as f:
     version = search(r'__version__ = \'(.*?)\'', f.read()).group(1)
 
 # Taken from https://stackoverflow.com/questions/14399534/reference-requirements-txt-for-the-install-requires-kwarg-in-setuptools-setup-py/14399775#14399775
@@ -69,7 +69,7 @@ setup(
     # corresponds to the "Summary" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#summary
     description='Open Source Collaborative Penetration Test and Vulnerability Management '
-                'Platform https://www.bugcode.com',  # Optional
+                'Platform https://www.threatcode.github.io/bugcode',  # Optional
 
     # This is an optional longer description of your project that represents
     # the body of text which users will see when they visit PyPI.
@@ -97,7 +97,7 @@ setup(
     #
     # This field corresponds to the "Home-Page" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#home-page-optional
-    url='https://github.com/threatcode/bogcode',  # Optional
+    url='https://github.com/threatcode/bugcode',  # Optional
 
     # This should be your name or the name of the organization which owns the
     # project.
@@ -105,7 +105,7 @@ setup(
 
     # This should be a valid email address corresponding to the author listed
     # above.
-    author_email='devel@bugcode.com',  # Optional
+    author_email='devel@threatcode.github.io/bugcode',  # Optional
 
     # Classifiers help users find your project by categorizing it.
     #
@@ -156,14 +156,14 @@ setup(
 
     # packages=find_packages(exclude=['contrib', 'docs', 'tests']),  # Required
     # packages=[''],
-    # packages=['bogcode', 'bogcode.server', 'bogcode.utils'],
-    # packages=['bogcode.' + package
+    # packages=['bugcode', 'bugcode.server', 'bugcode.utils'],
+    # packages=['bugcode.' + package
     #          for package in find_packages(
     #              '.', include=['server.*', 'config.*', 'utils.*', 'client.*',
     #                            'server', 'config', 'utils', 'client'])
-    #          ] + ['bogcode'],
-    # package_dir={'bogcode': '.'},
-    packages=find_packages(include=['bogcode', 'bogcode.*']),
+    #          ] + ['bugcode'],
+    # package_dir={'bugcode': '.'},
+    packages=find_packages(include=['bugcode', 'bugcode.*']),
 
     # Specify which Python versions you support. In contrast to the
     # 'Programming Language' classifiers above, 'pip install' will check this
@@ -221,11 +221,11 @@ setup(
 
     entry_points={  # Optional
         'console_scripts': [
-            'bogcode-server=bogcode.start_server:main',
-            'bogcode-manage=bogcode.manage:cli',
-            'bogcode-worker=bogcode.server.celery_worker:main',
-            'bogcode-worker-gevent=bogcode.server.celery_worker_gevent:main',
-            'bogcode-start-all=bogcode.start_all:main'
+            'bugcode-server=bugcode.start_server:main',
+            'bugcode-manage=bugcode.manage:cli',
+            'bugcode-worker=bugcode.server.celery_worker:main',
+            'bugcode-worker-gevent=bugcode.server.celery_worker_gevent:main',
+            'bugcode-start-all=bugcode.start_all:main'
         ],
     },
 
@@ -239,9 +239,9 @@ setup(
     # maintainers, and where to support the project financially. The key is
     # what's used to render the link text on PyPI.
     project_urls={  # Optional
-        'Bug Reports': 'https://github.com/threatcode/bogcode/issues',
+        'Bug Reports': 'https://github.com/threatcode/bugcode/issues',
         'Say Thanks!': 'http://saythanks.io/to/bugcode',
-        'Source': 'https://github.com/threatcode/bogcode/',
+        'Source': 'https://github.com/threatcode/bugcode/',
     },
     setup_requires=['pytest-runner'],
     tests_require=dev_required,

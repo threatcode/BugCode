@@ -1,6 +1,6 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -11,8 +11,8 @@ from urllib.parse import urljoin
 import pytest
 from posixpath import join
 
-from bogcode.server.models import Workspace, Scope, SeveritiesHistogram
-from bogcode.server.api.modules.workspaces import WorkspaceView
+from bugcode.server.models import Workspace, Scope, SeveritiesHistogram
+from bugcode.server.api.modules.workspaces import WorkspaceView
 from tests.test_api_non_workspaced_base import ReadWriteAPITests, BulkDeleteTestsMixin
 from tests import factories
 

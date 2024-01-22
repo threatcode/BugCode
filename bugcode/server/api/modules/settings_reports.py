@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2021  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2021  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 
@@ -11,8 +11,8 @@ import logging
 from flask import Blueprint
 
 # Local application imports
-from bogcode.settings.reports import ReportsSettingSchema, ReportsSettings
-from bogcode.server.api.modules.settings import SettingsAPIView
+from bugcode.settings.reports import ReportsSettingSchema, ReportsSettings
+from bugcode.server.api.modules.settings import SettingsAPIView
 
 logger = logging.getLogger(__name__)
 reports_settings_api = Blueprint('reports_settings_api', __name__)

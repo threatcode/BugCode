@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2016  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2016  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 
@@ -20,7 +20,7 @@ from sqlalchemy.orm import with_expression
 from sqlalchemy.orm.exc import NoResultFound
 
 # Local application imports
-from bogcode.server.models import (
+from bugcode.server.models import (
     db,
     Workspace,
     SeveritiesHistogram,
@@ -29,13 +29,13 @@ from bogcode.server.models import (
     count_vulnerability_severities,
     _last_run_agent_date,
 )
-from bogcode.server.schemas import (
+from bugcode.server.schemas import (
     JSTimestampField,
     MutableField,
     PrimaryKeyRelatedField,
     SelfNestedField,
 )
-from bogcode.server.api.base import (
+from bugcode.server.api.base import (
     ReadWriteView,
     AutoSchema,
     FilterMixin,

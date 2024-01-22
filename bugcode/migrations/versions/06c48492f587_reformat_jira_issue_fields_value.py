@@ -8,7 +8,7 @@ Create Date: 2022-03-31 18:46:21.552568+00:00
 from alembic import op
 import sqlalchemy as sa
 
-from bogcode.server.models import Configuration
+from bugcode.server.models import Configuration
 
 
 # revision identifiers, used by Alembic.

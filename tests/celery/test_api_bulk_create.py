@@ -4,14 +4,14 @@ import time
 import pytest
 from celery import current_app as current_flask_app
 
-from bogcode.server.models import (
+from bugcode.server.models import (
     db,
     Command,
     Host,
     Service,
     Workspace)
 
-from bogcode.server.api.modules import bulk_create as bc
+from bugcode.server.api.modules import bulk_create as bc
 
 
 host_data = {
@@ -47,7 +47,7 @@ vuln_data = {
 vuln_web_data = {
     'type': 'VulnerabilityWeb',
     'method': 'POST',
-    'website': 'https://bugcode.com',
+    'website': 'https://threatcode.github.io/bugcode',
     'path': '/search',
     'parameter_name': 'q',
     'status_code': 200,

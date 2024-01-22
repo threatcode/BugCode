@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 # Standard library imports
@@ -9,7 +9,7 @@ from datetime import datetime
 from typing import Tuple
 
 # Local application imports
-from bogcode.server.models import Command, AgentExecution, Executor, Workspace
+from bugcode.server.models import Command, AgentExecution, Executor, Workspace
 
 logger = logging.getLogger(__name__)
 

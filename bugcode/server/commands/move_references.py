@@ -1,6 +1,6 @@
 from sqlalchemy.dialects.postgresql import insert
 
-from bogcode.server.models import Workspace, db, VulnerabilityReference
+from bugcode.server.models import Workspace, db, VulnerabilityReference
 
 
 def _move_references(all_workspaces=False, workspace_name=None):

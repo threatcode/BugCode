@@ -32,8 +32,8 @@ def upgrade():
         sa.Column('show_data_table', sa.Boolean()),
         sa.Column('creator_id', sa.Integer(), nullable=True),
         sa.Column('update_user_id', sa.Integer(), nullable=True),
-        sa.ForeignKeyConstraint(['creator_id'], ['bogcode_user.id'], ondelete='SET NULL'),
-        sa.ForeignKeyConstraint(['update_user_id'], ['bogcode_user.id'], ondelete='SET NULL'),
+        sa.ForeignKeyConstraint(['creator_id'], ['bugcode_user.id'], ondelete='SET NULL'),
+        sa.ForeignKeyConstraint(['update_user_id'], ['bugcode_user.id'], ondelete='SET NULL'),
         sa.PrimaryKeyConstraint('id')
         )
     # ### end Alembic commands ###

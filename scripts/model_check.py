@@ -6,7 +6,7 @@ def check(source_branch: str, target_branch: str) -> None:
     child = subprocess.run(
         [
             "git", "diff", "--compact-summary",
-            f"{source_branch}..{target_branch}", "bogcode/migrations/"
+            f"{source_branch}..{target_branch}", "bugcode/migrations/"
         ],
         stdout=subprocess.PIPE
     )

@@ -1,6 +1,6 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -76,7 +76,7 @@ class TestExportData:
             name='Vulnerability Web test',
             description='Desc for testing web vuln',
             severity="high",
-            path='bogcode.com',
+            path='threatcode.github.io/bugcode',
             method="GET",
             parameters="ABCDEF",
             parameter_name="qwerty",
@@ -92,7 +92,7 @@ class TestExportData:
         response_xml = response.data
 
         xml_file_path = TEST_DATA_PATH / \
-                        'bogcode_export_data_xml_metasploit.xml'
+                        'bugcode_export_data_xml_metasploit.xml'
         with xml_file_path.open('rb') as output:
             xml_file = output.read()
 

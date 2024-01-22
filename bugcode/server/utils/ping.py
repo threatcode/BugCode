@@ -3,13 +3,13 @@ import logging
 from gevent.event import Event
 import requests
 
-from bogcode import __version__
-from bogcode.server.extensions import socketio
+from bugcode import __version__
+from bugcode.server.extensions import socketio
 
 logger = logging.getLogger(__name__)
 
 RUN_INTERVAL = 43200
-HOME_URL = "https://portal.bugcode.com/api/v1/license_check"
+HOME_URL = "https://portal.threatcode.github.io/bugcode/api/v1/license_check"
 
 stop_ping_event = Event()
 

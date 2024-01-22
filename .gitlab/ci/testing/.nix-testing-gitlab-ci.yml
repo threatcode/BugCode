@@ -1,6 +1,6 @@
 pylint:
     tags:
-        - bogcodetests
+        - bugcodetests
     image: nixos/nix:2.16.0
     stage: test  # This should be after build_and_push_to_cachix to improve performance
     script:
@@ -11,7 +11,7 @@ pylint:
         - export USER=$(whoami)
         - echo "$CACHIX_CONFG" >~/.config/cachix/cachix.dhall
         - cachix use bugcode
-        - nix-shell --command "pylint --rcfile=.pylintrc bogcode" | tee pylint.txt
+        - nix-shell --command "pylint --rcfile=.pylintrc bugcode" | tee pylint.txt
         - nix-env -if pynixify/nixpkgs.nix -A gnused
         - score=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' pylint.txt)
           #- anybadge --label pylint --value=$score --file pylint.svg 4=red 6=orange 8=yellow 10=green
@@ -28,7 +28,7 @@ pylint:
 
 .postgresql_test_nix_base:
     tags:
-        - bogcodetests
+        - bugcodetests
     stage: test
     coverage: '/TOTAL\s+\d+\s+\d+\s+(\d+%)/'
     script:
@@ -42,15 +42,15 @@ pylint:
         - "echo 'hosts: files dns' >/etc/nsswitch.conf"
         - export LC_ALL=C.UTF-8
         - export LANG=C.UTF-8
-        - mkdir -p ~/.bogcode/config
-        - cp tests/data/server.ini ~/.bogcode/config
-        - mkdir -p bogcode/frontend/www && touch bogcode/frontend/www/index.html
+        - mkdir -p ~/.bugcode/config
+        - cp tests/data/server.ini ~/.bugcode/config
+        - mkdir -p bugcode/frontend/www && touch bugcode/frontend/www/index.html
         - mkdir run_from
-        - nix-shell --command "cd run_from && pytest ../tests -v --capture=sys --cov=../bogcode/server --color=yes --disable-warnings --connection-string=postgresql+psycopg2://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres/$POSTGRES_DB"
+        - nix-shell --command "cd run_from && pytest ../tests -v --capture=sys --cov=../bugcode/server --color=yes --disable-warnings --connection-string=postgresql+psycopg2://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres/$POSTGRES_DB"
     artifacts:
         when: on_failure
         paths:
-            - ~/.bogcode/logs/bogcode-server.log
+            - ~/.bugcode/logs/bugcode-server.log
     needs:
       - job: build_and_push_to_cachix
         artifacts: false

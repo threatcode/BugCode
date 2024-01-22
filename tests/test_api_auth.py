@@ -1,6 +1,6 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -9,7 +9,7 @@ import base64
 import pytest
 from tests import factories
 from flask_security.utils import hash_password
-from bogcode.server.api.modules.websocket_auth import decode_agent_websocket_token
+from bugcode.server.api.modules.websocket_auth import decode_agent_websocket_token
 
 
 class TestWebsocketAuthEndpoint:

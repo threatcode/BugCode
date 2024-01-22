@@ -157,23 +157,23 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   },
   {
     "revision": "8385ead158847d5a2936b1110eefc29a",
-    "url": "/static/media/bogcode-logo-nav.8385ead1.svg"
+    "url": "/static/media/bugcode-logo-nav.8385ead1.svg"
   },
   {
     "revision": "6f6c122b0b1ee1e610089f9e0f50ac18",
-    "url": "/static/media/bogcode-logo.6f6c122b.svg"
+    "url": "/static/media/bugcode-logo.6f6c122b.svg"
   },
   {
     "revision": "13bdbd547f21dfc0396722edc30244d4",
-    "url": "/static/media/bogcode_loadingbar.13bdbd54.gif"
+    "url": "/static/media/bugcode_loadingbar.13bdbd54.gif"
   },
   {
     "revision": "3af44fcb996a883c3b615929e4383a94",
-    "url": "/static/media/bogcode_logo.3af44fcb.svg"
+    "url": "/static/media/bugcode_logo.3af44fcb.svg"
   },
   {
     "revision": "57beba14e32bd34818518e541842f146",
-    "url": "/static/media/bogcode_logo_product.57beba14.svg"
+    "url": "/static/media/bugcode_logo_product.57beba14.svg"
   },
   {
     "revision": "efd0850b0928947b021aaaa5eac3864d",

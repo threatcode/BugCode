@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2018  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2018  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 # Related third party imports
@@ -8,7 +8,7 @@ from flask_security.utils import hash_password
 from flask import current_app
 
 # Local application imports
-from bogcode.server.models import User, db
+from bugcode.server.models import User, db
 
 
 def changes_password(username, password):
@@ -20,4 +20,4 @@ def changes_password(username, password):
             db.session.commit()
             print("Password changed successfully")
         else:
-            print("User not found in Bogcode's Database")
+            print("User not found in Bugcode's Database")

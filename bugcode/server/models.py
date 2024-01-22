@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2016  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2016  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 # Standard library imports
@@ -63,9 +63,9 @@ from flask_security.utils import hash_data
 from depot.fields.sqlalchemy import UploadedFileField
 
 # Local application imports
-from bogcode.server.config import bogcode_server
-from bogcode.server.fields import JSONType, BogcodeUploadedFile
-from bogcode.server.utils.cvss import (
+from bugcode.server.config import bugcode_server
+from bugcode.server.fields import JSONType, BugcodeUploadedFile
+from bugcode.server.utils.cvss import (
     get_propper_value,
     get_severity,
     get_base_score,
@@ -74,7 +74,7 @@ from bogcode.server.utils.cvss import (
     get_exploitability_score,
     get_impact_score
 )
-from bogcode.server.utils.database import (
+from bugcode.server.utils.database import (
     BooleanToIntColumn,
     get_object_type_for,
     is_unique_constraint_violation,
@@ -358,7 +358,7 @@ class Metadata(db.Model):
     def creator_id(self):
         return Column(
             Integer,
-            ForeignKey('bogcode_user.id', ondelete="SET NULL"),
+            ForeignKey('bugcode_user.id', ondelete="SET NULL"),
             nullable=True)
 
     @declared_attr
@@ -369,7 +369,7 @@ class Metadata(db.Model):
     def update_user_id(self):
         return Column(
             Integer,
-            ForeignKey('bogcode_user.id', ondelete="SET NULL"),
+            ForeignKey('bugcode_user.id', ondelete="SET NULL"),
             nullable=True)
 
     @declared_attr
@@ -1071,9 +1071,9 @@ def _make_created_objects_sum_joined(object_type_filter, join_filters):
 class Command(Metadata):
     IMPORT_SOURCE = [
         'report',
-        # all the files the tools export and bogcode imports it from the reports directory,
+        # all the files the tools export and bugcode imports it from the reports directory,
         # gtk manual import or web import.
-        'shell',  # command executed on the shell or webshell with hooks connected to bogcode.
+        'shell',  # command executed on the shell or webshell with hooks connected to bugcode.
         'agent'
     ]
 
@@ -2087,7 +2087,7 @@ association_workspace_and_users_table = Table(
     'workspace_permission_association',
     db.Model.metadata,
     Column('workspace_id', Integer, ForeignKey('workspace.id')),
-    Column('user_id', Integer, ForeignKey('bogcode_user.id'))
+    Column('user_id', Integer, ForeignKey('bugcode_user.id'))
 )
 
 
@@ -2316,7 +2316,7 @@ class WorkspacePermission(db.Model):
     workspace_id = Column(Integer, ForeignKey('workspace.id'), nullable=False)
     workspace = relationship('Workspace')
 
-    user_id = Column(Integer, ForeignKey('bogcode_user.id'), nullable=False)
+    user_id = Column(Integer, ForeignKey('bugcode_user.id'), nullable=False)
     user = relationship('User', foreign_keys=[user_id])
 
     @property
@@ -2329,19 +2329,19 @@ def get(workspace_name):
 
 
 roles_users = db.Table('roles_users',
-                       db.Column('user_id', db.Integer(), db.ForeignKey('bogcode_user.id')),
-                       db.Column('role_id', db.Integer(), db.ForeignKey('bogcode_role.id')))
+                       db.Column('user_id', db.Integer(), db.ForeignKey('bugcode_user.id')),
+                       db.Column('role_id', db.Integer(), db.ForeignKey('bugcode_role.id')))
 
 
 class Role(db.Model, RoleMixin):
-    __tablename__ = 'bogcode_role'
+    __tablename__ = 'bugcode_role'
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(80), unique=True)
     weight = db.Column(db.Integer(), nullable=False)
 
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'bogcode_user'
+    __tablename__ = 'bugcode_user'
     ADMIN_ROLE = 'admin'
     PENTESTER_ROLE = 'pentester'
     ASSET_OWNER_ROLE = 'asset_owner'
@@ -2398,7 +2398,7 @@ class User(db.Model, UserMixin):
         user_id = self.fs_uniquifier
         hashed_data = hash_data(self.password) if self.password else None
         iat = int(time.time())
-        exp = iat + int(bogcode_server.api_token_expiration)
+        exp = iat + int(bugcode_server.api_token_expiration)
         jwt_data = {'user_id': user_id, "validation_check": hashed_data, 'iat': iat, 'exp': exp}
 
         return jwt.encode(jwt_data, app.config['SECRET_KEY'], algorithm="HS512")
@@ -2411,7 +2411,7 @@ class File(Metadata):
     name = BlankColumn(Text)  # TODO migration: check why blank is allowed
     filename = NonBlankColumn(Text)
     description = BlankColumn(Text)
-    content = Column(UploadedFileField(upload_type=BogcodeUploadedFile), nullable=False)  # plain attached file
+    content = Column(UploadedFileField(upload_type=BugcodeUploadedFile), nullable=False)  # plain attached file
     object_id = Column(Integer, nullable=False)
     object_type = Column(Enum(*OBJECT_TYPES, name='object_types'), nullable=False)
 
@@ -2423,8 +2423,8 @@ class UserAvatar(Metadata):
     name = BlankColumn(Text, unique=True)
     # photo field will automatically generate thumbnail
     # if the file is a valid image
-    photo = Column(UploadedFileField(upload_type=BogcodeUploadedFile))
-    user_id = Column('user_id', Integer(), ForeignKey('bogcode_user.id'))
+    photo = Column(UploadedFileField(upload_type=BugcodeUploadedFile))
+    user_id = Column('user_id', Integer(), ForeignKey('bugcode_user.id'))
     user = relationship('User', foreign_keys=[user_id])
 
 
@@ -2468,7 +2468,7 @@ class Methodology(Metadata):
 project_task_user_association = db.Table('project_task_user_association',
                                          db.Column('task_id', db.Integer(), db.ForeignKey('project_task.id')),
                                          db.Column('user_id', db.Integer(),
-                                                   db.ForeignKey('bogcode_user.id', ondelete='CASCADE'))
+                                                   db.ForeignKey('bugcode_user.id', ondelete='CASCADE'))
                                          )
 
 task_dependencies_association = db.Table('task_dependencies_association',
@@ -2716,7 +2716,7 @@ class EventType(db.Model):
 allowed_roles_association = db.Table('notification_allowed_roles',
                                      Column('notification_subscription_id', Integer,
                                             db.ForeignKey('notification_subscription.id'), nullable=False),
-                                     Column('allowed_role_id', Integer, db.ForeignKey('bogcode_role.id'),
+                                     Column('allowed_role_id', Integer, db.ForeignKey('bugcode_role.id'),
                                             nullable=False)
                                      )
 
@@ -2765,7 +2765,7 @@ class NotificationSubscriptionMailConfig(NotificationSubscriptionConfigBase):
     __tablename__ = 'notification_subscription_mail_config'
     id = Column(Integer, ForeignKey('notification_subscription_config_base.id'), primary_key=True)
     email = Column(String(50), nullable=True)
-    user_notified_id = Column(Integer, ForeignKey('bogcode_user.id'), index=True, nullable=True)
+    user_notified_id = Column(Integer, ForeignKey('bugcode_user.id'), index=True, nullable=True)
     user_notified = relationship(
         'User',
         backref=backref('notification_subscription_mail_config', cascade="all, delete-orphan")
@@ -2788,7 +2788,7 @@ class NotificationSubscriptionWebHookConfig(NotificationSubscriptionConfigBase):
 class NotificationSubscriptionWebSocketConfig(NotificationSubscriptionConfigBase):
     __tablename__ = 'notification_subscription_websocket_config'
     id = Column(Integer, ForeignKey('notification_subscription_config_base.id'), primary_key=True)
-    user_notified_id = Column(Integer, ForeignKey('bogcode_user.id'), index=True, nullable=True)
+    user_notified_id = Column(Integer, ForeignKey('bugcode_user.id'), index=True, nullable=True)
     user_notified = relationship(
         'User',
         backref=backref('notification_subscription_websocket_config', cascade="all, delete-orphan")
@@ -2876,7 +2876,7 @@ class WebsocketNotification(NotificationBase):
     __tablename__ = 'websocket_notification'
 
     id = Column(Integer, ForeignKey('notification_base.id'), primary_key=True)
-    user_notified_id = Column(Integer, ForeignKey('bogcode_user.id'), index=True)
+    user_notified_id = Column(Integer, ForeignKey('bugcode_user.id'), index=True)
     user_notified = relationship(
         'User',
         backref=backref('notifications', cascade="all, delete-orphan")
@@ -2892,7 +2892,7 @@ class WebsocketNotification(NotificationBase):
 class Notification(db.Model):
     __tablename__ = 'notification'
     id = Column(Integer, primary_key=True)
-    user_notified_id = Column(Integer, ForeignKey('bogcode_user.id'), index=True, nullable=False)
+    user_notified_id = Column(Integer, ForeignKey('bugcode_user.id'), index=True, nullable=False)
     user_notified = relationship(
         'User',
         backref=backref('notification', cascade="all, delete-orphan"),
@@ -3259,7 +3259,7 @@ class UserNotification(Metadata):
     subtype = Column(String, nullable=False)
     read = Column(Boolean, default=False)
     triggered_by = Column(JSONType)
-    user_id = Column(Integer, ForeignKey('bogcode_user.id'), index=True, nullable=False)
+    user_id = Column(Integer, ForeignKey('bugcode_user.id'), index=True, nullable=False)
     user = relationship('User',
                         backref=backref('user_notifications', cascade="all, delete-orphan"),
                         foreign_keys=[user_id])
@@ -3276,7 +3276,7 @@ class UserNotification(Metadata):
 class UserNotificationSettings(Metadata):
     __tablename__ = 'user_notification_settings'
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('bogcode_user.id'))
+    user_id = Column(Integer, ForeignKey('bugcode_user.id'))
     user = relationship('User',
                         backref=backref('notification_settings', uselist=False, cascade="all, delete-orphan"),
                         foreign_keys=[user_id])
@@ -3402,4 +3402,4 @@ event.listen(
 )
 
 # We have to import this after all models are defined
-import bogcode.server.events  # noqa F401
+import bugcode.server.events  # noqa F401

@@ -1,6 +1,6 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -10,10 +10,10 @@ import pytest
 
 from tests import factories
 from tests.test_api_non_workspaced_base import ReadOnlyAPITests
-from bogcode.server.models import (
+from bugcode.server.models import (
     Command
 )
-from bogcode.server.api.modules.global_commands import GlobalCommandView
+from bugcode.server.api.modules.global_commands import GlobalCommandView
 
 
 # Note: because of a bug with pytest, I can't simply mark TestListGlobalCommandView

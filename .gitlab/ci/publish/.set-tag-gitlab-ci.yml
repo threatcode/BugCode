@@ -10,7 +10,7 @@ publish_pypi:
     rules:
       - !reference [ .on-community-tag, rules ]
     needs:
-      - project: bugcode/bogcode-react
+      - project: khulnasoft/bugcode-react
         job: npm_build
         ref: community/master
         artifacts: true

@@ -1,7 +1,7 @@
 from flask_security.utils import hash_password, verify_password
 
-from bogcode.server.commands.change_password import changes_password
-from bogcode.server.models import User
+from bugcode.server.commands.change_password import changes_password
+from bugcode.server.models import User
 from tests.factories import UserFactory
 
 

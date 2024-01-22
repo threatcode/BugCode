@@ -1,12 +1,12 @@
 #!/usr/bin/python
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
 
-from bogcode.server.models import Host, Service, Vulnerability
+from bugcode.server.models import Host, Service, Vulnerability
 import random
 
 

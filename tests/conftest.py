@@ -1,6 +1,6 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -17,8 +17,8 @@ from pathlib import Path
 from pytest_factoryboy import register
 from sqlalchemy import event
 
-from bogcode.server.app import create_app
-from bogcode.server.models import db, LOCAL_TYPE, LDAP_TYPE
+from bugcode.server.app import create_app
+from bugcode.server.models import db, LOCAL_TYPE, LDAP_TYPE
 from tests import factories
 
 
@@ -159,8 +159,8 @@ def app2(request):
 
 @pytest.fixture(scope='session')
 def celery_app(app):
-    # from bogcode.server.celery_worker import celery
-    from bogcode.server.app import celery
+    # from bugcode.server.celery_worker import celery
+    from bugcode.server.app import celery
     # for use celery_worker fixture
     from celery.contrib.testing import tasks  # NOQA
     return celery
@@ -190,7 +190,7 @@ def database(app, request):
 
     db.app = app
     db.create_all()
-    db.engine.execute("INSERT INTO bogcode_role(name, weight) "
+    db.engine.execute("INSERT INTO bugcode_role(name, weight) "
                       "VALUES ('admin', 10),('asset_owner', 20),('pentester', 30),('client', 40);"
                       )
 

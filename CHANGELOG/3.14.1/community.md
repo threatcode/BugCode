@@ -9,7 +9,7 @@
  * MOD dont strip new line in description when exporting csv
  * MOD improved threads management on exception
  * MOD improved performance on vulnerability filter
- * MOD improved [API documentation](www.api.bugcode.com)
+ * MOD improved [API documentation](www.api.threatcode.github.io/bugcode)
  * FIX upload a report with invalid custom fields
  * ADD v3 API, which includes:
     * All endpoints ends without `/`

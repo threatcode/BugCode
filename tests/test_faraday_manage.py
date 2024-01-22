@@ -20,24 +20,24 @@ def test_manage_migrate():
             password=os.environ['POSTGRES_PASSWORD'],
             database=os.environ['POSTGRES_DB'],
         )
-        bogcode_config = SafeConfigParser()
-        config_path = Path('~/.bogcode/config/server.ini').expanduser()
-        bogcode_config.read(config_path)
+        bugcode_config = SafeConfigParser()
+        config_path = Path('~/.bugcode/config/server.ini').expanduser()
+        bugcode_config.read(config_path)
         try:
-            bogcode_config.add_section('database')
+            bugcode_config.add_section('database')
         except DuplicateSectionError:
             pass
-        bogcode_config.set('database', 'connection_string', connection_string)
-        with config_path.open('w') as bogcode_config_file:
-            bogcode_config.write(bogcode_config_file)
+        bugcode_config.set('database', 'connection_string', connection_string)
+        with config_path.open('w') as bugcode_config_file:
+            bugcode_config.write(bugcode_config_file)
 
-        command = ['bogcode-manage', 'create-tables']
+        command = ['bugcode-manage', 'create-tables']
         subproc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         subproc.wait()
         std, err = subproc.communicate()
         assert subproc.returncode == 0, ('Create tables failed!', std, err)
 
-        command = ['bogcode-manage', 'migrate']
+        command = ['bugcode-manage', 'migrate']
         subproc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         subproc.wait()
         std, err = subproc.communicate()

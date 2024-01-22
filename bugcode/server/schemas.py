@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 # Standard library imports
@@ -16,7 +16,7 @@ from marshmallow import fields, Schema, post_dump, EXCLUDE
 from marshmallow.utils import missing as missing_
 from marshmallow.exceptions import ValidationError
 
-from bogcode.server.models import (
+from bugcode.server.models import (
     db,
     VulnerabilityABC,
     CustomFieldsSchema,
@@ -38,7 +38,7 @@ class JSTimestampField(fields.Integer):
             return datetime.datetime.fromtimestamp(self._validated(value) / 1e3)
 
 
-class BogcodeCustomField(fields.Field):
+class BugcodeCustomField(fields.Field):
     def __init__(self, table_name='vulnerability', *args, **kwargs):
         self.table_name = table_name
         super().__init__(*args, **kwargs)

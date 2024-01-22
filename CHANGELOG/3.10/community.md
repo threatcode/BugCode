@@ -1,10 +1,10 @@
- * Use Python 3 instead of Python 2 in the Bogcode Server
+ * Use Python 3 instead of Python 2 in the Bugcode Server
  * Add ability to manage agents with multiple executors
  * Agents can be run with custom arguments
  * Improved processing of uploaded reports. Now it is much faster!
  * Add custom fields of type `choice`
  * Fix vuln status transition in bulk create API (mark closed vulns as re-opened when they are triggered again)
- * Fix bug when using non-existent workspaces in Bogcode GTK Client
+ * Fix bug when using non-existent workspaces in Bugcode GTK Client
  * Set service name as required in the Web UI
  * Validate the start date of a workspace is not greater than the end date
  * Fix command API when year is invalid
@@ -15,5 +15,5 @@
  * Fix style issues in "Hosts by Service" modal of the dashboard
  * Add API for bulk delete of vulnerabilities
  * Add missing vuln attributes to exported CSV
- * `bogcode-manage support` now displays the Operating System version
- * Notify when `bogcode-manage` can't run becasue of PostgreSQL HBA config error
+ * `bugcode-manage support` now displays the Operating System version
+ * Notify when `bugcode-manage` can't run becasue of PostgreSQL HBA config error

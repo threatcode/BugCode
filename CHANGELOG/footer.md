@@ -58,7 +58,7 @@ August 17, 2018:
 * Updated code to support pip 10
 * Added ldap to status check
 * Credentials icon aligned
-* Deamon now allows to execute bogcode sever in more than one port and more than one process for multiplexation
+* Deamon now allows to execute bugcode sever in more than one port and more than one process for multiplexation
 * All views now check for permissions on workspace
 * Pull requests #229, #231, #239 and #240 are merged
 * Avoid polling deleted executive reports
@@ -73,7 +73,7 @@ July 26, 2018:
 * Performance iprovements on the backend
 * Add quick change workspace name (from all views)
 * Changed the scope field of a workspace from a free text input to a list of targets
-* New bogcode styles in all webui views
+* New bugcode styles in all webui views
 * Add search by id for vulnerabilities
 * Add new plugin sslyze
 * Add new plugin wfuzz
@@ -103,7 +103,7 @@ July 26, 2018:
 * dirb plugin creates an informational vulnerability instead of a note.
 * Add confirmed column to exported csv from webui
 * Fixes in Arachni plugin
-* Add new parameters --keep-old and --keep-new for bogcode CLI
+* Add new parameters --keep-old and --keep-new for bugcode CLI
 * Add new screenshot fplugin which takes a screenshot of the ip:ports of a given protocol
 * Add fix for net sparker regular and cloud fix on severity
 * Removed Chat feature (data is kept inside notes)
@@ -123,7 +123,7 @@ November 17, 2017:
 November 5, 2017:
 ---
 * Added "Last modified" and "Created" in Hosts view
-* Fixed bug when trying to run Bogcode as second process and closing the terminal (&!)
+* Fixed bug when trying to run Bugcode as second process and closing the terminal (&!)
 * Fixed bug where it asked for dependencies eternally when you have a different version than the one required
 * Fixed small bug in the update_from_document method
 * Fixed bug, makes the python library dependencies specific to the desired version
@@ -131,10 +131,10 @@ November 5, 2017:
 * Merge PR #195: Create gentoo_requirements_extras.txt (New Github wiki page)
 * Merge PR #225: Add references to found vulnerabilities in nmap plugin
 * New plugin: Netsparker cloud
-* New plugin: Lynis (Winner of Bogcode Challenge 2017)
+* New plugin: Lynis (Winner of Bugcode Challenge 2017)
 * New Fplugin: changes the status of all vulnerabilities of an specific workspace to closed
 * New Fplugin: combines the "create_interface" and "create_host" scripts into one (create_interface_and_host script)
-* New Fplugin: import_csv , now you can import Bogcode objects from a CSV
+* New Fplugin: import_csv , now you can import Bugcode objects from a CSV
 
 August 11, 2017:
 ---
@@ -220,12 +220,12 @@ January 30, 2017:
 
 November 10, 2016:
 ---
-* New library to connect with Bogcode Server.
+* New library to connect with Bugcode Server.
 * Fixed Fplugin, now it uses the new library to communicate with the Server.
 * New field for Vulnerabilities: plugin creator and status.
-* Refactor in Bogcode Core and GTK Client.
-* Bug fixing in Bogcode Client and Server.
-* Added Bogcode news notifications in GTK and Web UI.
+* Refactor in Bugcode Core and GTK Client.
+* Bug fixing in Bugcode Client and Server.
+* Added Bugcode news notifications in GTK and Web UI.
 * New plugins: Dirb, Netdiscover, FruityWifi, Sentinel.
 * Improvements on the WPscan plugin.
 * Fixed Licenses search.
@@ -233,10 +233,10 @@ November 10, 2016:
 
 September 19, 2016:
 ---
-* Major refactor of Bogcode Client: now we support massive workspaces (100.000+ hosts).
+* Major refactor of Bugcode Client: now we support massive workspaces (100.000+ hosts).
 * Fixed more than 10 minor bugs on the Web UI.
 * Fixed searching with spaces character on Web UI
-* Updated URL shown when starting Bogcode.
+* Updated URL shown when starting Bugcode.
 * Dashboard is now refreshed automatically every 60 seconds.
 * Fixed Propecia plugin.
 * New plugin: WPscan
@@ -247,14 +247,14 @@ September 19, 2016:
 
 August 12, 2016:
 ---
-* Added Bogcode Server
+* Added Bugcode Server
 * Improved performance in web UI
-* Added some basic APIs to Bogcode Server
+* Added some basic APIs to Bugcode Server
 * Added licenses management section in web UI
 * Totally removed QT3, GTK is now the only GUI
-* Deprecated FileSystem databses: now Bogcode works exclusively with Bogcode Server and CouchDB
-* Added a button to go to the Bogcode Web directly from GTK
-* Fixed bug when deleting objects from Bogcode Web
+* Deprecated FileSystem databses: now Bugcode works exclusively with Bugcode Server and CouchDB
+* Added a button to go to the Bugcode Web directly from GTK
+* Fixed bug when deleting objects from Bugcode Web
 * Fixed bug where icons where not copied to correct folder on initialization
 * Fixed bug where current workspace wouldn't correspond to selected workspace on the sidebar on GTK
 * Fixed bug in 'Refresh Workspace' button on GTK
@@ -271,7 +271,7 @@ Jul 1, 2016:
 * Added button to edit your host in the GTK interface.
 * Hosts sidebar now can be sorted by amout of vulnerabilities and OS.
 * Changes in installation: install.sh now installs only GTK, QT is considered deprecated.
-* Changes in installation: Bogcode now runs with the last versions of Python modules.
+* Changes in installation: Bugcode now runs with the last versions of Python modules.
 * Changes in installation: fixed names of packages in setup_server.sh
 * Usability: Enter key in GTK dialogs works as OK button
 * Improved handling of lost connection to CouchDB database
@@ -283,15 +283,15 @@ Jul 1, 2016:
 
 Jun 13, 2016:
 ---
-* Added Import Report dialog to Bogcode GTK
-* Added a 'Loading workspace...' dialog to Bogcode GTK
-* Added host sidebar to Bogcode GTK
-* Added host information dialog to Bogcode GTK with the full data about a host, its interfaces, services and vulnerabilities
-* Added support for run bogcode from other directories.
+* Added Import Report dialog to Bugcode GTK
+* Added a 'Loading workspace...' dialog to Bugcode GTK
+* Added host sidebar to Bugcode GTK
+* Added host information dialog to Bugcode GTK with the full data about a host, its interfaces, services and vulnerabilities
+* Added support for run bugcode from other directories.
 * Fixed log reapparing after being disabled if user created a new tab
-* Fixed bug regarding exception handling in Bogcode GTK
-* Now Bogcode GTK supports Ctrl+Shift+C / Ctrl+Shift+V to Copy/Paste
-* Bogcode will now not crash if you suddenly lose connection to your CouchDB
+* Fixed bug regarding exception handling in Bugcode GTK
+* Now Bugcode GTK supports Ctrl+Shift+C / Ctrl+Shift+V to Copy/Paste
+* Bugcode will now not crash if you suddenly lose connection to your CouchDB
 
 May 23, 2016:
 ---
@@ -307,10 +307,10 @@ May 23, 2016:
 * Added workspace status in Gtk interface
 * Added conflict resolution support for the Gtk interface
 * Added search entry for workspaces in Gtk
-* Added support for 'exit' command inside Bogcode's Gtk terminal
+* Added support for 'exit' command inside Bugcode's Gtk terminal
 * Improved handling of uncaught exceptions in Gtk interface
 * Improved text formatting in Gtk's log console
-* Fixed several small bugs in Bogcode GTK
+* Fixed several small bugs in Bugcode GTK
 * Added support for resize workspace bar.
 * Added a quote for imported reports in WEB UI.
 * Added support for a new type of report in Qualysguard plugin.
@@ -329,7 +329,7 @@ Apr 29, 2016:
 Apr 04, 2016
 ---
 * Added cli mode (see wiki for usage instructions)
-* Support for multiple Bogcode instances in the same host
+* Support for multiple Bugcode instances in the same host
 * Fixed bug for editing web vulns in bulk
 * Fixed bug for select all in web UI
 * Fixed bugs in Qualys, ZAP, nikto, w3af, openVas plugins
@@ -358,10 +358,10 @@ Dec 18, 2015:
 * Immunity Canvas plugin added
 * Added Dig plugin
 * Added Traceroute plugin
-* Fixed bug in first run of Bogcode with log path and API errors
+* Fixed bug in first run of Bugcode with log path and API errors
 * Added parametrization for port configuration on APIs
 * Refactor Plugin Base to update active WS name in var
-* Refactor Plugins to use current WS in temp filename under $HOME/.bogcode/data. Affected Plugins:
+* Refactor Plugins to use current WS in temp filename under $HOME/.bugcode/data. Affected Plugins:
     - amap
     - dnsmap
     - nmap
@@ -370,12 +370,12 @@ Dec 18, 2015:
     - webfuzzer
     - nikto
 * Fixed bug get_installed_distributions from handler exceptions
-* Added Wiki information about running Bogcode without configuring CouchDB
+* Added Wiki information about running Bugcode without configuring CouchDB
 * Fixed Unicode bug in Nexpose-full Plugin
 * Filter false-positives in Status Report
 * Fixed bug that prevented the use of "reports" and "cwe" strings in Workspace names
 * Added port to Service type target in new vuln modal
-* Added new scripts for bogcode plugin:
+* Added new scripts for bugcode plugin:
     - /bin/delAllVulnsWith.py - delete all vulns that match a regex
     - /bin/getAllbySrv.py - get all IP addresses that have defined open port
     - /bin/getAllIpsNotServices.py added - get all IPs from targets without services
@@ -387,7 +387,7 @@ Oct 2, 2015:
 * Continuous Scanning Tool cscan added to ./scripts/cscan
 * Fix for saving objects without parent
 * Hosts and Services views now have pagination and search
-* Updates version number on Bogcode Start
+* Updates version number on Bugcode Start
 * Visual fixes on Firefox
 * Migrate graphs from D3.js to Chart.js
 * Added Services columns to Status Report
@@ -462,7 +462,7 @@ Jun 30, 2015:
 Apr 17, 2015:
 ---
 * You can get the new version here:
-* https://github.com/threatcode/bogcode/archive/v1.0.10.tar.gz
+* https://github.com/threatcode/bugcode/archive/v1.0.10.tar.gz
 
 Changes:
 
@@ -476,7 +476,7 @@ Bugfixes:
 Apr 7, 2015:
 ---
 You can get the new version here:
-* https://github.com/threatcode/bogcode/archive/v1.0.9.tar.gz
+* https://github.com/threatcode/bugcode/archive/v1.0.9.tar.gz
 
 Changes:
 
@@ -489,7 +489,7 @@ Mar 9, 2015:
 ---
 You can get the new version here:
 
-* https://github.com/threatcode/bogcode/archive/v1.0.8.tar.gz
+* https://github.com/threatcode/bugcode/archive/v1.0.8.tar.gz
 
 Changes:
 
@@ -505,9 +505,9 @@ Changes:
 * Field added for rating "ease of resolution" for vulnerabilities
 * Adjustments for Resolution field
 
-* New Bogcode plugin for Burp. Version 1.2
+* New Bugcode plugin for Burp. Version 1.2
  -Corrections for the vulnerabilities duplication for the burp plugin
- -New tab section to configure the new Vulnerabilities downloads for Bogcode
+ -New tab section to configure the new Vulnerabilities downloads for Bugcode
 
 * Automated backup for couch database
 * Ability to upload evidence of a vulnerability (as an attachment)
@@ -517,16 +517,16 @@ Dec 12, 2014:
 ---
 You can get the new version here:
 
-* https://github.com/threatcode/bogcode/archive/v1.0.7.tar.gz
+* https://github.com/threatcode/bugcode/archive/v1.0.7.tar.gz
 
 Changes:
 
 * Improved Vulnerability Edition usability, selecting a vuln will load it's content.
 * ZSH UI now is showing notifications.
 * ZSH UI now is showing active workspace.
-* Bogcode now asks confirmation on exit, If you have pending conflicts to solve it will show the number of each.
+* Bugcode now asks confirmation on exit, If you have pending conflicts to solve it will show the number of each.
 * Vulnerability creation is now suported in the status report.
-* Introducing SSLCheck, a tool for verify bugs in SSL/TLS Certificates on remote hosts. This is integrated with Bogcode with a plugin.
+* Introducing SSLCheck, a tool for verify bugs in SSL/TLS Certificates on remote hosts. This is integrated with Bugcode with a plugin.
 * Shodan Plugin is now working with the new API.
 * Some cosmetic changes in the status report.
 
@@ -546,7 +546,7 @@ Nov 7, 2014:
 ---
 You can get the new version here:
 
-* https://github.com/threatcode/bogcode/archive/v1.0.6.tar.gz
+* https://github.com/threatcode/bugcode/archive/v1.0.6.tar.gz
 
 Changes:
 
@@ -559,7 +559,7 @@ Changes:
 
 Oct 17, 2014:
 ----
-* https://github.com/threatcode/bogcode/commit/a81c6376ed47a2f7b501c8f48f2179eb7c5d58b9
+* https://github.com/threatcode/threatcode.github.io/bugcodemit/a81c6376ed47a2f7b501c8f48f2179eb7c5d58b9
 
 Status report now have edition capabilities
 Introducing batch vulnerability edition and deletion. Now you can edit your status report.
@@ -572,7 +572,7 @@ Mac support fixes
 
 Sep 26, 2014:
 ----
-* https://github.com/threatcode/bogcode/commit/440858ec8172193ce401bbf6a5f4b3052edb6edb
+* https://github.com/threatcode/threatcode.github.io/bugcodemit/440858ec8172193ce401bbf6a5f4b3052edb6edb
 
 New Dashboard design with summarized information.
 
@@ -589,9 +589,9 @@ Optimization Refactor.
 Jun 06, 2014:
 ----
 
-* https://github.com/threatcode/bogcode/commit/e616bdb44b089bfccf2405e51837eeae5d403b9f
+* https://github.com/threatcode/threatcode.github.io/bugcodemit/e616bdb44b089bfccf2405e51837eeae5d403b9f
 
-Notifications: Updating objets on bogcode now results in a beautiful
+Notifications: Updating objets on bugcode now results in a beautiful
 notification in the QT ui.
 
 Performance: Enhacing performance when lots of workspaces are available.
@@ -607,22 +607,22 @@ modifications). Vulnerability update and delete operations.
 May 14, 2014:
 ----
 
-* https://github.com/threatcode/bogcode/commit/9dfa9ad23dfe450ceb65d38074d55f07425aa90a
+* https://github.com/threatcode/threatcode.github.io/bugcodemit/9dfa9ad23dfe450ceb65d38074d55f07425aa90a
 
 Improving (web interface, vulnerability classification)
 
 Apr 30, 2014:
 ----
 
-* https://github.com/threatcode/bogcode/commit/931865fd4bd9c5fbd1a237b52659b1c873e1fcbf
+* https://github.com/threatcode/threatcode.github.io/bugcodemit/931865fd4bd9c5fbd1a237b52659b1c873e1fcbf
 
 MacOS Support
 
 Apr 04, 2014:
 ----
-* https://github.com/threatcode/bogcode/commit/0fe6978fe41dc85cd8540c2f26074f3e3f57507f
+* https://github.com/threatcode/threatcode.github.io/bugcodemit/0fe6978fe41dc85cd8540c2f26074f3e3f57507f
 
-We are proud to present two new features that will enhace the Bogcode experience.
+We are proud to present two new features that will enhace the Bugcode experience.
 Taking feedback from our users we took account that each of them had particular needs from their consoles (completion, size, fonts, so on so forth)  and their need to be able to know what commands where run during an engagement.
 
     * A brand new ZSH based Terminal UI

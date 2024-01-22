@@ -1,6 +1,6 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -9,8 +9,8 @@ import pytest
 from functools import partial
 from posixpath import join as urljoin
 
-from bogcode.server.models import Hostname, Host
-from bogcode.server.api.modules.hosts import HostsView
+from bugcode.server.models import Hostname, Host
+from bugcode.server.api.modules.hosts import HostsView
 
 from tests.test_api_workspaced_base import (
     ReadOnlyAPITests)

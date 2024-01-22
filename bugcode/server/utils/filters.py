@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2020  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2020  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 # Standard library imports
@@ -18,8 +18,8 @@ from marshmallow import Schema, fields, ValidationError, types, validate, post_l
 from marshmallow_sqlalchemy.convert import ModelConverter
 
 # Local application imports
-from bogcode.server.fields import JSONType
-from bogcode.server.models import (
+from bugcode.server.fields import JSONType
+from bugcode.server.models import (
     VulnerabilityWeb,
     Host,
     Service,
@@ -27,7 +27,7 @@ from bogcode.server.models import (
     Workspace,
     User,
 )
-from bogcode.server.utils.search import OPERATORS
+from bugcode.server.utils.search import OPERATORS
 
 VALID_OPERATORS = set(OPERATORS.keys()) - {'desc', 'asc'}
 DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f%z'

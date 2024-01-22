@@ -32,10 +32,10 @@ let
 
     bleach = self.callPackage ./packages/bleach { };
 
-    bogcode-agent-parameters-types =
-      self.callPackage ./packages/bogcode-agent-parameters-types { };
+    bugcode-agent-parameters-types =
+      self.callPackage ./packages/bugcode-agent-parameters-types { };
 
-    bogcode-plugins = self.callPackage ./packages/bogcode-plugins { };
+    bugcode-plugins = self.callPackage ./packages/bugcode-plugins { };
 
     bugcode = self.callPackage ./packages/bugcode { };
 

@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2019  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2019  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 # Standard library imports
@@ -11,14 +11,14 @@ import click
 from flask import current_app
 
 # Local application imports
-from bogcode.server.models import User, db
+from bugcode.server.models import User, db
 
 
 def change_username(current_username, new_username):
     with current_app.app_context():
         user = User.query.filter_by(username=current_username).first()
         if not user:
-            print(f"\nERROR: User {current_username} was not found in Bogcode's Database.")
+            print(f"\nERROR: User {current_username} was not found in Bugcode's Database.")
             sys.exit(1)
         else:
             print(f"\nThe user named {current_username} will be changed to {new_username}.")

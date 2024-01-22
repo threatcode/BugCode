@@ -33,13 +33,13 @@ def upgrade():
     op.create_foreign_key(
         'agent_creator_id_fkey',
         'agent',
-        'bogcode_user', ['creator_id'], ['id']
+        'bugcode_user', ['creator_id'], ['id']
     )
 
     op.create_foreign_key(
         'agent_update_user_id_fkey',
         'agent',
-        'bogcode_user', ['update_user_id'], ['id']
+        'bugcode_user', ['update_user_id'], ['id']
     )
 
     op.create_foreign_key(

@@ -18,7 +18,7 @@ depends_on = None
 
 def upgrade():
 
-    op.alter_column('bogcode_user',
+    op.alter_column('bugcode_user',
                     'otp_secret',
                     type_=sa.String(32),
                     existing_type=sa.String(16),
@@ -33,14 +33,14 @@ def downgrade():
           "we are deactivating 2FA in that user!")
 
     users = sa.table(
-        'bogcode_user',
+        'bugcode_user',
         sa.column('otp_secret', sa.String),
         sa.column('id', sa.Integer),
         sa.Column('state_otp', sa.Enum(*OTP_STATES, 'user_otp_states')),
     )
 
     conn = op.get_bind()
-    res = conn.execute('SELECT otp_secret, id FROM bogcode_user').fetchall()
+    res = conn.execute('SELECT otp_secret, id FROM bugcode_user').fetchall()
 
     for user in res:
         if user[0] and len(user[0]) > 16:
@@ -48,7 +48,7 @@ def downgrade():
                 users.update().where(users.c.id == user[1]).values({'otp_secret': None, 'state_otp': "disabled"})
             )
 
-    op.alter_column('bogcode_user',
+    op.alter_column('bugcode_user',
                     'otp_secret',
                     type_=sa.String(16),
                     existing_type=sa.String(32),

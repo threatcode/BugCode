@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2016  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2016  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 
@@ -11,7 +11,7 @@ from filteralchemy import FilterSet, operators  # pylint:disable=unused-import
 from sqlalchemy.orm.exc import NoResultFound
 
 # Local application imports
-from bogcode.server.api.base import (
+from bugcode.server.api.base import (
     AutoSchema,
     ReadWriteWorkspacedView,
     FilterSetMeta,
@@ -20,8 +20,8 @@ from bogcode.server.api.base import (
     BulkDeleteWorkspacedMixin,
     BulkUpdateWorkspacedMixin,
 )
-from bogcode.server.models import Credential, Host, Service, Workspace, db
-from bogcode.server.schemas import MutableField, SelfNestedField, MetadataSchema
+from bugcode.server.models import Credential, Host, Service, Workspace, db
+from bugcode.server.schemas import MutableField, SelfNestedField, MetadataSchema
 
 credentials_api = Blueprint('credentials_api', __name__)
 

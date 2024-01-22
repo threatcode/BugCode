@@ -3,8 +3,8 @@ from pathlib import Path
 from flask import Blueprint, send_file
 from marshmallow import Schema
 
-from bogcode.server.api.base import GenericView
-from bogcode.server.config import LOCAL_OPENAPI_FILE
+from bugcode.server.api.base import GenericView
+from bugcode.server.config import LOCAL_OPENAPI_FILE
 
 swagger_api = Blueprint('swagger_api', __name__)
 
@@ -29,7 +29,7 @@ class SwaggerView(GenericView):
         """
         if LOCAL_OPENAPI_FILE.exists():
             return send_file(LOCAL_OPENAPI_FILE)
-        default_swagger_path = Path(__file__).parent.parent.parent.parent / 'openapi' / 'bogcode_swagger.json'
+        default_swagger_path = Path(__file__).parent.parent.parent.parent / 'openapi' / 'bugcode_swagger.json'
         return send_file(default_swagger_path)
 
 

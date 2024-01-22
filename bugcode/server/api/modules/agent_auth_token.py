@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2016  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2016  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 
@@ -13,8 +13,8 @@ from flask import Blueprint
 from marshmallow import fields, Schema
 
 # Local application imports
-from bogcode.server.api.base import GenericView
-from bogcode.server.config import bogcode_server
+from bugcode.server.api.base import GenericView
+from bugcode.server.config import bugcode_server
 
 agent_auth_token_api = Blueprint('agent_auth_token_api', __name__)
 
@@ -46,8 +46,8 @@ class AgentAuthTokenView(GenericView):
             200:
               description: Ok
         """
-        totp = pyotp.TOTP(bogcode_server.agent_registration_secret, interval=int(
-            bogcode_server.agent_token_expiration))
+        totp = pyotp.TOTP(bugcode_server.agent_registration_secret, interval=int(
+            bugcode_server.agent_token_expiration))
         return AgentAuthTokenSchema().dump(
             {'token': totp.now(),
              'expires_in': totp.interval - datetime.datetime.utcnow().timestamp() % totp.interval,

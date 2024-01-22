@@ -1,5 +1,5 @@
-# Bogcode Penetration Test IDE
-# Copyright (C) 2016  Infobyte LLC (http://www.threatcodesec.com/)
+# Bugcode Penetration Test IDE
+# Copyright (C) 2016  Threatcode LLC (http://www.threatcodesec.com/)
 # See the file 'doc/LICENSE' for the license information
 import time
 import datetime
@@ -10,13 +10,13 @@ from flask import Blueprint
 from flask_classful import route
 from marshmallow import fields, post_load, ValidationError
 
-from bogcode.server.api.base import (
+from bugcode.server.api.base import (
     AutoSchema,
     ReadWriteWorkspacedView,
     PaginatedMixin
 )
-from bogcode.server.models import Command, Workspace
-from bogcode.server.schemas import MutableField, PrimaryKeyRelatedField, SelfNestedField, MetadataSchema
+from bugcode.server.models import Command, Workspace
+from bugcode.server.schemas import MutableField, PrimaryKeyRelatedField, SelfNestedField, MetadataSchema
 
 commandsrun_api = Blueprint('commandsrun_api', __name__)
 

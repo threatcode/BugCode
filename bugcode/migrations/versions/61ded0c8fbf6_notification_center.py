@@ -8,7 +8,7 @@ Create Date: 2023-01-11 19:24:20.511853+00:00
 from alembic import op
 import sqlalchemy as sa
 
-import bogcode
+import bugcode
 
 # revision identifiers, used by Alembic.
 revision = '61ded0c8fbf6'
@@ -23,13 +23,13 @@ def upgrade():
     sa.Column('create_date', sa.DateTime(), nullable=True),
     sa.Column('update_date', sa.DateTime(), nullable=True),
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('data', bogcode.server.fields.JSONType(), nullable=False),
+    sa.Column('data', bugcode.server.fields.JSONType(), nullable=False),
     sa.Column('processed', sa.Boolean(), nullable=True),
     sa.Column('creator_id', sa.Integer(), nullable=True),
     sa.Column('update_user_id', sa.Integer(), nullable=True),
     sa.Column('verbose', sa.Boolean(), nullable=False),
-    sa.ForeignKeyConstraint(['creator_id'], ['bogcode_user.id'], ondelete='SET NULL'),
-    sa.ForeignKeyConstraint(['update_user_id'], ['bogcode_user.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['creator_id'], ['bugcode_user.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['update_user_id'], ['bugcode_user.id'], ondelete='SET NULL'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('user_notification',
@@ -37,19 +37,19 @@ def upgrade():
     sa.Column('update_date', sa.DateTime(), nullable=True),
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('message', sa.Text(), nullable=False),
-    sa.Column('extra_data', bogcode.server.fields.JSONType(), nullable=True),
+    sa.Column('extra_data', bugcode.server.fields.JSONType(), nullable=True),
     sa.Column('type', sa.String(), nullable=False),
     sa.Column('subtype', sa.String(), nullable=False),
     sa.Column('read', sa.Boolean(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('creator_id', sa.Integer(), nullable=True),
     sa.Column('update_user_id', sa.Integer(), nullable=True),
-    sa.Column('triggered_by', bogcode.server.fields.JSONType(), nullable=False),
-    sa.Column('links_to', bogcode.server.fields.JSONType(), nullable=True),
+    sa.Column('triggered_by', bugcode.server.fields.JSONType(), nullable=False),
+    sa.Column('links_to', bugcode.server.fields.JSONType(), nullable=True),
     sa.Column('event_date', sa.DateTime(), nullable=False),
-    sa.ForeignKeyConstraint(['creator_id'], ['bogcode_user.id'], ondelete='SET NULL'),
-    sa.ForeignKeyConstraint(['update_user_id'], ['bogcode_user.id'], ondelete='SET NULL'),
-    sa.ForeignKeyConstraint(['user_id'], ['bogcode_user.id'], ),
+    sa.ForeignKeyConstraint(['creator_id'], ['bugcode_user.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['update_user_id'], ['bugcode_user.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['user_id'], ['bugcode_user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_user_notification_user_id'), 'user_notification', ['user_id'], unique=False)
@@ -118,9 +118,9 @@ def upgrade():
     sa.Column('adv_vuln_open_days', sa.Integer(), nullable=False),
     sa.Column('creator_id', sa.Integer(), nullable=True),
     sa.Column('update_user_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['creator_id'], ['bogcode_user.id'], ondelete='SET NULL'),
-    sa.ForeignKeyConstraint(['update_user_id'], ['bogcode_user.id'], ondelete='SET NULL'),
-    sa.ForeignKeyConstraint(['user_id'], ['bogcode_user.id'], ),
+    sa.ForeignKeyConstraint(['creator_id'], ['bugcode_user.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['update_user_id'], ['bugcode_user.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['user_id'], ['bugcode_user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2019  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2019  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 """
 
@@ -11,8 +11,8 @@ from urllib.parse import urljoin
 import pyotp
 import pytest
 
-from bogcode.server.api.modules.agent import AgentView
-from bogcode.server.models import Agent, Command
+from bugcode.server.api.modules.agent import AgentView
+from bugcode.server.models import Agent, Command
 from tests.factories import AgentFactory, WorkspaceFactory, ExecutorFactory
 from tests.test_api_non_workspaced_base import ReadWriteAPITests
 from tests import factories
@@ -54,29 +54,29 @@ def get_raw_agent(name="My agent", active=None, token=None):
 @pytest.mark.usefixtures('logged_user')
 class TestAgentAuthTokenAPIGeneric:
 
-    @mock.patch('bogcode.server.api.modules.agent.bogcode_server')
-    def test_get_agent_token(self, bogcode_server_config, test_client, session):
-        bogcode_server_config.agent_registration_secret = None
+    @mock.patch('bugcode.server.api.modules.agent.bugcode_server')
+    def test_get_agent_token(self, bugcode_server_config, test_client, session):
+        bugcode_server_config.agent_registration_secret = None
         res = test_client.get('/v3/agent_token')
         assert 'token' in res.json and 'expires_in' in res.json
         assert len(res.json['token'])
 
-    @mock.patch('bogcode.server.api.modules.agent.bogcode_server')
-    def test_create_agent_token_fails(self, bogcode_server_config, test_client, session):
-        bogcode_server_config.agent_registration_secret = None
+    @mock.patch('bugcode.server.api.modules.agent.bugcode_server')
+    def test_create_agent_token_fails(self, bugcode_server_config, test_client, session):
+        bugcode_server_config.agent_registration_secret = None
         res = test_client.post('/v3/agent_token')
         assert res.status_code == 405
 
 
 class TestAgentCreationAPI:
 
-    @mock.patch('bogcode.server.api.modules.agent.bogcode_server')
+    @mock.patch('bugcode.server.api.modules.agent.bugcode_server')
     @pytest.mark.usefixtures('ignore_nplusone')
-    def test_create_agent_valid_token(self, bogcode_server_config, test_client,
+    def test_create_agent_valid_token(self, bugcode_server_config, test_client,
                                       session):
         secret = pyotp.random_base32()
-        bogcode_server_config.agent_registration_secret = secret
-        bogcode_server_config.agent_token_expiration = 60
+        bugcode_server_config.agent_registration_secret = secret
+        bugcode_server_config.agent_token_expiration = 60
         logout(test_client, [302])
         initial_agent_count = len(session.query(Agent).all())
         raw_data = get_raw_agent(
@@ -87,12 +87,12 @@ class TestAgentCreationAPI:
         assert res.status_code == 201, (res.json, raw_data)
         assert len(session.query(Agent).all()) == initial_agent_count + 1
 
-    @mock.patch('bogcode.server.api.modules.agent.bogcode_server')
-    def test_create_agent_without_name_fails(self, bogcode_server_config,
+    @mock.patch('bugcode.server.api.modules.agent.bugcode_server')
+    def test_create_agent_without_name_fails(self, bugcode_server_config,
                                              test_client, session):
         secret = pyotp.random_base32()
-        bogcode_server_config.agent_registration_secret = secret
-        bogcode_server_config.agent_token_expiration = 60
+        bugcode_server_config.agent_registration_secret = secret
+        bugcode_server_config.agent_token_expiration = 60
         logout(test_client, [302])
         initial_agent_count = len(session.query(Agent).all())
         raw_data = get_raw_agent(
@@ -106,11 +106,11 @@ class TestAgentCreationAPI:
         assert res.status_code == 400
         assert len(session.query(Agent).all()) == initial_agent_count
 
-    @mock.patch('bogcode.server.api.modules.agent.bogcode_server')
-    def test_create_agent_invalid_token(self, bogcode_server_config,
+    @mock.patch('bugcode.server.api.modules.agent.bugcode_server')
+    def test_create_agent_invalid_token(self, bugcode_server_config,
                                         test_client, session):
         secret = pyotp.random_base32()
-        bogcode_server_config.agent_registration_secret = secret
+        bugcode_server_config.agent_registration_secret = secret
         logout(test_client, [302])
         raw_data = get_raw_agent(
             token="INVALID",
@@ -119,10 +119,10 @@ class TestAgentCreationAPI:
         res = test_client.post('/v3/agents', data=raw_data)
         assert res.status_code == 401
 
-    @mock.patch('bogcode.server.api.modules.agent.bogcode_server')
-    def test_create_agent_agent_token_not_set(self, bogcode_server_config,
+    @mock.patch('bugcode.server.api.modules.agent.bugcode_server')
+    def test_create_agent_agent_token_not_set(self, bugcode_server_config,
                                               test_client, session):
-        bogcode_server_config.agent_registration_secret = None
+        bugcode_server_config.agent_registration_secret = None
         logout(test_client, [302])
         raw_data = get_raw_agent(
             name="test agent",
@@ -130,10 +130,10 @@ class TestAgentCreationAPI:
         res = test_client.post('/v3/agents', data=raw_data)
         assert res.status_code == 400
 
-    @mock.patch('bogcode.server.api.modules.agent.bogcode_server')
-    def test_create_agent_invalid_payload(self, bogcode_server_config,
+    @mock.patch('bugcode.server.api.modules.agent.bugcode_server')
+    def test_create_agent_invalid_payload(self, bugcode_server_config,
                                           test_client, session):
-        bogcode_server_config.agent_registration_secret = None
+        bugcode_server_config.agent_registration_secret = None
         logout(test_client, [302])
         raw_data = {"PEPE": 'INVALID'}
         res = test_client.post('/v3/agents', data=raw_data)

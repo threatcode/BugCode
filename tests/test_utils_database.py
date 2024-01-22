@@ -1,14 +1,14 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
 
 import pytest
 
-from bogcode.server.utils.database import get_unique_fields
-from bogcode.server.models import (
+from bugcode.server.utils.database import get_unique_fields
+from bugcode.server.models import (
     License,
     Service,
     Host,

@@ -17,9 +17,9 @@ depends_on = None
 
 def upgrade():
     conn = op.get_bind()
-    conn.execute("ALTER TABLE bogcode_user ADD COLUMN preferences jsonb not null default '{}'::jsonb")
+    conn.execute("ALTER TABLE bugcode_user ADD COLUMN preferences jsonb not null default '{}'::jsonb")
 
 
 def downgrade():
     conn = op.get_bind()
-    conn.execute('ALTER TABLE bogcode_user DROP COLUMN "preferences"')
+    conn.execute('ALTER TABLE bugcode_user DROP COLUMN "preferences"')

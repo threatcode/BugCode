@@ -7,9 +7,9 @@ variables:
     PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
     APT_CACHE_DIR: "$CI_PROJECT_DIR/apt-cache"
     DEBIAN_FRONTEND: noninteractive
-    IMAGE_TAG: 'egrep -o "[0-9]\.([0-9]|[0-9][0-9])(\.[0-9])?" bogcode/__init__.py'
-    VAULT_ROLE: 'bogcode-readonly'
-    VAULT_ADDR: 'https://tluav-lb.bugcode.com'
+    IMAGE_TAG: 'egrep -o "[0-9]\.([0-9]|[0-9][0-9])(\.[0-9])?" bugcode/__init__.py'
+    VAULT_ROLE: 'bugcode-readonly'
+    VAULT_ADDR: 'https://tluav-lb.threatcode.github.io/bugcode'
 
     ## ENV_VARS LIST
     # FULL_TEST = Test all jobs

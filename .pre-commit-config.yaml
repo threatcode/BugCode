@@ -4,21 +4,21 @@ repos:
     rev: v4.1.0
     hooks:
     -   id: trailing-whitespace
-        exclude: '^bogcode/server/www/'
+        exclude: '^bugcode/server/www/'
     -   id: end-of-file-fixer
-        exclude: '^bogcode/server/www/'
+        exclude: '^bugcode/server/www/'
     -   id: check-json
-        exclude: '^bogcode/server/www/'
+        exclude: '^bugcode/server/www/'
     -   id: check-yaml
-        exclude: '^bogcode/server/www/'
+        exclude: '^bugcode/server/www/'
         args: [ --unsafe ]
     -   id: debug-statements
-        exclude: '^bogcode/server/www/'
+        exclude: '^bugcode/server/www/'
 -   repo: https://gitlab.com/pycqa/flake8
     rev: 3.9.2
     hooks:
     -   id: flake8
-        exclude: '^bogcode/server/www/'
+        exclude: '^bugcode/server/www/'
         additional_dependencies: [flake8-typing-imports==1.9.0]
 -   repo: https://github.com/ikamensh/flynt/
     rev: '0.76'

@@ -1,6 +1,6 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -16,10 +16,10 @@ from tests.test_api_non_workspaced_base import (
     ReadWriteAPITests,
     API_PREFIX
 )
-from bogcode.server.models import (
+from bugcode.server.models import (
     License,
 )
-from bogcode.server.api.modules.licenses import LicenseView
+from bugcode.server.api.modules.licenses import LicenseView
 from tests.factories import LicenseFactory
 
 

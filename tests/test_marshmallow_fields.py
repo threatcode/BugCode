@@ -1,6 +1,6 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -10,7 +10,7 @@ import datetime
 import pytest
 from collections import namedtuple
 from marshmallow import Schema, fields, ValidationError
-from bogcode.server.schemas import (
+from bugcode.server.schemas import (
     JSTimestampField,
     NullToBlankString,
     MutableField,

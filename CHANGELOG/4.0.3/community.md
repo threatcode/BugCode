@@ -1,5 +1,5 @@
  * Replace usage of strings for user_types enumerator constants
- * Increase the default duration of bogcode token
+ * Increase the default duration of bugcode token
  * Fix order by Role in Filters API
  * Refactor of bulk create API
  * Remove attachments and attachments_count properties from vulnerability. This improves performance.

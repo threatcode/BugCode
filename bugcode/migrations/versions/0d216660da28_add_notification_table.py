@@ -53,7 +53,7 @@ def upgrade():
     op.create_foreign_key(
         'notification_user_id_fkey',
         'notification',
-        'bogcode_user', ['user_notified_id'], ['id']
+        'bugcode_user', ['user_notified_id'], ['id']
     )
 
     op.create_foreign_key(

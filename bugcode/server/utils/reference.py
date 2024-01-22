@@ -1,7 +1,7 @@
 import logging
 
-from bogcode.server.models import db, VulnerabilityReference
-from bogcode.server.utils.database import get_or_create
+from bugcode.server.models import db, VulnerabilityReference
+from bugcode.server.utils.database import get_or_create
 
 
 logger = logging.getLogger(__name__)

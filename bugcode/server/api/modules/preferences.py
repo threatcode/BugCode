@@ -4,8 +4,8 @@ from flask import Blueprint, request, jsonify, abort
 from marshmallow import Schema, fields
 
 # Local application imports
-from bogcode.server.api.base import GenericView
-from bogcode.server.models import User, db
+from bugcode.server.api.base import GenericView
+from bugcode.server.models import User, db
 
 preferences_api = Blueprint('preferences_api', __name__)
 

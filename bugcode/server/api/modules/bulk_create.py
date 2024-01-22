@@ -24,8 +24,8 @@ from marshmallow import (
 from marshmallow.validate import Range
 
 # Local application imports
-from bogcode.server.config import bogcode_server
-from bogcode.server.models import (
+from bugcode.server.config import bugcode_server
+from bugcode.server.models import (
     db,
     Command,
     CommandObject,
@@ -39,26 +39,26 @@ from bogcode.server.models import (
     Workspace,
     Metadata
 )
-from bogcode.server.utils.cwe import create_cwe
-from bogcode.server.utils.database import (
+from bugcode.server.utils.cwe import create_cwe
+from bugcode.server.utils.database import (
     get_conflict_object,
     is_unique_constraint_violation,
     get_object_type_for,
 )
-from bogcode.server.api.base import (
+from bugcode.server.api.base import (
     AutoSchema,
     GenericWorkspacedView,
     get_workspace
 )
-from bogcode.server.api.modules import (
+from bugcode.server.api.modules import (
     hosts,
     services,
     vulns,
 )
-from bogcode.server.api.modules.websocket_auth import require_agent_token
-from bogcode.server.config import CONST_BUGCODE_HOME_PATH
-from bogcode.server.tasks import process_report_task
-from bogcode.server.utils.vulns import parse_cve_references_and_policyviolations
+from bugcode.server.api.modules.websocket_auth import require_agent_token
+from bugcode.server.config import CONST_BUGCODE_HOME_PATH
+from bugcode.server.tasks import process_report_task
+from bugcode.server.utils.vulns import parse_cve_references_and_policyviolations
 
 
 bulk_create_api = flask.Blueprint('bulk_create_api', __name__)
@@ -176,7 +176,7 @@ class HostBulkSchema(hosts.HostSchema):
 
 
 class BulkCommandSchema(AutoSchema):
-    """The schema of bogcode/server/api/modules/commandsrun.py has a lot
+    """The schema of bugcode/server/api/modules/commandsrun.py has a lot
     of ugly things because of the Web UI backwards compatibility.
 
     I don't need that here, so I'll write a schema from scratch."""
@@ -256,7 +256,7 @@ def bulk_create(ws: Workspace,
     if hosts_to_create > 0:
         logger.debug(f"Needs to create {hosts_to_create} hosts...")
 
-        if bogcode_server.celery_enabled:
+        if bugcode_server.celery_enabled:
             return process_report_task.delay(ws.id, command_dict, data['hosts'])
 
         # just in case celery is not configured
@@ -490,7 +490,7 @@ class BulkCreateView(GenericWorkspacedView):
         """
         ---
           tags: ["Bulk"]
-          description: Creates all bogcode objects in bulk for a workspace
+          description: Creates all bugcode objects in bulk for a workspace
           requestBody:
             required: true
             content:
@@ -597,8 +597,8 @@ class BulkCreateView(GenericWorkspacedView):
                 json.dump(json_data, output)
             logger.info("Create tmp json file for bulk_create: %s", file_path)
             user_id = flask_login.current_user.id if not flask_login.current_user.is_anonymous else None
-            if bogcode_server.celery_enabled:
-                from bogcode.server.utils.reports_processor import process_report  # pylint: disable=import-outside-toplevel
+            if bugcode_server.celery_enabled:
+                from bugcode.server.utils.reports_processor import process_report  # pylint: disable=import-outside-toplevel
                 process_report(workspace.name,
                                command.id,
                                file_path,
@@ -609,9 +609,9 @@ class BulkCreateView(GenericWorkspacedView):
                                None,
                                None,
                                None)
-                logger.info(f"Bogcode objects sent to celery in bulk for workspace {workspace}")
+                logger.info(f"Bugcode objects sent to celery in bulk for workspace {workspace}")
             else:
-                from bogcode.server.utils.reports_processor import REPORTS_QUEUE  # pylint: disable=import-outside-toplevel
+                from bugcode.server.utils.reports_processor import REPORTS_QUEUE  # pylint: disable=import-outside-toplevel
                 REPORTS_QUEUE.put(
                     (
                         workspace.name,
@@ -626,7 +626,7 @@ class BulkCreateView(GenericWorkspacedView):
                         None
                     )
                 )
-                logger.info(f"Bogcode objects enqueued in bulk for workspace {workspace}")
+                logger.info(f"Bugcode objects enqueued in bulk for workspace {workspace}")
         else:
             _update_command(command, data['command'])
         return flask.jsonify(

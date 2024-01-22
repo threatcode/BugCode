@@ -15,13 +15,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends  build-essentia
     && chmod +x /entrypoint.sh \
     && rm -rf /src
 
-WORKDIR /home/bogcode
+WORKDIR /home/bugcode
 
-RUN mkdir -p /home/bogcode/.bogcode/config
-RUN mkdir -p /home/bogcode/.bogcode/logs
-RUN mkdir -p /home/bogcode/.bogcode/session
-RUN mkdir -p /home/bogcode/.bogcode/storage
+RUN mkdir -p /home/bugcode/.bugcode/config
+RUN mkdir -p /home/bugcode/.bugcode/logs
+RUN mkdir -p /home/bugcode/.bugcode/session
+RUN mkdir -p /home/bugcode/.bugcode/storage
 
 
 ENV PYTHONUNBUFFERED 1
-ENV BUGCODE_HOME /home/bogcode
+ENV BUGCODE_HOME /home/bugcode

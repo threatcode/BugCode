@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 """
 # Standard library imports
@@ -11,8 +11,8 @@ from sqlalchemy import MetaData
 from sqlalchemy.orm import class_mapper
 
 # Local application imports
-import bogcode.server.config
-from bogcode.server import models
+import bugcode.server.config
+from bugcode.server import models
 
 
 class DatabaseSchema:
@@ -34,7 +34,7 @@ class DatabaseSchema:
             print('Please install sqlalchemy_schemadisplay with "pip install sqlalchemy_schemadisplay"')
             sys.exit(1)
         graph = create_schema_graph(
-            metadata=MetaData(bogcode.server.config.database.connection_string.strip("'")),
+            metadata=MetaData(bugcode.server.config.database.connection_string.strip("'")),
             show_datatypes=False,  # The image would get nasty big if we'd show the datatypes
             show_indexes=False,  # ditto for indexes
             rankdir='LR',  # From left to right (instead of top to bottom)

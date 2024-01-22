@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 # Standard library imports
@@ -16,7 +16,7 @@ from sqlalchemy.orm import Query
 from sqlalchemy.orm.attributes import get_history
 
 # Local application imports
-from bogcode.server.models import (
+from bugcode.server.models import (
     Host,
     Service,
     TagObject,
@@ -314,7 +314,7 @@ def alter_histogram_on_before_compile_update(query, update_context):
 
 
 # register the workspace verification for all objs that has workspace_id
-for name, obj in inspect.getmembers(sys.modules['bogcode.server.models']):
+for name, obj in inspect.getmembers(sys.modules['bugcode.server.models']):
     if inspect.isclass(obj) and getattr(obj, 'workspace_id', None):
         event.listen(obj, 'after_insert', after_insert_check_child_has_same_workspace)
         event.listen(obj, 'after_update', after_insert_check_child_has_same_workspace)

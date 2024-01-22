@@ -1,6 +1,6 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -14,8 +14,8 @@ from tests.test_api_workspaced_base import (
     BulkUpdateTestsMixin,
     BulkDeleteTestsMixin
 )
-from bogcode.server.api.modules.credentials import CredentialView
-from bogcode.server.models import Credential
+from bugcode.server.api.modules.credentials import CredentialView
+from bugcode.server.models import Credential
 from tests.factories import HostFactory, ServiceFactory
 
 

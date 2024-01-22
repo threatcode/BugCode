@@ -10,7 +10,7 @@ import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import JSONB
 from configparser import ConfigParser
 
-from bogcode.server.config import LOCAL_CONFIG_FILE
+from bugcode.server.config import LOCAL_CONFIG_FILE
 
 # revision identifiers, used by Alembic.
 revision = 'b49d8efbd0c2'

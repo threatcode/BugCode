@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 
 """
@@ -12,7 +12,7 @@ from flask_wtf.csrf import generate_csrf
 from marshmallow import Schema
 
 # Local application imports
-from bogcode.server.api.base import get_user_permissions, GenericView
+from bugcode.server.api.base import get_user_permissions, GenericView
 
 session_api = Blueprint('session_api', __name__)
 

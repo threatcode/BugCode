@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2018  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2018  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 # Standard library imports
@@ -11,8 +11,8 @@ import click
 from flask import current_app
 
 # Local application imports
-from bogcode.server.models import CustomFieldsSchema, db
-from bogcode.server.utils.database import get_or_create
+from bugcode.server.models import CustomFieldsSchema, db
+from bugcode.server.utils.database import get_or_create
 
 
 def add_custom_field_main():

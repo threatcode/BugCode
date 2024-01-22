@@ -1,7 +1,7 @@
 deploy_to_dev_environment:
     stage: deploy
     variables:
-      BUGCODE_DEB_NAME: bogcode-server-community_amd64.deb
+      BUGCODE_DEB_NAME: bugcode-server-community_amd64.deb
       DEPLOY_TO_DEV_ENV: "True"
     trigger:
       project: bugcode/devops

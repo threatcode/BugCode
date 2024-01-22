@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2019  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2019  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 import http
@@ -14,21 +14,21 @@ import flask_login
 from flask_classful import route
 from marshmallow import fields, Schema, EXCLUDE
 from sqlalchemy.orm.exc import NoResultFound
-from bogcode_agent_parameters_types.utils import type_validate, get_manifests
+from bugcode_agent_parameters_types.utils import type_validate, get_manifests
 
-from bogcode.server.api.base import (
+from bugcode.server.api.base import (
     AutoSchema,
     ReadWriteView, get_workspace
 )
-from bogcode.server.extensions import socketio
-from bogcode.server.models import (
+from bugcode.server.extensions import socketio
+from bugcode.server.models import (
     Agent,
     Executor,
     db,
 )
-from bogcode.server.schemas import PrimaryKeyRelatedField
-from bogcode.server.config import bogcode_server
-from bogcode.server.utils.agents import get_command_and_agent_execution
+from bugcode.server.schemas import PrimaryKeyRelatedField
+from bugcode.server.config import bugcode_server
+from bugcode.server.utils.agents import get_command_and_agent_execution
 
 agent_api = Blueprint('agent_api', __name__)
 agent_creation_api = Blueprint('agent_creation_api', __name__)
@@ -140,11 +140,11 @@ class AgentView(ReadWriteView):
 
     def _perform_create(self, data, **kwargs):
         token = data.pop('token')
-        if not bogcode_server.agent_registration_secret:
+        if not bugcode_server.agent_registration_secret:
             # someone is trying to use the token, but no token was generated yet.
             abort(401, "Invalid Token")
-        if not pyotp.TOTP(bogcode_server.agent_registration_secret,
-                          interval=int(bogcode_server.agent_token_expiration)
+        if not pyotp.TOTP(bugcode_server.agent_registration_secret,
+                          interval=int(bugcode_server.agent_token_expiration)
                           ).verify(token, valid_window=1):
             abort(401, "Invalid Token")
         agent = super()._perform_create(data, **kwargs)

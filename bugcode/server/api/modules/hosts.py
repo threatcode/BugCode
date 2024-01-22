@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2016  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2016  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 
@@ -23,9 +23,9 @@ from sqlalchemy import desc
 from sqlalchemy.orm import joinedload, undefer
 
 # Local application imports
-from bogcode.server.utils.database import get_or_create
-from bogcode.server.utils.command import set_command_id
-from bogcode.server.api.base import (
+from bugcode.server.utils.database import get_or_create
+from bugcode.server.utils.command import set_command_id
+from bugcode.server.api.base import (
     ReadWriteWorkspacedView,
     PaginatedMixin,
     AutoSchema,
@@ -35,15 +35,15 @@ from bogcode.server.api.base import (
     BulkDeleteWorkspacedMixin,
     BulkUpdateWorkspacedMixin, CountMultiWorkspacedMixin, get_workspace,
 )
-from bogcode.server.api.modules.services import ServiceSchema
-from bogcode.server.schemas import (
+from bugcode.server.api.modules.services import ServiceSchema
+from bugcode.server.schemas import (
     MetadataSchema,
     MutableField,
     NullToBlankString,
     PrimaryKeyRelatedField,
     SelfNestedField,
 )
-from bogcode.server.models import Host, Service, db, Hostname, CommandObject, Command
+from bugcode.server.models import Host, Service, db, Hostname, CommandObject, Command
 host_api = Blueprint('host_api', __name__)
 logger = logging.getLogger(__name__)
 

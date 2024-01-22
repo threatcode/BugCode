@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2021  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2021  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 # Standard library imports
@@ -10,9 +10,9 @@ from pathlib import Path
 from marshmallow import fields
 
 # Local application imports
-from bogcode.server.api.base import AutoSchema
-from bogcode.settings.base import Settings
-from bogcode.settings.exceptions import InvalidConfigurationError
+from bugcode.server.api.base import AutoSchema
+from bugcode.settings.base import Settings
+from bugcode.settings.exceptions import InvalidConfigurationError
 
 DEFAULT_CUSTOM_PLUGINS_FOLDER = ""
 

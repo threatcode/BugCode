@@ -1,10 +1,10 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
-from bogcode.server.models import TagObject
+from bugcode.server.models import TagObject
 
 
 def test_vulnweb_tags(vulnerability_web_factory, tag_factory, session):

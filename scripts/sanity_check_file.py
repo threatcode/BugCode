@@ -17,8 +17,8 @@ BRANCH_NAME = os.environ.get("CI_COMMIT_REF_NAME", ACTUAL_BRANCH)
 if not args.local:
     BRANCH_NAME = f"origin/{BRANCH_NAME}"
 
-PROF_FILE = "bogcode/server/api/modules/reports.py"
-CORP_FILE = "bogcode/server/api/modules/integration_jira.py"
+PROF_FILE = "bugcode/server/api/modules/reports.py"
+CORP_FILE = "bugcode/server/api/modules/integration_jira.py"
 
 mode = args.mode
 if mode == "diff":

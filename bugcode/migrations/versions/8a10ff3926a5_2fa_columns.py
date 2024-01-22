@@ -17,9 +17,9 @@ depends_on = None
 
 
 def upgrade():
-    op.add_column('bogcode_user', sa.Column('otp_secret', sa.String(16)))
+    op.add_column('bugcode_user', sa.Column('otp_secret', sa.String(16)))
     op.execute("CREATE TYPE user_otp_states AS ENUM('disabled', 'requested', 'confirmed')")
-    op.add_column('bogcode_user', sa.Column(
+    op.add_column('bugcode_user', sa.Column(
         'state_otp',
         sa.Enum(("disabled", "requested", "confirmed"), name='user_otp_states'),
         nullable=False,
@@ -27,6 +27,6 @@ def upgrade():
 
 
 def downgrade():
-    op.drop_column('bogcode_user', 'otp_secret')
-    op.drop_column('bogcode_user', 'state_otp')
+    op.drop_column('bugcode_user', 'otp_secret')
+    op.drop_column('bugcode_user', 'state_otp')
     op.execute('DROP TYPE user_otp_states')

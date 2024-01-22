@@ -33,7 +33,7 @@ from sqlalchemy.orm import ColumnProperty
 from sqlalchemy.orm.attributes import InstrumentedAttribute, QueryableAttribute
 
 # Local application imports
-from bogcode.server.models import User, CVE, Role
+from bugcode.server.models import User, CVE, Role
 
 logger = logging.getLogger(__name__)
 

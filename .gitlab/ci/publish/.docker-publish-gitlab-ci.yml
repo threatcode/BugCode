@@ -2,8 +2,8 @@
   stage: publish
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-    - gzip -d bogcode-server-docker.tar.gz
-    - docker load -i bogcode-server-docker.tar
+    - gzip -d bugcode-server-docker.tar.gz
+    - docker load -i bugcode-server-docker.tar
     - export VERSION=$(eval $IMAGE_TAG)
   tags:
     - shell
@@ -26,10 +26,10 @@ docker-publish-prod:
     CI_REGISTRY_USER: $DOCKER_USER
     CI_REGISTRY_PASSWORD: $DOCKER_PASS
     CI_REGISTRY: docker.io
-    CI_REGISTRY_IMAGE: index.docker.io/bugcode/bogcode
+    CI_REGISTRY_IMAGE: index.docker.io/khulnasoft/bugcode
   script:
     - !reference [ .get_secrets, script ]
-    - docker image tag registry.gitlab.com/bugcode/bogcode:latest $CI_REGISTRY_IMAGE:latest
+    - docker image tag registry.gitlab.com/khulnasoft/bugcode:latest $CI_REGISTRY_IMAGE:latest
     - docker push $CI_REGISTRY_IMAGE:latest
     - docker image tag $CI_REGISTRY_IMAGE:latest $CI_REGISTRY_IMAGE:$VERSION
     - docker push $CI_REGISTRY_IMAGE:$VERSION

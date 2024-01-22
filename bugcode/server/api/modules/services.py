@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2016  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2016  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 
@@ -12,13 +12,13 @@ from marshmallow.validate import OneOf, Range
 from sqlalchemy.orm.exc import NoResultFound
 
 # Local application imports
-from bogcode.server.models import (
+from bugcode.server.models import (
     Host,
     Service,
     Workspace,
     db
 )
-from bogcode.server.api.base import (
+from bugcode.server.api.base import (
     AutoSchema,
     ReadWriteWorkspacedView,
     FilterSetMeta,
@@ -26,13 +26,13 @@ from bogcode.server.api.base import (
     BulkDeleteWorkspacedMixin,
     BulkUpdateWorkspacedMixin
 )
-from bogcode.server.schemas import (
+from bugcode.server.schemas import (
     MetadataSchema,
     MutableField,
     PrimaryKeyRelatedField,
     SelfNestedField,
 )
-from bogcode.server.utils.command import set_command_id
+from bugcode.server.utils.command import set_command_id
 
 services_api = Blueprint('services_api', __name__)
 

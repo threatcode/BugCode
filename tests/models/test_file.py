@@ -1,11 +1,11 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
 import pytest
-from bogcode.server.models import File
+from bugcode.server.models import File
 from depot.manager import DepotManager
 
 from tests.conftest import TEST_DATA_PATH
@@ -14,10 +14,10 @@ from tests.conftest import TEST_DATA_PATH
 @pytest.fixture
 def depotfile():
     depot = DepotManager.get('default')
-    png_file_path = TEST_DATA_PATH / 'bogcode.png'
+    png_file_path = TEST_DATA_PATH / 'bugcode.png'
 
     with png_file_path.open('rb') as fp:
-        fileid = depot.create(fp, 'bogcode.png', 'image/png')
+        fileid = depot.create(fp, 'bugcode.png', 'image/png')
     return fileid
 
 
@@ -28,17 +28,17 @@ def test_get_vulnweb_evidence(vulnerability_web_factory, depotfile, session):
     session.commit()
     vuln = all_vulns[0]
 
-    correct_file = File(filename='bogcode.png', object_id=vuln.id,
+    correct_file = File(filename='bugcode.png', object_id=vuln.id,
                         object_type='vulnerability', content=depotfile)
-    session.add(File(filename='bogcode.png',
+    session.add(File(filename='bugcode.png',
                      object_id=vuln.service_id,
                      object_type='service', content=depotfile))
     session.add(correct_file)
 
     for other_vuln in all_vulns[1:]:
-        session.add(File(filename='bogcode.png', object_id=other_vuln.id,
+        session.add(File(filename='bugcode.png', object_id=other_vuln.id,
                          object_type='vulnerability', content=depotfile))
-        session.add(File(filename='bogcode.png',
+        session.add(File(filename='bugcode.png',
                          object_id=other_vuln.service_id,
                          object_type='service', content=depotfile))
 
@@ -50,7 +50,7 @@ def test_get_vulnweb_evidence(vulnerability_web_factory, depotfile, session):
 @pytest.mark.usefixtures('app')  # To load depot config
 def test_add_vulnweb_evidence(vulnerability_web, depotfile, session):
     session.commit()
-    file_ = File(filename='bogcode.png', content=depotfile)
+    file_ = File(filename='bugcode.png', content=depotfile)
     vulnerability_web.evidence.append(file_)
     session.commit()
     assert len(vulnerability_web.evidence) == 1

@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2016  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2016  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 
@@ -10,10 +10,10 @@ from flask import Blueprint
 from marshmallow import Schema
 
 # Local application imports
-from bogcode import __version__ as f_version
-from bogcode.server.api.base import GenericView
-from bogcode.server.config import bogcode_server
-from bogcode.settings.dashboard import DashboardSettings
+from bugcode import __version__ as f_version
+from bugcode.server.api.base import GenericView
+from bugcode.server.config import bugcode_server
+from bugcode.settings.dashboard import DashboardSettings
 
 info_api = Blueprint('info_api', __name__)
 
@@ -31,13 +31,13 @@ class InfoView(GenericView):
         ---
         get:
           tags: ["Informational"]
-          description: Gives basic info about the bogcode service
+          description: Gives basic info about the bugcode service
           responses:
             200:
               description: Ok
         """
 
-        response = flask.jsonify({'Bogcode Server': 'Running', 'Version': f_version})
+        response = flask.jsonify({'Bugcode Server': 'Running', 'Version': f_version})
         response.status_code = 200
 
         return response
@@ -55,14 +55,14 @@ class ConfigView(GenericView):
         ---
         get:
           tags: ["Informational"]
-          description: Gives basic info about the bogcode configuration
+          description: Gives basic info about the bugcode configuration
           responses:
             200:
               description: Ok
         """
         doc = {
             'ver': f_version,
-            'websocket_port': bogcode_server.websocket_port,
+            'websocket_port': bugcode_server.websocket_port,
             'show_vulns_by_price': DashboardSettings.settings.show_vulns_by_price,
             'smtp_enabled': False
         }

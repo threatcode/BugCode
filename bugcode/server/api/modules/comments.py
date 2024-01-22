@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2017  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2017  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 
@@ -10,14 +10,14 @@ from marshmallow import fields, ValidationError
 from marshmallow.validate import OneOf
 
 # Local application imports
-from bogcode.server.models import (
+from bugcode.server.models import (
     db,
     Host,
     Service,
     VulnerabilityGeneric,
     Comment,
 )
-from bogcode.server.api.base import (
+from bugcode.server.api.base import (
     AutoSchema,
     ReadWriteWorkspacedView,
     InvalidUsage,

@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-from bogcode.server.models import NotificationSubscription, EventType, NotificationSubscriptionWebSocketConfig
+from bugcode.server.models import NotificationSubscription, EventType, NotificationSubscriptionWebSocketConfig
 
 revision = '1574fbcf72f5'
 down_revision = '89115e133f0a'

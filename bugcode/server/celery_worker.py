@@ -2,9 +2,9 @@
 import argparse
 import os
 
-import bogcode.server.config
-from bogcode.server.app import celery, create_app  # noqa
-from bogcode.server.config import CELERY_LOG_FILE
+import bugcode.server.config
+from bugcode.server.app import celery, create_app  # noqa
+from bugcode.server.config import CELERY_LOG_FILE
 
 application = create_app()
 
@@ -29,7 +29,7 @@ def main():
         concurrency = args.concurrency
 
     loglevel = 'WARNING'
-    if bogcode.server.config.bogcode_server.debug:
+    if bugcode.server.config.bugcode_server.debug:
         loglevel = 'DEBUG'
     else:
         if args.loglevel:

@@ -4,7 +4,7 @@ import jwt
 import time
 from flask import current_app
 
-from bogcode.server.models import User
+from bugcode.server.models import User
 from tests import factories
 
 
@@ -94,7 +94,7 @@ class TestLogin:
     def test_retrieve_token_from_api_and_use_it(self, test_client, session):
         res = test_client.get('/v3/token')
         cookies = [cookie.name for cookie in test_client.cookie_jar]
-        assert "bogcode_session_2" in cookies
+        assert "bugcode_session_2" in cookies
         assert res.status_code == 200
 
         headers = {'Authorization': 'Token ' + res.json}
@@ -107,7 +107,7 @@ class TestLogin:
         assert res.status_code == 200
         assert 'Set-Cookie' not in res.headers
         cookies = [cookie.name for cookie in test_client.cookie_jar]
-        assert "bogcode_session_2" not in cookies
+        assert "bugcode_session_2" not in cookies
 
     def test_cant_retrieve_token_unauthenticated(self, test_client):
         # clean cookies make sure test_client has no session

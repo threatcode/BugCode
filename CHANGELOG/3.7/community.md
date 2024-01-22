@@ -1,6 +1,6 @@
  * Add vulnerability preview to status report
  * Update Fierce Plugin. Import can be done from GTK console.
- * Update Goohost plugin and now Bogcode imports Goohost .txt report.
+ * Update Goohost plugin and now Bugcode imports Goohost .txt report.
  * Update plugin for support WPScan v-3.4.5
  * Update Qualysguard plugin to its 8.17.1.0.2 version
  * Update custom fields with Searcher

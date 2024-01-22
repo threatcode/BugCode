@@ -1,13 +1,13 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2019  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2019  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 """
 import pytest
 from unittest import mock
 
 
-@mock.patch("bogcode.settings.reports.ReportsSettings.must_restart_threads", False)
+@mock.patch("bugcode.settings.reports.ReportsSettings.must_restart_threads", False)
 @pytest.mark.usefixtures('logged_user')
 class TestServerConfig:
     def test_update_server_config(self, test_client):

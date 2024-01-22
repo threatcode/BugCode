@@ -78,14 +78,14 @@ from flask import current_app
 from flask.views import MethodView
 
 # Local application imports
-from bogcode.server.api.base import GenericView
+from bugcode.server.api.base import GenericView
 
 RE_URL = re.compile(r"<(?:[^:<>]+:)?([^<>]+)>")
 
 logger = logging.getLogger(__name__)
 
 
-class BogcodeAPIPlugin(BasePlugin):
+class BugcodeAPIPlugin(BasePlugin):
     """APISpec plugin for Flask"""
 
     @staticmethod

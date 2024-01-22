@@ -27,8 +27,8 @@ def upgrade():
     sa.Column('vulnerability_id', sa.Integer(), nullable=False),
     sa.Column('creator_id', sa.Integer(), nullable=True),
     sa.Column('update_user_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['creator_id'], ['bogcode_user.id'], ondelete='SET NULL'),
-    sa.ForeignKeyConstraint(['update_user_id'], ['bogcode_user.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['creator_id'], ['bugcode_user.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['update_user_id'], ['bugcode_user.id'], ondelete='SET NULL'),
     sa.ForeignKeyConstraint(['vulnerability_id'], ['vulnerability.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )

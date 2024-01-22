@@ -7,11 +7,11 @@ Create Date: 2021-05-28 15:47:13.781453+00:00
 """
 from alembic import op
 import sqlalchemy as sa
-from bogcode.server.fields import JSONType
+from bugcode.server.fields import JSONType
 
 # Added manually for inserts
 from sqlalchemy import orm
-from bogcode.server.models import (NotificationSubscription,
+from bugcode.server.models import (NotificationSubscription,
                                    NotificationSubscriptionWebSocketConfig,
                                    User)
 
@@ -83,16 +83,16 @@ def upgrade():
     sa.Column('event_type_id', sa.Integer(), nullable=False),
     sa.Column('creator_id', sa.Integer(), nullable=True),
     sa.Column('update_user_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['creator_id'], ['bogcode_user.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['creator_id'], ['bugcode_user.id'], ondelete='SET NULL'),
     sa.ForeignKeyConstraint(['event_type_id'], ['event_type.id'], ),
-    sa.ForeignKeyConstraint(['update_user_id'], ['bogcode_user.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['update_user_id'], ['bugcode_user.id'], ondelete='SET NULL'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_notification_subscription_event_type_id'), 'notification_subscription', ['event_type_id'], unique=False)
     op.create_table('notification_allowed_roles',
     sa.Column('notification_subscription_id', sa.Integer(), nullable=False),
     sa.Column('allowed_role_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['allowed_role_id'], ['bogcode_role.id'], ),
+    sa.ForeignKeyConstraint(['allowed_role_id'], ['bugcode_role.id'], ),
     sa.ForeignKeyConstraint(['notification_subscription_id'], ['notification_subscription.id'], )
     )
     op.create_table('notification_event',
@@ -139,7 +139,7 @@ def upgrade():
     sa.Column('email', sa.String(length=50), nullable=True),
     sa.Column('user_notified_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['id'], ['notification_subscription_config_base.id'], ),
-    sa.ForeignKeyConstraint(['user_notified_id'], ['bogcode_user.id'], ),
+    sa.ForeignKeyConstraint(['user_notified_id'], ['bugcode_user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_notification_subscription_mail_config_user_notified_id'), 'notification_subscription_mail_config', ['user_notified_id'], unique=False)
@@ -153,7 +153,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_notified_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['id'], ['notification_subscription_config_base.id'], ),
-    sa.ForeignKeyConstraint(['user_notified_id'], ['bogcode_user.id'], ),
+    sa.ForeignKeyConstraint(['user_notified_id'], ['bugcode_user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_notification_subscription_websocket_config_user_notified_id'), 'notification_subscription_websocket_config', ['user_notified_id'], unique=False)
@@ -172,7 +172,7 @@ def upgrade():
     sa.Column('user_notified_id', sa.Integer(), nullable=True),
     sa.Column('mark_read', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['id'], ['notification_base.id'], ),
-    sa.ForeignKeyConstraint(['user_notified_id'], ['bogcode_user.id'], ),
+    sa.ForeignKeyConstraint(['user_notified_id'], ['bugcode_user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_websocket_notification_mark_read'), 'websocket_notification', ['mark_read'], unique=False)
@@ -221,7 +221,7 @@ def upgrade():
     res = bind.execute('SELECT name, id FROM event_type').fetchall()
     event_type_ids = dict(res)
 
-    res = bind.execute('SELECT name, id FROM bogcode_role').fetchall()
+    res = bind.execute('SELECT name, id FROM bugcode_role').fetchall()
     role_ids = dict(res)
 
     for config in default_initial_notifications_config:

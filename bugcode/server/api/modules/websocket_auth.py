@@ -1,6 +1,6 @@
 """
-Bogcode Penetration Test IDE
-Copyright (C) 2016  Infobyte LLC (https://bugcode.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2016  Threatcode LLC (https://threatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 """
 
@@ -19,8 +19,8 @@ from marshmallow import Schema
 from sqlalchemy.orm.exc import NoResultFound
 
 # Local application imports
-from bogcode.server.models import Agent
-from bogcode.server.api.base import GenericWorkspacedView, get_workspace
+from bugcode.server.models import Agent
+from bugcode.server.api.base import GenericWorkspacedView, get_workspace
 
 logger = logging.getLogger(__name__)
 websocket_auth_api = Blueprint('websocket_auth_api', __name__)

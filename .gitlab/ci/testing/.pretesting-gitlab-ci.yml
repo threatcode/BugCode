@@ -1,6 +1,6 @@
 merge_conflict_check:
     tags:
-        - bogcodetests
+        - bugcodetests
     image: python:3.11
     stage: pre_testing
     allow_failure: true
@@ -15,7 +15,7 @@ merge_conflict_check:
 
 sanity_check:
     tags:
-        - bogcodetests
+        - bugcodetests
     image: python:3.11
     stage: pre_testing
     script:
@@ -28,13 +28,13 @@ sanity_check:
 
 migration_sanity_check:
     tags:
-        - bogcodetests
+        - bugcodetests
     image: python:3.11
     stage: pre_testing
     script:
         - scripts/model_check.py
         - pip install .
-        - cd bogcode
+        - cd bugcode
         - $(alembic branches)
     rules:
         - !reference [.dev-staging-master, rules]
@@ -43,16 +43,16 @@ migration_sanity_check:
 
 bandit:
     tags:
-        - bogcodetests
+        - bugcodetests
     image: python:3.11
     stage: pre_testing
     script:
       - pip3 install virtualenv
-      - virtualenv -p python3 bogcode_venv
-      - source bogcode_venv/bin/activate
+      - virtualenv -p python3 bugcode_venv
+      - source bugcode_venv/bin/activate
       - pip3 install bandit
       - mkdir /results
-      - "bandit -r ${CI_PROJECT_DIR}/bogcode -o /results/output.xml -f xml --skip B101"
+      - "bandit -r ${CI_PROJECT_DIR}/bugcode -o /results/output.xml -f xml --skip B101"
     after_script:
       - wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
       - apt update
@@ -62,16 +62,16 @@ bandit:
       - apt install vault -y
       - setcap cap_ipc_lock= /usr/bin/vault
       - !reference [ .get_secrets, script ]
-      - pip3 install bogcode-cli
+      - pip3 install bugcode-cli
       - cat /results/output.xml
-      - if [[ $(grep -c testcase /results/output.xml) -gt 0 ]]; then (bogcode-cli auth -f $BUGCODE_URL -u $BUGCODE_USER -p $BUGCODE_PASSWORD && bogcode-cli workspace create $CI_COMMIT_REF_SLUG && bogcode-cli tool report /results/output.xml -w $CI_COMMIT_REF_SLUG); else (echo 'no vulns dettected' && exit 0); fi
+      - if [[ $(grep -c testcase /results/output.xml) -gt 0 ]]; then (bugcode-cli auth -f $BUGCODE_URL -u $BUGCODE_USER -p $BUGCODE_PASSWORD && bugcode-cli workspace create $CI_COMMIT_REF_SLUG && bugcode-cli tool report /results/output.xml -w $CI_COMMIT_REF_SLUG); else (echo 'no vulns dettected' && exit 0); fi
     rules:
         - !reference [.ignore-on-tag, rules]
         - when: on_success
 
 build_and_push_to_cachix:
     tags:
-        - bogcodetests
+        - bugcodetests
     image: nixos/nix:2.16.0
     stage: pre_testing
     variables:
@@ -106,7 +106,7 @@ no-format-str:
     stage: pre_testing
     script:
       - pip install flynt==0.69
-      - flynt -df bogcode tests
+      - flynt -df bugcode tests
     rules:
         - !reference [.ignore-on-tag, rules]
         - !reference [.ignore-on-master, rules]

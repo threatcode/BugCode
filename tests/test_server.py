@@ -1,6 +1,6 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -12,7 +12,7 @@ import pytest
 import jwt
 from flask import current_app
 
-from bogcode.server.models import db
+from bugcode.server.models import db
 
 
 def endpoint():

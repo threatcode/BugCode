@@ -1,16 +1,16 @@
-# Bogcode Penetration Test IDE
-# Copyright (C) 2016  Infobyte LLC (http://www.threatcodesec.com/)
+# Bugcode Penetration Test IDE
+# Copyright (C) 2016  Threatcode LLC (http://www.threatcodesec.com/)
 # See the file 'doc/LICENSE' for the license information
 import logging
 
 from flask import Blueprint
 
-from bogcode.server.api.base import (
+from bugcode.server.api.base import (
     ReadOnlyView,
     PaginatedMixin
 )
-from bogcode.server.models import Command
-from bogcode.server.api.modules.commandsrun import CommandSchema
+from bugcode.server.models import Command
+from bugcode.server.api.modules.commandsrun import CommandSchema
 
 globalcommands_api = Blueprint('globalcommands_api', __name__)
 logger = logging.getLogger(__name__)

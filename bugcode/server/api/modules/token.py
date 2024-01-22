@@ -8,8 +8,8 @@ from flask import Blueprint
 from marshmallow import Schema
 
 # Local application imports
-from bogcode.server.api.base import GenericView
-from bogcode.server.app import request_user_ip
+from bugcode.server.api.base import GenericView
+from bugcode.server.app import request_user_ip
 
 token_api = Blueprint('token_api', __name__)
 audit_logger = logging.getLogger('audit')

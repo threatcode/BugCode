@@ -1,6 +1,6 @@
 '''
-Bogcode Penetration Test IDE
-Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+Bugcode Penetration Test IDE
+Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -13,10 +13,10 @@ import time
 
 from tests import factories
 from tests.test_api_workspaced_base import ReadWriteAPITests
-from bogcode.server.models import (
+from bugcode.server.models import (
     Command,
     Vulnerability)
-from bogcode.server.api.modules.commandsrun import CommandView
+from bugcode.server.api.modules.commandsrun import CommandView
 from tests.factories import VulnerabilityFactory, EmptyCommandFactory, CommandObjectFactory, HostFactory, \
     WorkspaceFactory, ServiceFactory
 
@@ -359,7 +359,7 @@ class TestListCommandView(ReadWriteAPITests):
             'hostname': 'mandarina',
             'ip': '192.168.20.53',
             'itime': 1511387720.048548,
-            'params': '/home/lcubo/.bogcode/report/airbnb/nessus_report_Remote.nessus',
+            'params': '/home/lcubo/.bugcode/report/airbnb/nessus_report_Remote.nessus',
             'user': 'lcubo'
         }
 
@@ -377,7 +377,7 @@ class TestListCommandView(ReadWriteAPITests):
             'hostname': 'mandarina',
             'ip': '192.168.20.53',
             'itime': start_date.timestamp(),
-            'params': '/home/lcubo/.bogcode/report/airbnb/nessus_report_Remote.nessus',
+            'params': '/home/lcubo/.bugcode/report/airbnb/nessus_report_Remote.nessus',
             'user': 'lcubo'
         }
 
@@ -424,7 +424,7 @@ class TestListCommandView(ReadWriteAPITests):
             'hostname': 'mandarina',
             'ip': '192.168.20.53',
             'itime': 1511387720000.048548,
-            'params': '/home/lcubo/.bogcode/report/airbnb/nessus_report_Remote.nessus',
+            'params': '/home/lcubo/.bugcode/report/airbnb/nessus_report_Remote.nessus',
             'user': 'lcubo'
         }
 

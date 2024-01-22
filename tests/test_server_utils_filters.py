@@ -2,8 +2,8 @@ import pytest
 
 from marshmallow.exceptions import ValidationError
 
-from bogcode.server.utils.filters import FilterSchema
-from bogcode.server.utils.filters import FlaskRestlessSchema
+from bugcode.server.utils.filters import FilterSchema
+from bugcode.server.utils.filters import FlaskRestlessSchema
 
 
 class TestFilters:

@@ -1,7 +1,7 @@
 from alembic.script import ScriptDirectory
 from alembic.config import Config
 
-from bogcode.server.config import BUGCODE_BASE
+from bugcode.server.config import BUGCODE_BASE
 
 
 class TestMigrations:

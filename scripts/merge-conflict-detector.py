@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-# Bogcode Penetration Test IDE
-# Copyright (C) 2013  Infobyte LLC (http://www.threatcodesec.com/)
+# Bugcode Penetration Test IDE
+# Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
 # See the file 'doc/LICENSE' for the license information
 
 '''
 Internal script used to detect merge conflicts to branch with
 our propiertary code. Not useful if you don't have access to
-the code of Bogcode Professional or Bogcode Corporate
+the code of Bugcode Professional or Bugcode Corporate
 '''
 
 import os

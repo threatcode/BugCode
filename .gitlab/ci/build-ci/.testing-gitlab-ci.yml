@@ -8,19 +8,19 @@ smoke_test_deb:
     script:
         - apt-get update -y
         - apt install -y sudo curl
-        - apt-get install -y ./bogcode-server_amd64.deb
-        - which bogcode-manage
-        - bogcode-manage show-urls
-        - export BUGCODE_HOME=/home/bogcode
-        - /opt/bogcode/bin/bogcode-server || true  # create .bogcode
-        - "echo '[database]' >>~bogcode/.bogcode/config/server.ini"
-        - echo "connection_string = postgresql+psycopg2://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres/$POSTGRES_DB" >>~bogcode/.bogcode/config/server.ini
-        - cat ~bogcode/.bogcode/config/server.ini
-        - bogcode-manage create-tables
-        - /opt/bogcode/bin/bogcode-server &
+        - apt-get install -y ./bugcode-server_amd64.deb
+        - which bugcode-manage
+        - bugcode-manage show-urls
+        - export BUGCODE_HOME=/home/bugcode
+        - /opt/bugcode/bin/bugcode-server || true  # create .bugcode
+        - "echo '[database]' >>~bugcode/.bugcode/config/server.ini"
+        - echo "connection_string = postgresql+psycopg2://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres/$POSTGRES_DB" >>~bugcode/.bugcode/config/server.ini
+        - cat ~bugcode/.bugcode/config/server.ini
+        - bugcode-manage create-tables
+        - /opt/bugcode/bin/bugcode-server &
         - sleep 5
         - curl -v http://localhost:5985/_api/v2/info
-        - kill $(cat ~bogcode/.bogcode/bogcode-server-port-5985.pid)
+        - kill $(cat ~bugcode/.khulnasoft/bugcode-server-port-5985.pid)
         - jobs
     rules:
         - !reference [.be-uploaded, rules]
