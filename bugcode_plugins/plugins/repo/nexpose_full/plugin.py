@@ -12,7 +12,7 @@ from bugcode_plugins.plugins.plugins_utils import CVE_regex
 
 __author__ = "Micaela Ranea Sanchez"
 __copyright__ = "Copyright (c) 2013, KhulnaSoft Ltd"
-__credits__ = ["Francisco Amato", "Federico Kirschbaum",
+__credits__ = ["NxPKG", "Federico Kirschbaum",
                "Micaela Ranea Sanchez", "German Riera"]
 __license__ = ""
 __version__ = "1.0.0"

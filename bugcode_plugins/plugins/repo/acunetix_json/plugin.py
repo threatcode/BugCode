@@ -13,11 +13,11 @@ from bugcode_plugins.plugins.plugin import PluginJsonFormat
 from bugcode_plugins.plugins.repo.acunetix.DTO import Acunetix, Scan
 from json import loads
 
-__author__ = "Francisco Amato"
+__author__ = "NxPKG"
 __copyright__ = "Copyright (c) 2013, Threatcode LLC"
-__credits__ = ["Francisco Amato"]
+__credits__ = ["NxPKG"]
 __version__ = "1.0.0"
-__maintainer__ = "Francisco Amato"
+__maintainer__ = "NxPKG"
 __email__ = "famato@threatcodesec.com"
 __status__ = "Development"
 

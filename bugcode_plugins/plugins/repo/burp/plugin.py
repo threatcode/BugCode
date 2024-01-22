@@ -15,12 +15,12 @@ from bs4 import BeautifulSoup, Comment
 from bugcode_plugins.plugins.plugin import PluginXMLFormat
 from bugcode_plugins.plugins.plugins_utils import CVE_regex, CWE_regex
 
-__author__ = "Francisco Amato"
+__author__ = "NxPKG"
 __copyright__ = "Copyright (c) 2013, KhulnaSoft Ltd"
-__credits__ = ["Francisco Amato", "Micaela Ranea Sanchez"]
+__credits__ = ["NxPKG", "Micaela Ranea Sanchez"]
 __license__ = ""
 __version__ = "1.1.0"
-__maintainer__ = "Francisco Amato"
+__maintainer__ = "NxPKG"
 __email__ = "famato@khulnasoft.com"
 __status__ = "Development"
 

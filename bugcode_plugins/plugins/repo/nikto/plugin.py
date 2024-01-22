@@ -10,12 +10,12 @@ from html.parser import HTMLParser
 from bugcode_plugins.plugins import plugins_utils
 from bugcode_plugins.plugins.plugin import PluginXMLFormat
 
-__author__ = "Francisco Amato"
+__author__ = "NxPKG"
 __copyright__ = "Copyright (c) 2013, KhulnaSoft Ltd"
-__credits__ = ["Facundo de Guzmán", "Francisco Amato"]
+__credits__ = ["Facundo de Guzmán", "NxPKG"]
 __license__ = ""
 __version__ = "1.0.0"
-__maintainer__ = "Francisco Amato"
+__maintainer__ = "NxPKG"
 __email__ = "famato@khulnasoft.com"
 __status__ = "Development"
 

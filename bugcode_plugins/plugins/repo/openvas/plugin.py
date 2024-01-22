@@ -13,12 +13,12 @@ from bugcode_plugins.plugins.plugins_utils import filter_services
 
 import xml.etree.ElementTree as ET
 
-__author__ = "Francisco Amato"
+__author__ = "NxPKG"
 __copyright__ = "Copyright (c) 2013, KhulnaSoft Ltd"
-__credits__ = ["Francisco Amato"]
+__credits__ = ["NxPKG"]
 __license__ = ""
 __version__ = "1.0.0"
-__maintainer__ = "Francisco Amato"
+__maintainer__ = "NxPKG"
 __email__ = "famato@khulnasoft.com"
 __status__ = "Development"
 

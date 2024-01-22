@@ -19,7 +19,7 @@ __copyright__ = "Copyright (c) 2013, KhulnaSoft Ltd"
 __credits__ = ["Nicolas Rodriguez"]
 __license__ = ""
 __version__ = "1.0.0"
-__maintainer__ = "Francisco Amato"
+__maintainer__ = "NxPKG"
 __email__ = "famato@khulnasoft.com"
 __status__ = "Development"
 
