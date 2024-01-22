@@ -1,0 +1,76 @@
+.set-remote-github:
+  script:
+    - git remote -v |grep github &&  git remote set-url github https://${GH_USER}:${GH_TOKEN}@github.com/threatcode/bogcode.git || git remote add github https://${GH_USER}:${GH_TOKEN}@github.com/threatcode/bogcode.git
+
+
+update_github:
+    image: python:3.11
+    stage: publish
+    script:
+      - !reference [.set-remote-github, script]
+      - !reference [ .get_from_tar_and_replace_www, script ]
+      - git config user.email "devops@bugcode.com"
+      - git config user.name "Devops"
+      - git add .
+      - git commit -m "Front Updated"
+      - git branch
+      - git push --force github HEAD:master
+    rules:
+      - if: '$CI_COMMIT_REF_NAME == "white/master"'
+        variables:
+          DESTINY_BRANCH: master
+        when: on_success
+#      - if: '$CI_COMMIT_REF_NAME == "white/staging"'
+#        variables:
+#          DESTINY_BRANCH: staging
+#        when: on_success
+    tags:
+        - bogcodetests
+    needs:
+      - project: bugcode/bogcode-react
+        job: npm_build
+        ref: community/master
+        artifacts: true
+
+
+tag_on_github:
+    image: python:3.11
+    stage: publish
+    script:
+      - !reference [.set-remote-github, script]
+      - !reference [ .get_from_tar_and_replace_www, script ]
+      - export BUGCODE_VERSION=$(eval $IMAGE_TAG)
+      - git config user.email "devops@bugcode.com"
+      - git config user.name "Devops"
+      - git add .
+      - git commit -m "Front Updated"
+      - CHANGELOG/check_pre_tag.py
+      - git tag v$BUGCODE_VERSION -m "$(cat CHANGELOG/$BUGCODE_VERSION/community.md)"
+      - git push --force github v$BUGCODE_VERSION
+    rules:
+      - !reference [ .on-community-tag, rules ]
+    tags:
+      - bogcodetests
+    needs:
+      - project: bugcode/bogcode-react
+        job: npm_build
+        ref: community/master
+        artifacts: true
+
+upload_assets_to_github_tag:
+    image: python:3.11
+    stage: publish
+    script:
+      - export BUGCODE_VERSION=$(eval $IMAGE_TAG)
+      - pip3 install requests click
+      - scripts/github_release.py --deb-file ./bogcode-server_amd64.deb --rpm-file ./bogcode-server_amd64.rpm
+    rules:
+      - !reference [ .on-community-tag, rules ]
+    tags:
+      - bogcodetests
+    needs:
+      - job: tag_on_github
+      - job: generate_deb_master
+        artifacts: true
+      - job: generate_rpm_master
+        artifacts: true

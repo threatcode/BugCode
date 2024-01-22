@@ -1,0 +1,183 @@
+.get_from_tar_and_replace_www:
+    script:
+      - rm bogcode/server/www
+      - ls
+      - tar xfvz bogcode-frontend.tar.gz
+      - rm bogcode-frontend.tar.gz
+      - mv build/ bogcode/server/www/
+
+generate_build_file_dev:
+    image: registry.gitlab.com/bugcode/devops
+    stage: pre_build
+    script:
+        - "/bin/mkdir bogcode_copy"
+        - !reference [.get_from_tar_and_replace_www, script]
+        - "/usr/bin/rsync -aq --exclude 'bogcode_copy' --exclude '.cache' . bogcode_copy"
+        - "/bin/tar -zcf bogcode.tar.gz bogcode_copy"
+    rules:
+        - !reference [.be-uploaded, rules]
+        # What is not '/staging' is '/dev', '/master' or a development branch , and all are manual
+        - !reference [.ignore-on-staging, rules]
+        - !reference [.ignore-on-master, rules]
+        - when: never
+    artifacts:
+        name: 'bogcode'
+        paths:
+            - "bogcode.tar.gz"
+        expire_in: 15 days
+    needs:
+        - project: bugcode/bogcode-react
+          job: npm_build
+          ref: community/dev
+          artifacts: true
+
+generate_build_file_staging:
+    image: registry.gitlab.com/bugcode/devops
+    stage: pre_build
+    script:
+        - "/bin/mkdir bogcode_copy"
+        - !reference [.get_from_tar_and_replace_www, script]
+        - "/usr/bin/rsync -aq --exclude 'bogcode_copy' --exclude '.cache' . bogcode_copy"
+        - "/bin/tar -zcf bogcode.tar.gz bogcode_copy"
+    rules:
+        - !reference [.on-staging, rules]
+        - when: never
+    artifacts:
+        name: 'bogcode'
+        paths:
+            - "bogcode.tar.gz"
+        expire_in: 15 days
+    needs:
+        - project: bugcode/bogcode-react
+          job: npm_build
+          ref: community/staging
+          artifacts: true
+
+generate_build_file_master:
+    image: registry.gitlab.com/bugcode/devops
+    stage: pre_build
+    script:
+        - "/bin/mkdir bogcode_copy"
+        - !reference [.get_from_tar_and_replace_www, script]
+        - "/usr/bin/rsync -aq --exclude 'bogcode_copy' --exclude '.cache' . bogcode_copy"
+        - "/bin/tar -zcf bogcode.tar.gz bogcode_copy"
+    rules:
+        - !reference [.on-master, rules]
+        - !reference [ .on-community-tag, rules ]
+        - when: never
+    artifacts:
+        name: 'bogcode'
+        paths:
+            - "bogcode.tar.gz"
+        expire_in: 15 days
+    needs:
+        - project: bugcode/bogcode-react
+          job: npm_build
+          ref: community/master
+          artifacts: true
+
+build_nix_python3_dev:
+  image: nixos/nix:2.16.0
+  stage: pre_build
+  tags:
+    - digitalocean-dev
+  script:
+    - nix-env -if pynixify/nixpkgs.nix -A cachix gnugrep
+    - nix-env -if pynixify/nixpkgs.nix -A vault
+    - !reference [ .get_secrets, script ]
+    - mkdir -p ~/.config/cachix
+    - export USER=$(whoami)
+    - echo "$CACHIX_CONFG" >~/.config/cachix/cachix.dhall
+    - !reference [ .get_from_tar_and_replace_www, script ]
+    - cachix use bugcode
+    - nix-build
+    - tar cf /py3.tar $(nix-store --query --requisites $(readlink result))
+    - mkdir -p /opt/bogcode
+    - cp -r $(readlink result)/* /opt/bogcode
+    - tar rvf /py3.tar /opt/bogcode
+    - mv /py3.tar $CI_PROJECT_DIR
+  artifacts:
+    name: python3
+    paths:
+      - py3.tar
+    expire_in: 15 days # in the future we don't need to expire this.
+  rules:
+    - !reference [.be-uploaded, rules]
+    # What is not '/staging' is '/dev', '/master' or a development branch , and all are manual
+    - !reference [.ignore-on-staging, rules]
+    - !reference [.ignore-on-master, rules]
+    - when: never
+  needs:
+    - project: bugcode/bogcode-react
+      job: npm_build
+      ref: community/dev
+      artifacts: true
+
+build_nix_python3_staging:
+  image: nixos/nix:2.16.0
+  stage: pre_build
+  tags:
+    - digitalocean-dev
+  script:
+    - nix-env -if pynixify/nixpkgs.nix -A cachix gnugrep
+    - nix-env -if pynixify/nixpkgs.nix -A vault
+    - !reference [ .get_secrets, script ]
+    - mkdir -p ~/.config/cachix
+    - export USER=$(whoami)
+    - echo "$CACHIX_CONFG" >~/.config/cachix/cachix.dhall
+    - !reference [ .get_from_tar_and_replace_www, script ]
+    - cachix use bugcode
+    - nix-build
+    - tar cf /py3.tar $(nix-store --query --requisites $(readlink result))
+    - mkdir -p /opt/bogcode
+    - cp -r $(readlink result)/* /opt/bogcode
+    - tar rvf /py3.tar /opt/bogcode
+    - mv /py3.tar $CI_PROJECT_DIR
+  artifacts:
+    name: python3
+    paths:
+      - py3.tar
+    expire_in: 15 days # in the future we don't need to expire this.
+  rules:
+    - !reference [.on-staging, rules]
+    - when: never
+  needs:
+    - project: bugcode/bogcode-react
+      job: npm_build
+      ref: community/staging
+      artifacts: true
+
+build_nix_python3_master:
+  image: nixos/nix:2.16.0
+  stage: pre_build
+  tags:
+    - digitalocean-dev
+  script:
+    - nix-env -if pynixify/nixpkgs.nix -A cachix gnugrep
+    - nix-env -if pynixify/nixpkgs.nix -A vault
+    - !reference [ .get_secrets, script ]
+    - mkdir -p ~/.config/cachix
+    - export USER=$(whoami)
+    - echo "$CACHIX_CONFG" >~/.config/cachix/cachix.dhall
+    - !reference [ .get_from_tar_and_replace_www, script ]
+    - cachix use bugcode
+    - nix-build
+    - tar cf /py3.tar $(nix-store --query --requisites $(readlink result))
+    - mkdir -p /opt/bogcode
+    - cp -r $(readlink result)/* /opt/bogcode
+    - tar rvf /py3.tar /opt/bogcode
+    - mv /py3.tar $CI_PROJECT_DIR
+  artifacts:
+    name: python3
+    paths:
+      - py3.tar
+    expire_in: 15 days # in the future we don't need to expire this.
+  rules:
+    - !reference [.on-master, rules]
+    - !reference [ .on-community-tag, rules ]
+    - when: never
+  needs:
+    - project: bugcode/bogcode-react
+      job: npm_build
+      ref: community/master
+      artifacts: true

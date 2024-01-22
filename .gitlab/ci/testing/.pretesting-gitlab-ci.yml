@@ -1,0 +1,113 @@
+merge_conflict_check:
+    tags:
+        - bogcodetests
+    image: python:3.11
+    stage: pre_testing
+    allow_failure: true
+    script:
+        - git config --global user.email "you@example.com"
+        - git config --global user.name "Mergerbot"
+        - python3 scripts/merge-conflict-detector.py
+    rules:
+        - !reference [.dev-staging-master, rules]
+        - !reference [.ignore-on-tag, rules]
+        - when: never
+
+sanity_check:
+    tags:
+        - bogcodetests
+    image: python:3.11
+    stage: pre_testing
+    script:
+        - bash scripts/sanity_check_commit.sh
+        - scripts/sanity_check_file.py --mode=ls
+    rules:
+        - !reference [.dev-staging-master, rules]
+        - !reference [.ignore-on-tag, rules]
+        - when: never
+
+migration_sanity_check:
+    tags:
+        - bogcodetests
+    image: python:3.11
+    stage: pre_testing
+    script:
+        - scripts/model_check.py
+        - pip install .
+        - cd bogcode
+        - $(alembic branches)
+    rules:
+        - !reference [.dev-staging-master, rules]
+        - !reference [.ignore-on-tag, rules]
+        - when: never
+
+bandit:
+    tags:
+        - bogcodetests
+    image: python:3.11
+    stage: pre_testing
+    script:
+      - pip3 install virtualenv
+      - virtualenv -p python3 bogcode_venv
+      - source bogcode_venv/bin/activate
+      - pip3 install bandit
+      - mkdir /results
+      - "bandit -r ${CI_PROJECT_DIR}/bogcode -o /results/output.xml -f xml --skip B101"
+    after_script:
+      - wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+      - apt update
+      - apt-get install software-properties-common -y
+      - echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/hashicorp.list
+      - apt update
+      - apt install vault -y
+      - setcap cap_ipc_lock= /usr/bin/vault
+      - !reference [ .get_secrets, script ]
+      - pip3 install bogcode-cli
+      - cat /results/output.xml
+      - if [[ $(grep -c testcase /results/output.xml) -gt 0 ]]; then (bogcode-cli auth -f $BUGCODE_URL -u $BUGCODE_USER -p $BUGCODE_PASSWORD && bogcode-cli workspace create $CI_COMMIT_REF_SLUG && bogcode-cli tool report /results/output.xml -w $CI_COMMIT_REF_SLUG); else (echo 'no vulns dettected' && exit 0); fi
+    rules:
+        - !reference [.ignore-on-tag, rules]
+        - when: on_success
+
+build_and_push_to_cachix:
+    tags:
+        - bogcodetests
+    image: nixos/nix:2.16.0
+    stage: pre_testing
+    variables:
+      # Note: this size has to fit both our community, professional and corporate versions
+      MAX_CLOSURE_SIZE_IN_MB: 850
+    script:
+        - nix-env -if pynixify/nixpkgs.nix -A vault
+        - nix-env -if pynixify/nixpkgs.nix -A cachix
+        - nix-env -if pynixify/nixpkgs.nix -A gawk
+        - !reference [ .get_secrets, script ]
+        - mkdir -p ~/.config/cachix
+        - export USER=$(whoami)
+        - echo "$CACHIX_CONFG" >~/.config/cachix/cachix.dhall
+        - cachix use bugcode
+        - nix-build | cachix push bugcode
+        - ./scripts/check-closure-size ./result
+    rules:
+      - when: on_success
+
+flake8:
+    image: python:3.11
+    stage: pre_testing
+    script:
+      - pip install flake8
+      - flake8 .
+    rules:
+        - !reference [.ignore-on-tag, rules]
+        - when: on_success
+
+no-format-str:
+    image: python:3.11
+    stage: pre_testing
+    script:
+      - pip install flynt==0.69
+      - flynt -df bogcode tests
+    rules:
+        - !reference [.ignore-on-tag, rules]
+        - !reference [.ignore-on-master, rules]
+        - when: on_success

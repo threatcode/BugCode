@@ -1,0 +1,30 @@
+smoke_test_deb:
+    allow_failure: false
+    stage: build_testing  # TODO improve
+    image: ubuntu:18.04
+    needs:
+      - job: generate_deb_dev
+        artifacts: true
+    script:
+        - apt-get update -y
+        - apt install -y sudo curl
+        - apt-get install -y ./bogcode-server_amd64.deb
+        - which bogcode-manage
+        - bogcode-manage show-urls
+        - export BUGCODE_HOME=/home/bogcode
+        - /opt/bogcode/bin/bogcode-server || true  # create .bogcode
+        - "echo '[database]' >>~bogcode/.bogcode/config/server.ini"
+        - echo "connection_string = postgresql+psycopg2://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres/$POSTGRES_DB" >>~bogcode/.bogcode/config/server.ini
+        - cat ~bogcode/.bogcode/config/server.ini
+        - bogcode-manage create-tables
+        - /opt/bogcode/bin/bogcode-server &
+        - sleep 5
+        - curl -v http://localhost:5985/_api/v2/info
+        - kill $(cat ~bogcode/.bogcode/bogcode-server-port-5985.pid)
+        - jobs
+    rules:
+        - !reference [.be-uploaded, rules]
+        # What is not '/staging' is '/dev', '/master' or a development branch , and all are manual
+        - !reference [.ignore-on-staging, rules]
+        - !reference [.ignore-on-master, rules]
+        - when: never
