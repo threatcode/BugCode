@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "bugcode-agent-dispatcher"
-version = "3.0.1"
+name = "bugcode-agent-parameters-types"
+version = "3.8.15"
 description = ""
 authors = ["NxPKG <116948796+NxPKG@users.noreply.github.com>"]
 readme = "README.md"

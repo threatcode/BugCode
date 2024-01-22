@@ -7,6 +7,7 @@ setup(
     install_requires=[
         "bugcode_plugins",
         "bugcode_agent_dispatcher",
+        "bugcode_agent_parameters_types",
     ],
     entry_points={  # Optional
         'console_scripts': [
