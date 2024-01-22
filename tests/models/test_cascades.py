@@ -1,6 +1,6 @@
 '''
 Bugcode Penetration Test IDE
-Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
+Copyright (C) 2013  Threatcode LLC (http://www.tthreatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 
 '''
@@ -32,7 +32,7 @@ class TestCascadeDelete:
         self.session = session
         assert service.workspace_id == workspace.id
 
-        workspace.set_scope(['*.threatcodesec.com', '192.168.1.0/24'])
+        workspace.set_scope(['*.tthreatcode.github.io/bugcode', '192.168.1.0/24'])
         self.user = user
         self.workspace = workspace
         self.permission = WorkspacePermission(user=user, workspace=workspace)

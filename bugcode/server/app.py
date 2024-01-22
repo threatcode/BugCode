@@ -407,7 +407,7 @@ def create_app(db_connection_string=None, testing=None, register_extensions_flag
         'SECURITY_POST_RESET_VIEW': '/',
         'SECURITY_SEND_PASSWORD_RESET_EMAIL': True,
         # For testing purpose
-        'SECURITY_EMAIL_SENDER': "noreply@threatcodesec.com",
+        'SECURITY_EMAIL_SENDER': "noreply@tthreatcode.github.io/bugcode",
         'SECURITY_CHANGEABLE': True,
         'SECURITY_SEND_PASSWORD_CHANGE_EMAIL': False,
         'SECURITY_MSG_USER_DOES_NOT_EXIST': login_failed_message,

@@ -6,6 +6,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         "bugcode_plugins",
+        "bugcode_agent_dispatcher",
     ],
     entry_points={  # Optional
         'console_scripts': [

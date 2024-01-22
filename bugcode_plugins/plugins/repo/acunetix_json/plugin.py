@@ -1,6 +1,6 @@
 """
 Bugcode Penetration Test IDE
-Copyright (C) 2013  Threatcode LLC (http://www.threatcodesec.com/)
+Copyright (C) 2013  Threatcode LLC (http://www.tthreatcode.github.io/bugcode/)
 See the file 'doc/LICENSE' for the license information
 
 """
@@ -18,7 +18,7 @@ __copyright__ = "Copyright (c) 2013, Threatcode LLC"
 __credits__ = ["NxPKG"]
 __version__ = "1.0.0"
 __maintainer__ = "NxPKG"
-__email__ = "famato@threatcodesec.com"
+__email__ = "famato@tthreatcode.github.io/bugcode"
 __status__ = "Development"
 
 from bugcode_plugins.plugins.repo.acunetix_json.DTO import AcunetixJsonParser, Vulnerabilities, \
